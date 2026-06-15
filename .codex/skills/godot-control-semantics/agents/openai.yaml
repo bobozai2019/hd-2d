@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Control Semantics"
+  short_description: "Choose Godot controls from HTML structure"
+  default_prompt: "Use $godot-control-semantics to map this HTML/UI block to the right Godot controls before building the scene."

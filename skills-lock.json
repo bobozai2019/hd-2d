@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "prd": {
+      "source": "snarktank/ralph",
+      "sourceType": "github",
+      "skillPath": "skills/prd/SKILL.md",
+      "computedHash": "055dcc0eb68c5a4b87fc1728defee030a7516e15b15ea878a6f69a8630ac05b6"
+    },
+    "ralph": {
+      "source": "snarktank/ralph",
+      "sourceType": "github",
+      "skillPath": "skills/ralph/SKILL.md",
+      "computedHash": "be0de698040463767f85f29cb776a65978dcff37b9f724c1c402954bb8aab874"
+    }
+  }
+}

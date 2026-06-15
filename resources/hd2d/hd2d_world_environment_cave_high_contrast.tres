@@ -1,0 +1,17 @@
+[gd_resource type="Environment" format=3]
+
+[resource]
+background_mode = 1
+background_color = Color(0.012, 0.014, 0.02, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.08, 0.11, 0.12, 1)
+ambient_light_energy = 0.12
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.2
+glow_enabled = true
+glow_intensity = 0.2
+glow_strength = 0.62
+fog_enabled = true
+fog_light_color = Color(0.11, 0.14, 0.16, 1)
+fog_density = 0.014

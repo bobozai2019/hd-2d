@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML to Godot UI"
+  short_description: "Convert HTML UI prototypes into Godot scenes"
+  default_prompt: "Use $html-to-godot-ui to convert this HTML UI prototype into a native Godot Control scene."

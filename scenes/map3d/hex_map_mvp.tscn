@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/map3d/hex_map_mvp.gd" id="1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(8, 8)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hex"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 6
+
+[node name="HexMapMvp" type="Node3D"]
+script = ExtResource("1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0.0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 4, 0)
+light_energy = 1.25
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="HexTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_hex")
+
+[node name="InfoLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+text = "Hex Map MVP Placeholder"
+billboard = 1
+
+[node name="CameraRig" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 5.6)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+current = true
+fov = 36.0

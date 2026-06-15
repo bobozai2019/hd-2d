@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="SpriteFrames" path="res://assets/generated/characters/engineer/engineer_stand.spriteframes.tres" id="1"]
+
+[node name="EngineerStandAnimatedSprite3D" type="AnimatedSprite3D"]
+sprite_frames = ExtResource("1")
+animation = &"stand"
+autoplay = "stand"
+centered = true
+pixel_size = 0.0024
+billboard = 1
+texture_filter = 1
+shaded = true
+alpha_cut = 1
+alpha_scissor_threshold = 0.02
+cast_shadow = 0

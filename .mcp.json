@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "godotiq": {
+      "command": "python",
+      "args": ["-m", "godotiq"],
+      "cwd": "d:/godot/project/hd-2d",
+      "env": {
+        "PYTHONPATH": "d:/godot/project/hd-2d/addons/godotiq"
+      }
+    },
+    "image-recognition": {
+      "command": "python",
+      "args": ["d:/godot/project/hd-2d/.claude/mcp-servers/image-recognition/server.py"],
+      "env": {
+        "MIMO_API_KEY": "tp-ccpe7sh8bruzwy8siieqijdde7273cd54ktv5j66rjpwvqzo",
+        "MIMO_BASE_URL": "https://token-plan-cn.xiaomimimo.com/v1",
+        "MIMO_MODEL": "mimo-v2.5"
+      }
+    },
+    "blender": {
+      "command": "uvx",
+      "args": ["blender-mcp"]
+    }
+  }
+}

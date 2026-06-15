@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/main.gd" id="1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuRoot" type="MarginContainer" parent="UiLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Panel" type="PanelContainer" parent="UiLayer/MenuRoot"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="UiLayer/MenuRoot/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="UiLayer/MenuRoot/Panel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "HD-2D Prototype Menu"
+
+[node name="StatusLabel" type="Label" parent="UiLayer/MenuRoot/Panel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Route"
+
+[node name="ButtonColumn" type="VBoxContainer" parent="UiLayer/MenuRoot/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StartRunButton" type="Button" parent="UiLayer/MenuRoot/Panel/Content/ButtonColumn"]
+layout_mode = 2
+text = "Start Run"
+
+[node name="HexMapMvpButton" type="Button" parent="UiLayer/MenuRoot/Panel/Content/ButtonColumn"]
+layout_mode = 2
+text = "Hex Map MVP"
+
+[node name="Hd2dEffectLabButton" type="Button" parent="UiLayer/MenuRoot/Panel/Content/ButtonColumn"]
+layout_mode = 2
+text = "HD2D Effect Lab"

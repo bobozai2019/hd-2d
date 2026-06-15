@@ -1,0 +1,287 @@
+[gd_scene format=3 uid="uid://bihnyn1xo5cek"]
+
+[ext_resource type="Script" uid="uid://hdyb1kkstlr" path="res://scripts/map3d/hd2d_effect_lab.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/map3d/characters/engineer_stand_animated_sprite_3d.tscn" id="2"]
+
+[sub_resource type="Environment" id="Environment_hd2d"]
+background_mode = 1
+background_color = Color(0.035, 0.039, 0.045, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.62, 0.58, 0.52, 1)
+ambient_light_energy = 0.72
+tonemap_mode = 2
+tonemap_exposure = 1.05
+tonemap_white = 1.4
+glow_enabled = true
+glow_intensity = 0.18
+glow_strength = 0.42
+fog_enabled = true
+fog_light_color = Color(0.48, 0.52, 0.58, 1)
+fog_density = 0.006
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributes_hd2d"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 13.0
+dof_blur_far_transition = 2.8
+dof_blur_amount = 0.06
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.19, 0.22, 0.19, 1)
+roughness = 0.86
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(12, 11)
+
+[sub_resource type="StandardMaterial3D" id="Material_foreground"]
+albedo_color = Color(0.09, 0.11, 0.1, 1)
+roughness = 0.86
+
+[sub_resource type="BoxMesh" id="BoxMesh_foreground_pillar"]
+size = Vector3(0.35, 1.15, 0.35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_foreground_canopy"]
+size = Vector3(1.1, 0.18, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="Material_background_tile"]
+albedo_color = Color(0.16, 0.2, 0.18, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hex_sample"]
+top_radius = 0.95
+bottom_radius = 0.95
+height = 0.12
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Material_glow"]
+albedo_color = Color(0.8, 0.56, 0.24, 1)
+roughness = 0.55
+emission_enabled = true
+emission = Color(0.95, 0.62, 0.24, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="StandardMaterial3D" id="Material_wall"]
+albedo_color = Color(0.2, 0.19, 0.18, 1)
+roughness = 0.94
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall"]
+size = Vector3(1.3, 1.55, 0.22)
+
+[sub_resource type="StandardMaterial3D" id="Material_bridge"]
+albedo_color = Color(0.26, 0.24, 0.21, 1)
+roughness = 0.82
+
+[sub_resource type="BoxMesh" id="BoxMesh_bridge_small"]
+size = Vector3(0.42, 0.18, 1.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bridge_large"]
+size = Vector3(1.85, 0.18, 1.15)
+
+[sub_resource type="StandardMaterial3D" id="Material_fog_plane"]
+transparency = 1
+albedo_color = Color(0.62, 0.7, 0.76, 0.26)
+emission_enabled = true
+emission = Color(0.48, 0.55, 0.61, 1)
+emission_energy_multiplier = 0.1
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_fog"]
+size = Vector2(1.45, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_vfx_plane"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.54, 0.38, 1, 0.38)
+emission_enabled = true
+emission = Color(0.53, 0.32, 1, 1)
+emission_energy_multiplier = 0.85
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_vfx"]
+size = Vector2(0.9, 1.3)
+
+[sub_resource type="StandardMaterial3D" id="Material_shadow"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.32)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shadow"]
+top_radius = 0.62
+bottom_radius = 0.62
+height = 0.01
+radial_segments = 32
+rings = 1
+
+[node name="Hd2dEffectLab" type="Node3D" unique_id=615018432]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1977205782]
+environment = SubResource("Environment_hd2d")
+camera_attributes = SubResource("CameraAttributes_hd2d")
+
+[node name="Lighting" type="Node3D" parent="." unique_id=1652031741]
+
+[node name="KeyLight" type="DirectionalLight3D" parent="Lighting" unique_id=504353518]
+transform = Transform3D(0.573576, -0.579228, 0.579228, 0, 0.707107, 0.707107, -0.819152, -0.40558, 0.40558, 0, 5, 0)
+light_color = Color(0.9703689, 0.9258153, 0.7839532, 1)
+light_energy = 2.15
+shadow_enabled = true
+
+[node name="FillLight" type="OmniLight3D" parent="Lighting" unique_id=1985890369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2.1, 2.8)
+light_color = Color(0.61557907, 0.63843757, 0.6796791, 1)
+light_energy = 0.42
+omni_range = 6.0
+
+[node name="Stage" type="Node3D" parent="." unique_id=1057172137]
+
+[node name="Ground" type="MeshInstance3D" parent="Stage" unique_id=1350874015]
+material_override = SubResource("Material_ground")
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="ForegroundProps" type="Node3D" parent="Stage" unique_id=848080315]
+
+[node name="ForegroundPillarLeft" type="MeshInstance3D" parent="Stage/ForegroundProps" unique_id=1517236979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.58, 1.2)
+material_override = SubResource("Material_foreground")
+mesh = SubResource("BoxMesh_foreground_pillar")
+
+[node name="ForegroundCanopy" type="MeshInstance3D" parent="Stage/ForegroundProps" unique_id=1593152040]
+transform = Transform3D(0.94, 0, 0, 0, 0.72, -0.12, 0, 0.12, 1.05, -1.26, 1.28, 1.05)
+material_override = SubResource("Material_foreground")
+mesh = SubResource("BoxMesh_foreground_canopy")
+
+[node name="BackgroundTiles" type="Node3D" parent="Stage" unique_id=1649647687]
+
+[node name="BackgroundTileNear" type="MeshInstance3D" parent="Stage/BackgroundTiles" unique_id=1707382300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 0.06, -1.25)
+material_override = SubResource("Material_background_tile")
+mesh = SubResource("CylinderMesh_hex_sample")
+
+[node name="BackgroundTileFar" type="MeshInstance3D" parent="Stage/BackgroundTiles" unique_id=513458339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.06, -3.2)
+material_override = SubResource("Material_background_tile")
+mesh = SubResource("CylinderMesh_hex_sample")
+
+[node name="GlowSample" type="MeshInstance3D" parent="Stage" unique_id=798889460]
+transform = Transform3D(0.42, 0, 0, 0, 0.03, 0, 0, 0, 0.42, 1.62, 0.03, -1.48)
+material_override = SubResource("Material_glow")
+mesh = SubResource("CylinderMesh_hex_sample")
+
+[node name="OcclusionSamples" type="Node3D" parent="Stage" unique_id=977144458]
+
+[node name="WallFront" type="MeshInstance3D" parent="Stage/OcclusionSamples" unique_id=793087211]
+transform = Transform3D(0.98, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.78, 0.15)
+material_override = SubResource("Material_wall")
+mesh = SubResource("BoxMesh_wall")
+
+[node name="WallBack" type="MeshInstance3D" parent="Stage/OcclusionSamples" unique_id=309413995]
+transform = Transform3D(0.78, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.92, 0.42, -0.64)
+material_override = SubResource("Material_wall")
+mesh = SubResource("BoxMesh_wall")
+
+[node name="HeightSamples" type="Node3D" parent="Stage" unique_id=1114463101]
+
+[node name="BridgeStepLow" type="MeshInstance3D" parent="Stage/HeightSamples" unique_id=1177868048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.18, 1.52)
+material_override = SubResource("Material_bridge")
+mesh = SubResource("BoxMesh_bridge_small")
+
+[node name="BridgeStepHigh" type="MeshInstance3D" parent="Stage/HeightSamples" unique_id=1968475547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0.54, 1.52)
+material_override = SubResource("Material_bridge")
+mesh = SubResource("BoxMesh_bridge_large")
+
+[node name="TransparentSamples" type="Node3D" parent="Stage" unique_id=1066949532]
+
+[node name="FogPlane" type="MeshInstance3D" parent="Stage/TransparentSamples" unique_id=829288252]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0.92, 0.9, 0.02)
+material_override = SubResource("Material_fog_plane")
+mesh = SubResource("QuadMesh_fog")
+
+[node name="VfxPlane" type="MeshInstance3D" parent="Stage/TransparentSamples" unique_id=295971161]
+transform = Transform3D(0.68, 0, 0, 0, 0.94, 0, 0, 0, 0.8, 1.4, 0.76, -0.55)
+material_override = SubResource("Material_vfx_plane")
+mesh = SubResource("QuadMesh_vfx")
+
+[node name="FakeShadow" type="MeshInstance3D" parent="Stage" unique_id=2119793945]
+transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.58, -2.45, 0.018, 1.98)
+material_override = SubResource("Material_shadow")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_shadow")
+
+[node name="CharacterRoot" type="Node3D" parent="." unique_id=1248913738]
+
+[node name="PlayerCharacter" parent="CharacterRoot" unique_id=2099287624 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, 0.84098005, 1.98)
+
+[node name="ComparisonSprites" type="Node3D" parent="CharacterRoot" unique_id=620467264]
+
+[node name="ComparisonSpriteNear" parent="CharacterRoot/ComparisonSprites" unique_id=1607316740 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.84098005, -0.18)
+modulate = Color(0.88, 0.94, 1, 0.92)
+pixel_size = 0.0022
+billboard = 2
+shaded = false
+
+[node name="ComparisonSpriteFar" parent="CharacterRoot/ComparisonSprites" unique_id=1026809681 instance=ExtResource("2")]
+transform = Transform3D(0.98, 0, 0, 0, 1, 0, 0, 0, 1.02, 1.05, 0.84098005, -0.46)
+modulate = Color(1, 0.86, 0.86, 0.92)
+billboard = 2
+shaded = false
+
+[node name="VfxRoot" type="Node3D" parent="." unique_id=1420814645]
+
+[node name="AmbientParticles" type="Node3D" parent="VfxRoot" unique_id=661007714]
+
+[node name="GlowSources" type="Node3D" parent="VfxRoot" unique_id=1087200544]
+
+[node name="SkillSamples" type="Node3D" parent="VfxRoot" unique_id=1450029704]
+
+[node name="FogPlanes" type="Node3D" parent="VfxRoot" unique_id=2027131791]
+
+[node name="DynamicLights" type="Node3D" parent="VfxRoot" unique_id=134010]
+
+[node name="Markers" type="Node3D" parent="." unique_id=1754427881]
+
+[node name="MovementRoute" type="Node3D" parent="Markers" unique_id=1942557845]
+
+[node name="entry_point" type="Marker3D" parent="Markers/MovementRoute" unique_id=762859276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, 0, 1.98)
+
+[node name="wall_front" type="Marker3D" parent="Markers/MovementRoute" unique_id=369668619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, 0.52)
+
+[node name="wall_back" type="Marker3D" parent="Markers/MovementRoute" unique_id=1500754554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18, 0, -0.48)
+
+[node name="foreground_cover" type="Marker3D" parent="Markers/MovementRoute" unique_id=391586923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74, 0, 1.2)
+
+[node name="bridge_top" type="Marker3D" parent="Markers/MovementRoute" unique_id=1494119679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0, 1.56)
+
+[node name="transparent_zone" type="Marker3D" parent="Markers/MovementRoute" unique_id=218563297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92, 0, 0.16)
+
+[node name="glow_side" type="Marker3D" parent="Markers/MovementRoute" unique_id=380932457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 0, -1.12)
+
+[node name="sprite_sorting" type="Marker3D" parent="Markers/MovementRoute" unique_id=128576905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76, 0, -0.34)
+
+[node name="CameraProfiles" type="Node3D" parent="Markers" unique_id=1813680691]
+
+[node name="PerspectiveCapture" type="Marker3D" parent="Markers/CameraProfiles" unique_id=1131508755]
+transform = Transform3D(1, 0, 0, 0, 0.85264, 0.522499, 0, -0.522499, 0.85264, 0.02, 5.08, 7.82)
+
+[node name="OrthogonalCapture" type="Marker3D" parent="Markers/CameraProfiles" unique_id=634753306]
+transform = Transform3D(1, 0, 0, 0, 0.848048, 0.529919, 0, -0.529919, 0.848048, 0.02, 5.18, 7.74)
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=99669317]
+transform = Transform3D(1, 0, 0, 0, 0.85264, 0.522499, 0, -0.522499, 0.85264, 0.02, 5.08, 7.82)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1359012194]
+current = true
+fov = 34.0
+size = 12.0
+far = 80.0
