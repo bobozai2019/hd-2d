@@ -29,7 +29,10 @@
 
 - P0 火把使用 Godot 原生节点组合：primitive 托架/火盆、additive mesh 火舌、additive glow volume、少量 `GPUParticles3D` 火星和暖色 `OmniLight3D`。
 - Phase 7 起默认可复用模板为 `res://scenes/map3d/vfx/hd2d_torch_effect.tscn`，脚本为 `res://scripts/map3d/vfx/hd2d_torch_effect.gd`。
-- 模板默认包含火盆/杯口/煤床拆层、三层 additive mesh 火舌、两层 glow volume、少量火星和可关闭的 `TorchLight`。
-- 默认模板不使用贴图火焰、`Sprite3D` 火焰或程序 `ImageTexture` 火焰。
+- 模板默认包含火盆/杯口/煤床拆层、四层自然像素火焰 sprite、两层 sprite glow、少量火星和可关闭的 `TorchLight`。
+- 火把模板的可见节点应直接放在 `.tscn` 内，避免只在脚本 `_ready()` 中动态创建，保证编辑器环境下可直接预览和调参。
+- Phase 6 的 P0 验证模板不使用贴图火焰、`Sprite3D` 火焰或程序 `ImageTexture` 火焰，用于证明纯 Godot 原生特效路线成立。
+- 自然火把变体允许使用项目内生成的像素 sprite sheet 火焰层，但禁止直接裁切整张 AI 参考图进游戏。
+- 自然火把的 sprite sheet 层应拆为外焰、中焰、内核和顶部细火舌，并用不同翻帧速度/相位避免同步规律感。
 - 单屏默认动态局部光上限为 `3`。`6` 光源只保留为压力边界，不进入正式地图默认模板。
 - 正式地图中可见火把数量可以多于真实动态光数量；非关键火把应关闭 `light_enabled`，只保留 emission/glow。

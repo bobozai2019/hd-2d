@@ -10,7 +10,7 @@ Phase 6 已经证明 Godot 原生火把特效、受光材质和 `1 / 3 / 6` 动�
 
 1. 基于参考图和 `docs/hd2d/fire/Godot 火把特效制作.docx`，明确火把视觉目标。
 2. 建立独立 `Hd2dTorchEffect` 场景和脚本，供验证场与正式 Run 地图复用。
-3. 保留 Phase 6 的 Godot 原生 3D 特效路线，不使用贴图火焰作为默认方案。
+3. 保留 Phase 6 的 Godot 原生 3D 特效路线作为对照，同时允许 Phase 7 自然火把使用项目内生成的 sprite sheet 火焰来解决规整感。
 4. 在独立验证场和正式地图中分别接入模板。
 5. 最后生成对比截图和对比记录，判断新模板是否明显优于 Phase 6 P0 火把，并是否接近参考图的氛围。
 
@@ -56,9 +56,10 @@ Hd2dTorchEffect
 │   ├── Bracket
 │   └── TorchCup
 ├── FlameEffect
-│   ├── OuterTongue
-│   ├── MiddleTongue
-│   └── InnerTongue
+│   ├── OuterFlame
+│   ├── MiddleFlame
+│   ├── CoreFlame
+│   └── TopWisp
 ├── FlameHalo
 │   ├── OuterGlowVolume
 │   └── InnerGlowVolume
@@ -142,7 +143,7 @@ resources/hd2d/vfx/
 - 模板能单独实例化。
 - 多个实例有不同 flicker phase，不会同步闪烁。
 - `TorchLight` 可按参数开启 / 关闭阴影。
-- 不使用 `Sprite3D` 火焰、贴图火焰或程序 `ImageTexture` 火焰。
+- 不使用整张 AI 参考图裁切进游戏；自然火焰必须拆为项目内生成的外焰、中焰、内核和顶部细火舌 sprite sheet。
 
 ## [x] 任务 7.3：强化火盆和火焰层次
 

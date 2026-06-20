@@ -19,3 +19,7 @@
 - GLB 资源尚未落地。
 - `scenes/map3d/hd2d_map_asset_light_response_lab.tscn` 当前使用同名模块的 Godot 原语回退。
 - 后续补 GLB 时，优先保持文件名不变，以便场景逐步替换。
+
+新增运行时模型：
+
+- `hd2d_market_plaza.glb` — 市集广场组合模块，使用 `assets/generated/map3d/textures/hd2d_market_plaza_*_{albedo,normal}.png` 贴图。

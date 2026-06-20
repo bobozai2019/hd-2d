@@ -79,6 +79,9 @@
 9. **制作可复用火把模板并做对比验收**
    基于参考图和 Phase 6 结论，建立独立火把模板，接入验证场和正式 Run 地图，最后输出 Phase 6 / Phase 7 / 参考图对比结论。
 
+10. **验证材质受光和参考图氛围**
+   针对“人物和地表没有受到光影响”的当前问题，先判断是否需要新增或调整资产，再建立最小测试样例，用 baseline / adjusted / no-local-light / character profile 截图决定是否迁移到主场景。
+
 ## Goal 驱动执行入口
 
 本任务包支持两种执行方式：
@@ -157,6 +160,7 @@
 - [x] Phase 5: [phase-5-acceptance-rollout-and-maintenance.md](D:/godot/project/hd-2d/tasks/hd2d-full-implementation-plan/phase-5-acceptance-rollout-and-maintenance.md)
 - [x] Phase 6: [phase-6-torch-material-and-dynamic-light-validation.md](D:/godot/project/hd-2d/tasks/hd2d-full-implementation-plan/phase-6-torch-material-and-dynamic-light-validation.md)
 - [x] Phase 7: [phase-7-reusable-torch-template-and-reference-comparison.md](D:/godot/project/hd-2d/tasks/hd2d-full-implementation-plan/phase-7-reusable-torch-template-and-reference-comparison.md)
+- [ ] Phase 8: [phase-8-material-light-response-reference-match.md](D:/godot/project/hd-2d/tasks/hd2d-full-implementation-plan/phase-8-material-light-response-reference-match.md)
 
 使用方式：
 
@@ -195,6 +199,9 @@
 9. `phase-7-reusable-torch-template-and-reference-comparison.md`
    基于参考图制作可复用火把模板，接入验证场和正式 Run 地图，并用同机位截图完成 Phase 6 / Phase 7 / 参考图对比。
 
+10. `phase-8-material-light-response-reference-match.md`
+   先确认是否需要新增或调整资产，再建立最小材质受光样例，用固定截图对比参考图氛围和角色受光方案。
+
 ## 阶段交付物索引
 
 每个阶段结束时，都要留下可被下一阶段直接使用的交付物：
@@ -210,6 +217,7 @@
 | 阶段 5 | 最终截图矩阵、验证命令清单、性能预算、回滚策略、制作规范归档 | 后续角色、地图、特效能按同一规范扩展 |
 | 阶段 6 | 火把纯特效验证场、墙/地受光材质截图、多光源对照、下一轮光照制作规范 | 3 光源默认方案有截图证据，火把不用贴图且墙/地能受光 |
 | 阶段 7 | 可复用火把模板、验证场接入、正式 Run 地图样本、Phase 6 / Phase 7 / 参考图对比表 | 新模板优于 Phase 6 P0，默认不超过 3 动态光，正式地图流程不破坏 |
+| 阶段 8 | 最小材质受光样例、资产新增/调整决策、baseline / adjusted / no-local-light / character 截图 | 证明是否能靠现有资产调参接近参考图；若不能，明确新增资产缺口 |
 
 推荐阶段执行记录路径：
 
@@ -224,6 +232,7 @@ tasks/hd2d-full-implementation-plan/records/
   phase-5-final-acceptance-record.md
   phase-6-lighting-validation-record.md
   phase-7-torch-template-comparison-record.md
+  phase-8-reference-light-response-record.md
 ```
 
 执行记录只保存结论、命令结果、截图文件名和关键参数，不提交 `output/` 截图文件。

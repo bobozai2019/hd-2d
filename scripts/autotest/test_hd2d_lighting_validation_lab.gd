@@ -20,7 +20,7 @@ func _run() -> void:
 	_assert(String(profile.get("profile_role", "")) == "recommended_default", "lighting lab default profile is recommended default")
 	_assert(String(profile.get("torch_variant", "")) == "phase7", "lighting lab defaults to Phase 7 torch template")
 	_assert(String(profile.get("template_scene", "")) == "res://scenes/map3d/vfx/hd2d_torch_effect.tscn", "lighting lab exposes the reusable torch template scene")
-	_assert(not bool(profile.get("texture_based_torch", true)), "lighting lab torch is effect-based, not texture-based")
+	_assert(bool(profile.get("texture_based_torch", false)), "lighting lab natural torch uses sprite sheet flame assets")
 
 	var torch_profiles: Array = profile.get("torch_profiles", [])
 	_assert(torch_profiles.size() >= 3, "lighting lab exposes torch template profiles")
@@ -28,7 +28,11 @@ func _run() -> void:
 		_assert(bool(torch_profile.get("has_prop", false)), "%s has torch prop layers" % String(torch_profile.get("name", "")))
 		_assert(bool(torch_profile.get("has_flame", false)), "%s has flame layers" % String(torch_profile.get("name", "")))
 		_assert(bool(torch_profile.get("has_halo", false)), "%s has glow layers" % String(torch_profile.get("name", "")))
-		_assert(not bool(torch_profile.get("texture_based", true)), "%s is not texture-based" % String(torch_profile.get("name", "")))
+		_assert(bool(torch_profile.get("uses_spark_particles", false)), "%s uses spark particles" % String(torch_profile.get("name", "")))
+		_assert(bool(torch_profile.get("uses_spark_texture", false)), "%s uses the ember atlas for spark particles" % String(torch_profile.get("name", "")))
+		_assert(bool(torch_profile.get("uses_spark_particle_billboard", false)), "%s uses particle billboard material for spark flipbook" % String(torch_profile.get("name", "")))
+		_assert(bool(torch_profile.get("uses_sprite_sheet_flame", false)), "%s uses natural flame sprite sheets" % String(torch_profile.get("name", "")))
+		_assert(bool(torch_profile.get("texture_based", false)), "%s exposes texture-based natural flame assets" % String(torch_profile.get("name", "")))
 
 	var material_targets: Array = profile.get("material_targets", [])
 	_assert(material_targets.size() >= 3, "lighting lab exposes wall and floor material targets")

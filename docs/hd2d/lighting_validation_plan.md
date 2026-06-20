@@ -81,9 +81,11 @@ Screenshot matrix:
 ## Phase 7 Result
 
 - Reusable template: accepted. Use `res://scenes/map3d/vfx/hd2d_torch_effect.tscn` and `res://scripts/map3d/vfx/hd2d_torch_effect.gd` as the default native 3D torch template.
-- Template contents: primitive prop layers, three additive flame tongues, two additive glow volumes, restrained sparks, and one optional warm `TorchLight`.
-- Validation lab: `torch_variant=phase6|phase7` can switch the same scene and camera between the Phase 6 P0 reference and the Phase 7 template.
-- Run map carry-forward: small formal-map samples live under `VfxRoot/TorchSamples`; only key torches should enable real dynamic lights.
+- Editor posture: the template scene owns its visible prop, flame, glow, sparks, and light nodes. The script only binds existing nodes, applies exported values, and drives flicker.
+- Template contents: primitive prop layers, natural pixel sprite-sheet flame layers, sprite glow, restrained sparks, and one optional warm `TorchLight`.
+- Natural flame assets: generated under `res://assets/generated/hd2d/fire/natural_torch/`, with separate sheets for outer flame, middle flame, core flame, top wisp, ember sparks, torch glow, and wall light patch.
+- Validation lab: `torch_variant=phase6|phase7` can switch the same scene and camera between `VfxRoot/Torches` and `VfxRoot/Phase7Torches`.
+- Run map carry-forward: small formal-map samples are placed in the scene under `VfxRoot/TorchSamples`; only key torches should enable real dynamic lights.
 - Comparison result: Phase 7 is closer to the reference image than Phase 6 because the fire bowl/cup silhouette is clearer and the effect is reusable. Low-poly `.glb` torch props remain a later art pass, not a blocker.
 
 ## Extra Follow-Up Worth Testing

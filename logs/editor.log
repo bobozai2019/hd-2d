@@ -1,11 +1,7 @@
-=== EditorLogger session start: 2026-06-15T21:58:52 ===
-[2026-06-15T21:58:52] [STDOUT] Editor Logger enabled
+=== EditorLogger session start: 2026-06-20T14:07:10 ===
+[2026-06-20T14:07:10] [STDOUT] Editor Logger enabled
 
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=GDScript::reload (res://addons/godotiq/godotiq_server.gd:667) | code=Parse Error: Static function "set_run_instances_config()" not found in base "GDScriptNativeClass". | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=GDScript::reload (res://addons/godotiq/godotiq_server.gd:667) | code=Parse Error: Cannot infer the type of "single_err" variable because the value doesn't have a set type. | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=GDScript::reload (res://addons/godotiq/godotiq_server.gd:673) | code=Parse Error: Static function "set_run_instances_config()" not found in base "GDScriptNativeClass". | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=GDScript::reload (res://addons/godotiq/godotiq_server.gd:673) | code=Parse Error: Cannot infer the type of "run_config_err" variable because the value doesn't have a set type. | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=GDScript::reload (res://addons/godotiq/godotiq_plugin.gd:0) | code=Compile Error: Failed to compile depended scripts. | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=0 editor_notify=true | origin=load (modules/gdscript/gdscript.cpp:2907) | code=Failed to load script "res://addons/godotiq/godotiq_plugin.gd" with error "Compilation failed". | backtraces=[]
-[2026-06-15T21:58:52] [ERROR] type=2 editor_notify=false | origin=_enter_tree (res://addons/godotiq/godotiq_plugin.gd:16) | code=Invalid call. Nonexistent function 'new' in base 'GDScript'. | backtraces=[GDScript backtrace (most recent call first):
-    [0] _enter_tree (res://addons/godotiq/godotiq_plugin.gd:16)]
+[2026-06-20T14:07:10] [STDOUT] GodotIQ: WebSocket server listening on 127.0.0.1:6007
+
+[2026-06-20T14:07:10] [STDOUT] GodotIQ: Logger registered (Godot 4.5+)
+

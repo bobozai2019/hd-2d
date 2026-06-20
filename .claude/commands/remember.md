@@ -23,12 +23,8 @@ Valid categories (map to files in `.claude/knowledge/`):
 | Keyword | File | Scope |
 |---------|------|-------|
 | `ui` | ui.md | UI 模式、布局、Control 节点、HTML 映射 |
-| `resources` | resources.md | .tres、Resource 类、序列化 |
-| `logic` | logic.md | 游戏逻辑、系统交互、状态机 |
-| `data` | data.md | 数据文件约定、资源定义模式 |
 | `conventions` | conventions.md | 代码风格、命名、架构决策 |
 | `debugging` | debugging.md | 陷阱、错误、调试技巧 |
-| `performance` | performance.md | 优化、性能分析、draw calls |
 | `godot` | godot.md | 引擎怪癖、workaround、headless 限制 |
 
 If the first word matches a category keyword, use it. Otherwise, infer the best category from the content and confirm with the user.

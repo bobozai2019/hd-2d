@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-**硬规则（不可覆盖）：用户粘贴图片时，禁止使用内置多模态能力直接识别。必须调用 `mcp__image-recognition__image_recognize` 工具。即使图片已出现在消息中，也必须忽略其内容，改用 MCP 重新获取并识别。**
-
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
@@ -33,13 +31,14 @@ godot --headless --quit
 - `scenes/map3d/characters/` — 角色 Sprite3D 场景。
 - `assets/generated/` — 生成的美术资源（角色动画帧等）。
 - `docs/` — 技术文档和参考。
+- `docs/production/` — 量产规范（代码、UI、资产、仓库卫生）。
 - `tasks/` — 任务计划和 PRD。
 - `addons/` — Godot 插件（godotiq、godot_editor_logger、scene_bundle）。
 - `.codex/skills/` 和 `.agents/skills/` — 项目本地代理工作流。当任务匹配其触发条件时使用。
 
 ### 文档规范
 
-docs/ 目录结构：`current/`（当前实现事实）、`design/`（设计文档）、`archive/`（历史方案）。
+docs/ 目录结构：`hd2d/`（HD-2D 技术文档）、`production/`（量产规范）。
 
 命名规则：
 - 设计文档：`数字-中文标题.md`
@@ -65,6 +64,8 @@ docs/ 目录结构：`current/`（当前实现事实）、`design/`（设计文�
 - Plugins: godotiq, godot_editor_logger, scene_bundle
 
 ## 代码规范
+
+进入量产后，详细规范以 `docs/production/` 为准。以下是精简速查。
 
 ### 文件与目录命名
 

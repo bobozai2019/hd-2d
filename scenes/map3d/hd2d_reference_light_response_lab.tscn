@@ -1,0 +1,577 @@
+[gd_scene format=3 uid="uid://dncpb45b6mle3"]
+
+[ext_resource type="Script" uid="uid://w711fv5i26sa" path="res://scripts/map3d/hd2d_reference_light_response_lab.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cj4wfay257ffn" path="res://scenes/map3d/vfx/hd2d_torch_effect.tscn" id="2_torch"]
+[ext_resource type="SpriteFrames" uid="uid://bsa26nbvdluj0" path="res://assets/generated/characters/engineer/engineer_stand.spriteframes.tres" id="3_frames"]
+[ext_resource type="Texture2D" uid="uid://b5dwm4sdchok6" path="res://assets/generated/hd2d/fire/natural_torch/alpha_wall_light_patch_draft.png" id="4_patch_tex"]
+
+[sub_resource type="Environment" id="env_baseline"]
+background_mode = 1
+background_color = Color(0.021, 0.027, 0.05, 1)
+ambient_light_source = 1
+ambient_light_color = Color(0.18, 0.23, 0.34, 1)
+ambient_light_energy = 0.28
+tonemap_mode = 2
+tonemap_exposure = 0.95
+tonemap_white = 1.35
+glow_enabled = true
+glow_intensity = 0.24
+glow_strength = 0.56
+fog_enabled = true
+fog_light_color = Color(0.18, 0.24, 0.33, 1)
+
+[sub_resource type="CameraAttributesPractical" id="cam_attrs"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 11.0
+dof_blur_far_transition = 2.4
+dof_blur_amount = 0.06
+
+[sub_resource type="StandardMaterial3D" id="mat_ground"]
+albedo_color = Color(0.24, 0.27, 0.24, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="mesh_ground_plate"]
+size = Vector3(5.8, 0.16, 4.4)
+
+[sub_resource type="StandardMaterial3D" id="mat_wall"]
+albedo_color = Color(0.26, 0.24, 0.22, 1)
+metallic_specular = 0.14
+roughness = 0.88
+
+[sub_resource type="BoxMesh" id="mesh_back_wall"]
+size = Vector3(5.85, 2.18, 0.28)
+
+[sub_resource type="BoxMesh" id="mesh_pier"]
+size = Vector3(0.28, 2.34, 0.36)
+
+[sub_resource type="StandardMaterial3D" id="mat_rock"]
+albedo_color = Color(0.19, 0.19, 0.17, 1)
+metallic_specular = 0.08
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="mesh_rock_l"]
+size = Vector3(0.94, 0.46, 0.86)
+
+[sub_resource type="BoxMesh" id="mesh_rock_r"]
+size = Vector3(0.82, 0.34, 0.76)
+
+[sub_resource type="StandardMaterial3D" id="mat_fg"]
+albedo_color = Color(0.11, 0.12, 0.11, 1)
+metallic_specular = 0.08
+roughness = 0.94
+
+[sub_resource type="BoxMesh" id="mesh_fg_l"]
+size = Vector3(0.42, 0.72, 2.8)
+
+[sub_resource type="BoxMesh" id="mesh_fg_r"]
+size = Vector3(0.36, 0.58, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="mat_ground_patch"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.49, 0.16, 0.28)
+albedo_texture = ExtResource("4_patch_tex")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="mesh_ground_patch"]
+size = Vector2(3.15, 2.15)
+
+[sub_resource type="StandardMaterial3D" id="mat_wall_patch"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.52, 0.18, 0.24)
+albedo_texture = ExtResource("4_patch_tex")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="mesh_wall_patch"]
+size = Vector2(3.8, 1.45)
+
+[sub_resource type="StandardMaterial3D" id="mat_edge"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.28)
+albedo_texture = ExtResource("4_patch_tex")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="mesh_edge"]
+size = Vector2(1.3, 2.9)
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_0_0"]
+albedo_color = Color(0.22, 0.24, 0.22, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="mesh_tile"]
+size = Vector3(0.74, 0.026, 0.62)
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_1_0"]
+albedo_color = Color(0.235, 0.255, 0.235, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_2_0"]
+albedo_color = Color(0.25, 0.27, 0.25, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_1_1"]
+albedo_color = Color(0.25, 0.27, 0.25, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_2_1"]
+albedo_color = Color(0.22, 0.24, 0.22, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_0_1"]
+albedo_color = Color(0.235, 0.255, 0.235, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_2_2"]
+albedo_color = Color(0.235, 0.255, 0.235, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_0_2"]
+albedo_color = Color(0.25, 0.27, 0.25, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_1_2"]
+albedo_color = Color(0.22, 0.24, 0.22, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_0_3"]
+albedo_color = Color(0.22, 0.24, 0.22, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_1_3"]
+albedo_color = Color(0.235, 0.255, 0.235, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_2_3"]
+albedo_color = Color(0.25, 0.27, 0.25, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_1_4"]
+albedo_color = Color(0.25, 0.27, 0.25, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_2_4"]
+albedo_color = Color(0.22, 0.24, 0.22, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_tile_0_4"]
+albedo_color = Color(0.235, 0.255, 0.235, 1)
+metallic_specular = 0.12
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="mat_shadow"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.32)
+
+[sub_resource type="CylinderMesh" id="mesh_shadow"]
+top_radius = 0.34
+bottom_radius = 0.34
+height = 0.01
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="mat_warm_patch_h"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.48, 0.14, 0.34)
+albedo_texture = ExtResource("4_patch_tex")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="mesh_warm_patch"]
+size = Vector2(0.72, 0.34)
+
+[node name="Hd2dReferenceLightResponseLab" type="Node3D" unique_id=811930190]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2111692093]
+environment = SubResource("env_baseline")
+camera_attributes = SubResource("cam_attrs")
+
+[node name="Lighting" type="Node3D" parent="." unique_id=1584019258]
+
+[node name="MoonKey" type="DirectionalLight3D" parent="Lighting" unique_id=138481449]
+transform = Transform3D(0.788011, 0, 0.615661, 0.522111, 0.529919, -0.668271, 0.326251, -0.848048, -0.417582, 0, 0, 0)
+light_color = Color(0.5, 0.62, 0.86, 1)
+light_energy = 0.18
+
+[node name="DebugAmbientProbe" type="OmniLight3D" parent="Lighting" unique_id=135089139]
+visible = false
+
+[node name="Stage" type="Node3D" parent="." unique_id=1078005633]
+
+[node name="GroundPlate" type="MeshInstance3D" parent="Stage" unique_id=581242474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+material_override = SubResource("mat_ground")
+mesh = SubResource("mesh_ground_plate")
+
+[node name="BackWall" type="MeshInstance3D" parent="Stage" unique_id=1465431815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02, -1.72)
+material_override = SubResource("mat_wall")
+mesh = SubResource("mesh_back_wall")
+
+[node name="WallPier0" type="MeshInstance3D" parent="Stage" unique_id=1041139020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35, 1.07, -1.55)
+material_override = SubResource("mat_wall")
+mesh = SubResource("mesh_pier")
+
+[node name="WallPier1" type="MeshInstance3D" parent="Stage" unique_id=1426337289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 1.07, -1.55)
+material_override = SubResource("mat_wall")
+mesh = SubResource("mesh_pier")
+
+[node name="WallPier2" type="MeshInstance3D" parent="Stage" unique_id=1904342760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 1.07, -1.55)
+material_override = SubResource("mat_wall")
+mesh = SubResource("mesh_pier")
+
+[node name="WallPier3" type="MeshInstance3D" parent="Stage" unique_id=301406687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 1.07, -1.55)
+material_override = SubResource("mat_wall")
+mesh = SubResource("mesh_pier")
+
+[node name="RaisedRockLeft" type="MeshInstance3D" parent="Stage" unique_id=584391567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0.18, -0.35)
+material_override = SubResource("mat_rock")
+mesh = SubResource("mesh_rock_l")
+
+[node name="RaisedRockRight" type="MeshInstance3D" parent="Stage" unique_id=1633695910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, 0.12, 0.1)
+material_override = SubResource("mat_rock")
+mesh = SubResource("mesh_rock_r")
+
+[node name="ForegroundLeftEdge" type="MeshInstance3D" parent="Stage" unique_id=40357495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92, 0.24, 1)
+material_override = SubResource("mat_fg")
+mesh = SubResource("mesh_fg_l")
+
+[node name="ForegroundRightEdge" type="MeshInstance3D" parent="Stage" unique_id=333836937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 0.2, 1.08)
+material_override = SubResource("mat_fg")
+mesh = SubResource("mesh_fg_r")
+
+[node name="WarmLightPatchGround" type="MeshInstance3D" parent="Stage" unique_id=408610773]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.03, 0.18)
+material_override = SubResource("mat_ground_patch")
+cast_shadow = 0
+mesh = SubResource("mesh_ground_patch")
+
+[node name="WarmLightPatchWall" type="MeshInstance3D" parent="Stage" unique_id=203689845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08, -1.545)
+material_override = SubResource("mat_wall_patch")
+cast_shadow = 0
+mesh = SubResource("mesh_wall_patch")
+
+[node name="EdgeDarkenLeft" type="MeshInstance3D" parent="Stage" unique_id=1655550316]
+transform = Transform3D(0.994522, 0, 0.104528, 0, 1, 0, -0.104528, 0, 0.994522, -2.62, 1, -0.18)
+material_override = SubResource("mat_edge")
+cast_shadow = 0
+mesh = SubResource("mesh_edge")
+
+[node name="EdgeDarkenRight" type="MeshInstance3D" parent="Stage" unique_id=1755930131]
+transform = Transform3D(0.994522, 0, -0.104528, 0, 1, 0, 0.104528, 0, 0.994522, 2.62, 1, -0.18)
+material_override = SubResource("mat_edge")
+cast_shadow = 0
+mesh = SubResource("mesh_edge")
+
+[node name="GroundStone_0_0" type="MeshInstance3D" parent="Stage" unique_id=1408655384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0.018, -1.32)
+material_override = SubResource("mat_tile_0_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_1_0" type="MeshInstance3D" parent="Stage" unique_id=809689154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56, 0.018, -1.32)
+material_override = SubResource("mat_tile_1_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_2_0" type="MeshInstance3D" parent="Stage" unique_id=141628256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78, 0.018, -1.32)
+material_override = SubResource("mat_tile_2_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_3_0" type="MeshInstance3D" parent="Stage" unique_id=1273939820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018, -1.32)
+material_override = SubResource("mat_tile_0_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_4_0" type="MeshInstance3D" parent="Stage" unique_id=1542229845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78, 0.018, -1.32)
+material_override = SubResource("mat_tile_1_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_5_0" type="MeshInstance3D" parent="Stage" unique_id=600314642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.018, -1.32)
+material_override = SubResource("mat_tile_2_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_6_0" type="MeshInstance3D" parent="Stage" unique_id=1326430084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34, 0.018, -1.32)
+material_override = SubResource("mat_tile_0_0")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_0_1" type="MeshInstance3D" parent="Stage" unique_id=1329868930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0.018, -0.66)
+material_override = SubResource("mat_tile_1_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_1_1" type="MeshInstance3D" parent="Stage" unique_id=851426573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56, 0.018, -0.66)
+material_override = SubResource("mat_tile_2_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_2_1" type="MeshInstance3D" parent="Stage" unique_id=1770746241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78, 0.018, -0.66)
+material_override = SubResource("mat_tile_0_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_3_1" type="MeshInstance3D" parent="Stage" unique_id=1638626204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018, -0.66)
+material_override = SubResource("mat_tile_1_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_4_1" type="MeshInstance3D" parent="Stage" unique_id=1425273641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78, 0.018, -0.66)
+material_override = SubResource("mat_tile_2_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_5_1" type="MeshInstance3D" parent="Stage" unique_id=1853109910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.018, -0.66)
+material_override = SubResource("mat_tile_0_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_6_1" type="MeshInstance3D" parent="Stage" unique_id=1993941718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34, 0.018, -0.66)
+material_override = SubResource("mat_tile_1_1")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_0_2" type="MeshInstance3D" parent="Stage" unique_id=1607557504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0.018, 0)
+material_override = SubResource("mat_tile_2_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_1_2" type="MeshInstance3D" parent="Stage" unique_id=237566429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56, 0.018, 0)
+material_override = SubResource("mat_tile_0_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_2_2" type="MeshInstance3D" parent="Stage" unique_id=1920805266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78, 0.018, 0)
+material_override = SubResource("mat_tile_1_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_3_2" type="MeshInstance3D" parent="Stage" unique_id=1828270214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018, 0)
+material_override = SubResource("mat_tile_2_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_4_2" type="MeshInstance3D" parent="Stage" unique_id=1470918465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78, 0.018, 0)
+material_override = SubResource("mat_tile_0_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_5_2" type="MeshInstance3D" parent="Stage" unique_id=1104744536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.018, 0)
+material_override = SubResource("mat_tile_1_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_6_2" type="MeshInstance3D" parent="Stage" unique_id=554256306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34, 0.018, 0)
+material_override = SubResource("mat_tile_2_2")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_0_3" type="MeshInstance3D" parent="Stage" unique_id=817444306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0.018, 0.66)
+material_override = SubResource("mat_tile_0_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_1_3" type="MeshInstance3D" parent="Stage" unique_id=483812405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56, 0.018, 0.66)
+material_override = SubResource("mat_tile_1_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_2_3" type="MeshInstance3D" parent="Stage" unique_id=1042121523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78, 0.018, 0.66)
+material_override = SubResource("mat_tile_2_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_3_3" type="MeshInstance3D" parent="Stage" unique_id=1627081255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018, 0.66)
+material_override = SubResource("mat_tile_0_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_4_3" type="MeshInstance3D" parent="Stage" unique_id=115371196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78, 0.018, 0.66)
+material_override = SubResource("mat_tile_1_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_5_3" type="MeshInstance3D" parent="Stage" unique_id=2013378806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.018, 0.66)
+material_override = SubResource("mat_tile_2_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_6_3" type="MeshInstance3D" parent="Stage" unique_id=681067819]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34, 0.018, 0.66)
+material_override = SubResource("mat_tile_0_3")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_0_4" type="MeshInstance3D" parent="Stage" unique_id=851022176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34, 0.018, 1.32)
+material_override = SubResource("mat_tile_1_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_1_4" type="MeshInstance3D" parent="Stage" unique_id=1813529932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56, 0.018, 1.32)
+material_override = SubResource("mat_tile_2_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_2_4" type="MeshInstance3D" parent="Stage" unique_id=1250213988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78, 0.018, 1.32)
+material_override = SubResource("mat_tile_0_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_3_4" type="MeshInstance3D" parent="Stage" unique_id=1360332142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018, 1.32)
+material_override = SubResource("mat_tile_1_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_4_4" type="MeshInstance3D" parent="Stage" unique_id=256268678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78, 0.018, 1.32)
+material_override = SubResource("mat_tile_2_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_5_4" type="MeshInstance3D" parent="Stage" unique_id=720625094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56, 0.018, 1.32)
+material_override = SubResource("mat_tile_0_4")
+mesh = SubResource("mesh_tile")
+
+[node name="GroundStone_6_4" type="MeshInstance3D" parent="Stage" unique_id=500740376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34, 0.018, 1.32)
+material_override = SubResource("mat_tile_1_4")
+mesh = SubResource("mesh_tile")
+
+[node name="CharacterSamples" type="Node3D" parent="." unique_id=1611534430]
+
+[node name="CharacterUnshaded" type="Node3D" parent="CharacterSamples" unique_id=379089524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.07, 0.72)
+
+[node name="Visual" type="AnimatedSprite3D" parent="CharacterSamples/CharacterUnshaded" unique_id=1775756436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1415311, 0.84, 0)
+cast_shadow = 0
+pixel_size = 0.0024
+billboard = 2
+alpha_cut = 1
+alpha_scissor_threshold = 0.02
+texture_filter = 1
+sprite_frames = ExtResource("3_frames")
+animation = &"stand"
+autoplay = "stand"
+
+[node name="ShadowPlane" type="MeshInstance3D" parent="CharacterSamples/CharacterUnshaded" unique_id=1936765835]
+transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.58, 0, 0.018, 0.12)
+material_override = SubResource("mat_shadow")
+cast_shadow = 0
+mesh = SubResource("mesh_shadow")
+
+[node name="CharacterShaded" type="Node3D" parent="CharacterSamples" unique_id=276046436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0.72)
+
+[node name="Visual" type="AnimatedSprite3D" parent="CharacterSamples/CharacterShaded" unique_id=733803834]
+transform = Transform3D(0.45841327, 0, -0.88873917, 0, 1, 0, 0.88873917, 0, 0.45841327, -0.46501362, 0.84, 0)
+cast_shadow = 0
+pixel_size = 0.0024
+billboard = 2
+shaded = true
+alpha_cut = 1
+alpha_scissor_threshold = 0.02
+texture_filter = 1
+sprite_frames = ExtResource("3_frames")
+animation = &"stand"
+autoplay = "stand"
+
+[node name="ShadowPlane" type="MeshInstance3D" parent="CharacterSamples/CharacterShaded" unique_id=2060130955]
+transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.58, 0, 0.018, 0.12)
+material_override = SubResource("mat_shadow")
+cast_shadow = 0
+mesh = SubResource("mesh_shadow")
+
+[node name="CharacterHybrid" type="Node3D" parent="CharacterSamples" unique_id=1842299333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.07, 0.72)
+
+[node name="Visual" type="AnimatedSprite3D" parent="CharacterSamples/CharacterHybrid" unique_id=1594653335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9881827, 0.84, 0)
+cast_shadow = 0
+pixel_size = 0.0024
+billboard = 2
+alpha_cut = 1
+alpha_scissor_threshold = 0.02
+texture_filter = 1
+sprite_frames = ExtResource("3_frames")
+animation = &"stand"
+autoplay = "stand"
+
+[node name="ShadowPlane" type="MeshInstance3D" parent="CharacterSamples/CharacterHybrid" unique_id=1076138443]
+transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.58, 0, 0.018, 0.12)
+material_override = SubResource("mat_shadow")
+cast_shadow = 0
+mesh = SubResource("mesh_shadow")
+
+[node name="HybridWarmFootLight" type="MeshInstance3D" parent="CharacterSamples/CharacterHybrid" unique_id=1888988959]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.025, 0.08)
+visible = false
+material_override = SubResource("mat_warm_patch_h")
+cast_shadow = 0
+mesh = SubResource("mesh_warm_patch")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=802903296]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1551311681]
+transform = Transform3D(1, 0, 0, 0, 0.892946, -0.450163, 0, -0.450163, -0.892946, 0, 3.9, 5.7)
+current = true
+fov = 38.0
+far = 40.0
+
+[node name="VfxRoot" type="Node3D" parent="." unique_id=1014896540]
+
+[node name="TorchKey" parent="VfxRoot" unique_id=1489786190 instance=ExtResource("2_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0.02, 0.52)
+light_base_energy = 1.25
+flicker_phase = 0.0
+profile_rank = 1
+
+[node name="TorchSecondary" parent="VfxRoot" unique_id=1397440894 instance=ExtResource("2_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85, 0.88, -1.18)
+light_base_energy = 0.38
+light_range = 2.5
+flicker_phase = 2.2
+profile_rank = 2
+
+[node name="TorchFarAtmosphere" parent="VfxRoot" unique_id=153495081 instance=ExtResource("2_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15, 1.02, -1.35)
+light_base_energy = 0.0
+light_range = 2.0
+light_enabled = false
+flicker_phase = 4.6
+profile_rank = 2

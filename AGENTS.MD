@@ -8,7 +8,7 @@
 
 当前处于早期阶段：已完成基础相机控制和角色动画 Sprite3D。
 
-完整架构参考请见 `CLAUDE.md`。本文件是日常代理工作的简明操作指南。
+完整架构参考请见 `CLAUDE.md`，量产详细规范请见 `docs/production/`。本文件是日常代理工作的简明操作指南。
 
 ## 仓库目录
 
@@ -18,12 +18,16 @@
 - `scenes/map3d/characters/` — 角色 Sprite3D 场景。
 - `assets/generated/` — 生成的美术资源（角色动画帧等）。
 - `docs/` — 技术文档和参考。
+- `docs/production/` — 量产规范（代码、UI、资产、仓库卫生）。
 - `tasks/` — 任务计划和 PRD。
 - `addons/` — Godot 插件（godotiq、godot_editor_logger、scene_bundle）。
 - `.codex/skills/` 和 `.agents/skills/` — 项目本地代理工作流。当任务匹配其触发条件时使用。
 
 ## 代理工作流要求
 
+- **编写代码或制作场景前，必须先阅读以下规范文件：**
+  - `docs/production/01-code-standard.md` — 代码规范（命名、信号、注释等）
+  - `docs/production/02-ui-standard.md` — UI 规范（Control 节点、布局、主题等）
 - 编辑前先阅读相关已有代码。匹配本地模式，不要引入新风格。
 - 保留用户的工作区变更。工作树可能有未提交的改动；除非明确要求，不要 reset、checkout 或还原文件。
 - 保持编辑聚焦于所请求的行为变更。除非正确性需要，否则避免大范围重构。

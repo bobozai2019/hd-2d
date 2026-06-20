@@ -10,7 +10,6 @@ const MAT_FOREGROUND := preload("res://assets/generated/map3d/materials/mat_hd2d
 const MAT_BACKGROUND := preload("res://assets/generated/map3d/materials/mat_hd2d_background.tres")
 const MAT_EMISSION_WARM := preload("res://assets/generated/map3d/materials/mat_hd2d_emission_warm.tres")
 const MAT_EMISSION_COOL := preload("res://assets/generated/map3d/materials/mat_hd2d_emission_cool.tres")
-const HD2D_TORCH_EFFECT_SCENE := preload("res://scenes/map3d/vfx/hd2d_torch_effect.tscn")
 
 const PREVIEW_NODES := [
 	{"node_id": "entry", "node_type": "current", "state": "current", "layer_index": 0, "lane_index": 0, "layer_width": 1, "reward": "Start"},
@@ -787,20 +786,8 @@ func _play_select_feedback(tile: Area3D) -> void:
 
 func _build_torch_samples() -> void:
 	_ensure_torch_samples_root()
-	if _torch_samples_root.get_child_count() > 0:
-		return
-
-	var entry_tile := _tiles_by_id.get(&"entry") as Area3D
-	var battle_tile := _tiles_by_id.get(&"battle_1") as Area3D
-	var entry_position := Vector3(-1.4, 0.0, 0.8)
-	var battle_position := Vector3(1.35, 0.0, -0.6)
-	if entry_tile != null:
-		entry_position = entry_tile.position + Vector3(-0.82, 0.0, 0.72)
-	if battle_tile != null:
-		battle_position = battle_tile.position + Vector3(0.82, 0.0, -0.68)
-
-	_add_torch_sample("RunTorch_Key", entry_position, true, 0.46, 3.2, 0.4)
-	_add_torch_sample("RunTorch_Atmosphere", battle_position, false, 0.0, 2.6, 3.2)
+	if _torch_samples_root.get_child_count() == 0:
+		push_warning("Run map expects Phase 7 torch samples under VfxRoot/TorchSamples.")
 
 
 func _ensure_torch_samples_root() -> void:
@@ -811,20 +798,6 @@ func _ensure_torch_samples_root() -> void:
 		_torch_samples_root = Node3D.new()
 		_torch_samples_root.name = "TorchSamples"
 		_vfx_root.add_child(_torch_samples_root)
-
-
-func _add_torch_sample(torch_name: String, torch_position: Vector3, enabled_light: bool, light_energy: float, light_range: float, flicker_phase: float) -> void:
-	var torch := HD2D_TORCH_EFFECT_SCENE.instantiate() as Node3D
-	torch.name = torch_name
-	torch.position = torch_position
-	torch.set("light_enabled", enabled_light)
-	torch.set("light_base_energy", light_energy)
-	torch.set("light_range", light_range)
-	torch.set("flicker_phase", flicker_phase)
-	torch.set("profile_rank", 3)
-	torch.set("shadows_enabled", enabled_light)
-	torch.set("sparks_enabled", enabled_light)
-	_torch_samples_root.add_child(torch)
 
 
 func _count_torch_dynamic_lights() -> int:

@@ -50,6 +50,22 @@ GodotIQ 调试控制台 (`godotiq_read_debug_console`) 只捕获运行时错误�
 
 **How to apply:** 做 GodotIQ/MCP 交互验收前，优先显式停止旧会话并从目标主场景重新启动。遇到交互探测卡住时，三轮尝试中允许把完整路径拆成更小证据链，如按钮可触发、节点存在、日志无错。
 
+## 2026-06-20: GLB 从 Blender 导入的内嵌灯光会导致过曝
+
+**Symptom:** 场景调低 `tonemap_exposure`、外部 `Light3D.light_energy` 后仍然大面积爆白。
+
+**Investigation:** GLB / Blender 场景里自带的灯光被一起实例化，和 Godot 场景外部灯光、Glow、曝光叠加。market_plaza GLB 内嵌了 4 个 `OmniLight3D` + 1 个 `DirectionalLight3D`，与场景外部 7+ 个灯光叠加导致约 15 个灯光同时贡献。
+
+**Root cause:** Blender 导出 GLB 时保留了场景中的灯光节点，Godot 导入时这些灯光作为子节点被实例化，默认 `visible = true`。
+
+**Fix:** 在 `.tscn` 中对 GLB 实例的内嵌灯光子节点添加 `visible = false` override：
+```tscn
+[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketPlaza" index="0"]
+visible = false
+```
+
+**How to apply:** 导入 GLB 模型后，先用 GodotIQ `scene_tree` 检查实例内部是否带 `Light3D` 节点。如果有，在 `.tscn` 中对这些子灯加 `visible = false` override，再微调外部灯光和 tonemap。不要只调 Environment 参数——那是治标不治本。
+
 ## 2026-05-17: 插件可预期降级状态不要用 push_error
 
 **Symptom:** `logs/editor.log` 出现 GodotIQ 端口绑定 `[ERROR]`，但项目脚本加载和场景测试都能通过。

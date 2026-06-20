@@ -4,8 +4,8 @@
 
 ## Categories
 
-- [UI](ui.md) — Control 节点选择、布局模式、Container 用法、主题覆盖、交互模式
-- [Conventions](conventions.md) — 代码风格决策、命名模式、架构选择、信号命名、文件组织
+- [UI](ui.md) — Control 节点选择、布局模式、Container 用法、主题覆盖、交互模式（暂空）
+- [Conventions](conventions.md) — 代码风格决策、命名模式、架构选择、preload 类型注解、场景化 UI
 - [Debugging](debugging.md) — 常见错误模式、陷阱描述、调试流程、测试策略、headless 验证注意事项
 - [Godot](godot.md) — 引擎怪癖、Godot 4.6 workaround、headless 模式限制、导出注意事项、编辑器行为
 

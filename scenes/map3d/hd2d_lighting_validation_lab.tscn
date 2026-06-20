@@ -5,6 +5,7 @@
 [ext_resource type="CameraAttributesPractical" path="res://resources/hd2d/hd2d_camera_attributes_night_warm_lights.tres" id="3_6jye4"]
 [ext_resource type="PackedScene" path="res://scenes/map3d/characters/hd2d_character_template.tscn" id="4_k6omr"]
 [ext_resource type="SpriteFrames" uid="uid://bsa26nbvdluj0" path="res://assets/generated/characters/engineer/engineer_stand.spriteframes.tres" id="5_8pj77"]
+[ext_resource type="PackedScene" uid="uid://cj4wfay257ffn" path="res://scenes/map3d/vfx/hd2d_torch_effect.tscn" id="6_torch"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bdlc"]
 albedo_color = Color(0.08, 0.09, 0.08, 1)
@@ -700,8 +701,8 @@ light_energy = 0.82
 shadow_enabled = true
 
 [node name="CoolFill" type="OmniLight3D" parent="Lighting" unique_id=1152809387]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 4)
-light_color = Color(0.42, 0.58, 0.88, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 1.339375)
+light_color = Color(0.5571611, 0.59265023, 0.59049624, 1)
 light_energy = 0.18
 omni_range = 8.0
 
@@ -783,6 +784,7 @@ mesh = SubResource("BoxMesh_n1xb6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17800903, 0, 0)
 
 [node name="Torches" type="Node3D" parent="VfxRoot" unique_id=1377497201]
+visible = false
 
 [node name="CenterFloorTorch" type="Node3D" parent="VfxRoot/Torches" unique_id=1526033543]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.86, 0.95)
@@ -1097,6 +1099,57 @@ preprocess = 0.3
 process_material = SubResource("ParticleProcessMaterial_tlpxt")
 draw_pass_1 = SubResource("QuadMesh_7qu6w")
 
+[node name="Phase7Torches" type="Node3D" parent="VfxRoot" unique_id=1444173138]
+
+[node name="CenterFloorTorch" parent="VfxRoot/Phase7Torches" unique_id=672379377 instance=ExtResource("6_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.86, 0.95)
+light_base_energy = 0.58
+light_range = 3.4
+flicker_phase = 1.7
+profile_rank = 1
+
+[node name="LeftWallTorch" parent="VfxRoot/Phase7Torches" unique_id=108142381 instance=ExtResource("6_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15, 1.1, -0.8)
+light_base_energy = 0.74
+light_range = 4.0
+flicker_phase = 0.0
+
+[node name="RightWallTorch" parent="VfxRoot/Phase7Torches" unique_id=194384097 instance=ExtResource("6_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15, 1.1, -0.8)
+light_base_energy = 0.68
+light_range = 4.0
+flicker_phase = 3.1
+
+[node name="RearLeftPressureTorch" parent="VfxRoot/Phase7Torches" unique_id=1722162537 instance=ExtResource("6_torch")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 1.22, -1.62)
+visible = false
+light_base_energy = 0.44
+light_range = 4.0
+shadows_enabled = false
+flicker_phase = 4.2
+profile_rank = 6
+
+[node name="RearRightPressureTorch" parent="VfxRoot/Phase7Torches" unique_id=1279920179 instance=ExtResource("6_torch")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1.22, -1.62)
+visible = false
+light_base_energy = 0.44
+light_range = 4.0
+shadows_enabled = false
+flicker_phase = 5.4
+profile_rank = 6
+
+[node name="FrontPressureTorch" parent="VfxRoot/Phase7Torches" unique_id=954668747 instance=ExtResource("6_torch")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 1.86)
+visible = false
+light_base_energy = 0.42
+light_range = 4.0
+shadows_enabled = false
+flicker_phase = 6.2
+profile_rank = 6
+
 [node name="DynamicLights" type="Node3D" parent="VfxRoot" unique_id=1635847461]
 
 [node name="CenterFloorTorchLight" type="OmniLight3D" parent="VfxRoot/DynamicLights" unique_id=605846545]
@@ -1142,7 +1195,8 @@ light_energy = 0.48165625
 omni_range = 3.0
 
 [node name="Character" parent="." unique_id=358596904 instance=ExtResource("4_k6omr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62, 0, 0.72)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3381245, 0, 0.72)
+wall_min_slide_angle = 0.3577925
 
 [node name="FootPoint2" type="Marker3D" parent="Character" unique_id=2049820917]
 
@@ -1164,3 +1218,6 @@ transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.58, 0, 0.018, 0.12)
 material_override = SubResource("Material_shadow")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_shadow")
+
+[node name="Hd2dTorchEffect" parent="." unique_id=1207385228 instance=ExtResource("6_torch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7260959, 2.3841858e-07, 1.2624213)

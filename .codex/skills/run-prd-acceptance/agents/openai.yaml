@@ -1,4 +1,0 @@
-interface:
-  display_name: "Run PRD Acceptance"
-  short_description: "Run PRD acceptance tests and write timestamped reports"
-  default_prompt: "Use $run-prd-acceptance with a PRD markdown path to execute the full acceptance run and write results under PRD_TEST."

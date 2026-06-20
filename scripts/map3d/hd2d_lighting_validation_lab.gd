@@ -12,7 +12,8 @@ const TORCH_SPECS := [
 	{"name": "FrontPressureTorch", "phase": 6.2, "energy": 0.42, "profile_rank": 6},
 ]
 
-@onready var _torches_root: Node3D = $VfxRoot/Torches
+@onready var _phase6_torches_root: Node3D = $VfxRoot/Torches
+@onready var _phase7_torches_root: Node3D = $VfxRoot/Phase7Torches
 @onready var _dynamic_lights_root: Node3D = $VfxRoot/DynamicLights
 @onready var _material_targets_root: Node3D = $ValidationTargets/MaterialTargets
 
@@ -24,13 +25,12 @@ var _time := 0.0
 
 
 func _ready() -> void:
-	_setup_phase7_template_torches()
 	_collect_scene_torches()
 	set_dynamic_light_profile(DEFAULT_DYNAMIC_LIGHT_COUNT)
 
 	var startup_args := OS.get_cmdline_user_args()
 	for arg in startup_args:
-		if arg.begins_with("lighting_profile=") or arg.begins_with("light_count="):
+		if arg.begins_with("lighting_profile=") or arg.begins_with("light_count=") or arg.begins_with("torch_variant="):
 			_pending_capture_args.append(arg)
 	if _pending_capture_args.size() > 0:
 		_apply_profile_args(_pending_capture_args)
@@ -145,15 +145,15 @@ func set_torch_variant(variant: String) -> void:
 
 func _collect_scene_torches() -> void:
 	_torch_runtime.clear()
+	var root := _get_active_torch_root()
 	for spec in TORCH_SPECS:
 		var torch_name := String(spec.get("name", "Torch"))
-		var runtime_name := _get_runtime_torch_name(torch_name)
-		var torch := _torches_root.get_node_or_null(runtime_name) as Node3D
+		var torch := root.get_node_or_null(torch_name) as Node3D
 		var light := _get_torch_light(torch)
 		if light == null or _torch_variant == "phase6":
 			light = _dynamic_lights_root.get_node_or_null(torch_name + "Light") as OmniLight3D
 		if torch == null:
-			push_warning("Missing torch node: %s" % runtime_name)
+			push_warning("Missing %s torch node: %s" % [_torch_variant, torch_name])
 			continue
 		_torch_runtime.append({
 			"phase": float(spec.get("phase", 0.0)),
@@ -192,7 +192,8 @@ func _normalize_light_count(light_count: int) -> int:
 
 func _get_active_torch_count() -> int:
 	var count := 0
-	for child in _torches_root.get_children():
+	var root := _get_active_torch_root()
+	for child in root.get_children():
 		if child is Node3D and (child as Node3D).visible:
 			count += 1
 	return count
@@ -207,69 +208,33 @@ func _get_profile_role() -> String:
 
 
 func _has_texture_based_torch_nodes() -> bool:
-	for torch in _torches_root.get_children():
+	var root := _get_active_torch_root()
+	for torch in root.get_children():
 		if _node_uses_texture(torch):
 			return true
 	return false
 
 
-func _setup_phase7_template_torches() -> void:
-	for child in _dynamic_lights_root.get_children():
-		if child is OmniLight3D and String(child.name).ends_with("TorchLight"):
-			child.visible = false
-			child.process_mode = Node.PROCESS_MODE_DISABLED
-
-	for spec in TORCH_SPECS:
-		var torch_name := String(spec.get("name", "Torch"))
-		var existing := _torches_root.get_node_or_null(torch_name) as Node3D
-		var source_transform := Transform3D.IDENTITY
-		if existing != null:
-			source_transform = existing.transform
-			if not existing.has_method("get_torch_light"):
-				existing.name = _get_phase6_reference_name(torch_name)
-				existing.visible = false
-				existing.process_mode = Node.PROCESS_MODE_DISABLED
-			else:
-				_configure_phase7_torch(existing, spec)
-				continue
-
-		var torch := HD2D_TORCH_EFFECT_SCENE.instantiate() as Node3D
-		torch.name = torch_name
-		torch.transform = source_transform
-		_configure_phase7_torch(torch, spec)
-		_torches_root.add_child(torch)
-
-
 func _prepare_torch_variant_nodes() -> void:
+	_phase6_torches_root.visible = _torch_variant == "phase6"
+	_phase7_torches_root.visible = _torch_variant == "phase7"
 	for spec in TORCH_SPECS:
 		var torch_name := String(spec.get("name", "Torch"))
-		var phase7_torch := _torches_root.get_node_or_null(torch_name) as Node3D
-		var phase6_torch := _torches_root.get_node_or_null(_get_phase6_reference_name(torch_name)) as Node3D
+		var phase7_torch := _phase7_torches_root.get_node_or_null(torch_name) as Node3D
+		var phase6_torch := _phase6_torches_root.get_node_or_null(torch_name) as Node3D
 		var phase6_light := _dynamic_lights_root.get_node_or_null(torch_name + "Light") as OmniLight3D
-		if phase7_torch != null and _torch_variant == "phase6":
+		if phase7_torch != null:
 			if phase7_torch.has_method("set_active"):
 				phase7_torch.call("set_active", false, false)
 			else:
 				phase7_torch.visible = false
 				phase7_torch.process_mode = Node.PROCESS_MODE_DISABLED
-		if phase6_torch != null and _torch_variant == "phase7":
+		if phase6_torch != null:
 			phase6_torch.visible = false
 			phase6_torch.process_mode = Node.PROCESS_MODE_DISABLED
 		if phase6_light != null:
 			phase6_light.visible = false
 			phase6_light.process_mode = Node.PROCESS_MODE_DISABLED
-
-
-func _configure_phase7_torch(torch: Node3D, spec: Dictionary) -> void:
-	var base_energy := float(spec.get("energy", 0.6))
-	var profile_rank := int(spec.get("profile_rank", DEFAULT_DYNAMIC_LIGHT_COUNT))
-	torch.set("flicker_phase", float(spec.get("phase", 0.0)))
-	torch.set("light_base_energy", base_energy)
-	torch.set("light_range", 3.4 if profile_rank == 1 else 4.0)
-	torch.set("profile_rank", profile_rank)
-	torch.set("sparks_enabled", true)
-	torch.set("shadows_enabled", profile_rank <= DEFAULT_DYNAMIC_LIGHT_COUNT)
-	torch.set("light_enabled", true)
 
 
 func _get_torch_light(torch: Node3D) -> OmniLight3D:
@@ -280,14 +245,8 @@ func _get_torch_light(torch: Node3D) -> OmniLight3D:
 	return torch.get_node_or_null("TorchLight") as OmniLight3D
 
 
-func _get_runtime_torch_name(torch_name: String) -> String:
-	if _torch_variant == "phase6":
-		return _get_phase6_reference_name(torch_name)
-	return torch_name
-
-
-func _get_phase6_reference_name(torch_name: String) -> String:
-	return "Phase6Reference_%s" % torch_name
+func _get_active_torch_root() -> Node3D:
+	return _phase6_torches_root if _torch_variant == "phase6" else _phase7_torches_root
 
 
 func _node_uses_texture(node: Node) -> bool:

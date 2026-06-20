@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/map3d/run_hex_map_3d.gd" id="1"]
 [ext_resource type="Environment" path="res://resources/hd2d/hd2d_world_environment_default.tres" id="2"]
 [ext_resource type="CameraAttributesPractical" path="res://resources/hd2d/hd2d_camera_attributes_default.tres" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/map3d/run_hex_map_hud.tscn" id="4"]
 [ext_resource type="Material" path="res://assets/generated/map3d/materials/mat_hd2d_ground.tres" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/map3d/vfx/hd2d_torch_effect.tscn" id="6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
 size = Vector2(14, 14)
@@ -70,6 +71,23 @@ mesh = SubResource("PlaneMesh_ground")
 [node name="FogPlanes" type="Node3D" parent="VfxRoot"]
 
 [node name="DynamicLights" type="Node3D" parent="VfxRoot"]
+
+[node name="TorchSamples" type="Node3D" parent="VfxRoot"]
+
+[node name="RunTorch_Key" parent="VfxRoot/TorchSamples" instance=ExtResource("6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 0.8)
+light_base_energy = 0.46
+light_range = 3.2
+flicker_phase = 0.4
+
+[node name="RunTorch_Atmosphere" parent="VfxRoot/TorchSamples" instance=ExtResource("6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0, -0.6)
+light_base_energy = 0.0
+light_range = 2.6
+sparks_enabled = false
+shadows_enabled = false
+light_enabled = false
+flicker_phase = 3.2
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
 

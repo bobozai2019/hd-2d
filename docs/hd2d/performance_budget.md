@@ -43,7 +43,7 @@ Source:
 
 - Validation lab default: `3` Phase 7 torch templates with real `TorchLight`.
 - Validation lab pressure profile: `6` templates remains a stress case only.
-- Run map sample: `RunTorch_Key` enables a real `TorchLight`; `RunTorch_Atmosphere` keeps flame/glow only.
+- Run map sample: scene-placed `VfxRoot/TorchSamples/RunTorch_Key` enables a real `TorchLight`; `RunTorch_Atmosphere` keeps flame/glow only.
 
 Interpretation:
 

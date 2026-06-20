@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "renderdoc_bridge_init"
+compatibility_minimum = "4.3"
+reloadable = true
+
+[libraries]
+; Windows — debug
+windows.debug.x86_64 = "res://addons/renderdoc_bridge/bin/renderdoc_bridge.windows.editor.x86_64.dll"
+; Windows — release
+windows.release.x86_64 = "res://addons/renderdoc_bridge/bin/renderdoc_bridge.windows.editor.x86_64.dll"
+; Linux — debug
+linux.debug.x86_64 = "res://addons/renderdoc_bridge/bin/librenderdoc_bridge.linux.editor.x86_64.so"
+; Linux — release
+linux.release.x86_64 = "res://addons/renderdoc_bridge/bin/librenderdoc_bridge.linux.editor.x86_64.so"

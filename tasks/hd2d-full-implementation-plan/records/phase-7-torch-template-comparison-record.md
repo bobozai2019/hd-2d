@@ -23,19 +23,38 @@
 - 新增可复用模板：
   - `scenes/map3d/vfx/hd2d_torch_effect.tscn`
   - `scripts/map3d/vfx/hd2d_torch_effect.gd`
+- 编辑器可见性调整：
+  - `hd2d_torch_effect.tscn` 已直接包含火把本体、火舌、glow、火星和 `TorchLight` 节点。
+  - `hd2d_torch_effect.gd` 不再动态创建 mesh、material 或子节点，只绑定场景内节点并驱动 flicker。
+  - `hd2d_lighting_validation_lab.tscn` 已直接包含 `VfxRoot/Phase7Torches` 实例组，打开验证场即可看到 Phase 7 默认火把。
+  - `run_hex_map_3d.tscn` 已直接包含 `VfxRoot/TorchSamples/RunTorch_Key` 和 `RunTorch_Atmosphere`。
+- 自然火焰调整：
+  - 生成并接入 `assets/generated/hd2d/fire/natural_torch/` 下的 sprite sheet 草图。
+  - `FlameEffect` 由规则 mesh 火舌改为 `OuterFlame`、`MiddleFlame`、`CoreFlame`、`TopWisp` 四层 `Sprite3D`。
+  - `hd2d_torch_effect.gd` 使用不同翻帧速度和相位驱动四层火焰，避免同步规律感。
+  - glow 使用 alpha 贴图，避免黑底方块。
 - 模板结构包含：
   - `TorchProp/Stand`
   - `TorchProp/Bracket`
   - `TorchProp/TorchCup`
   - `TorchProp/CupRim`
   - `TorchProp/CoalBed`
-  - `FlameEffect/OuterTongue`
-  - `FlameEffect/MiddleTongue`
-  - `FlameEffect/InnerTongue`
+  - `FlameEffect/OuterFlame`
+  - `FlameEffect/MiddleFlame`
+  - `FlameEffect/CoreFlame`
+  - `FlameEffect/TopWisp`
   - `FlameHalo/OuterGlowVolume`
   - `FlameHalo/InnerGlowVolume`
   - `Sparks`
   - `TorchLight`
+- 自然火焰素材：
+  - `assets/generated/hd2d/fire/natural_torch/flame_outer_sheet_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/flame_middle_sheet_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/flame_core_sheet_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/flame_top_wisp_sheet_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/ember_sparks_atlas_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/alpha_torch_glow_soft_draft.png`
+  - `assets/generated/hd2d/fire/natural_torch/alpha_wall_light_patch_draft.png`
 - 默认参数：
   - `light_base_energy = 0.6`
   - `light_flicker_strength = 0.16`
@@ -48,12 +67,12 @@
   - `shadows_enabled = true`
   - `light_enabled = true`
 - 光照验证场接入：
-  - `scripts/map3d/hd2d_lighting_validation_lab.gd` 在运行时把旧火把保留为 `Phase6Reference_*`。
-  - 默认使用 Phase 7 模板实例。
+  - `scripts/map3d/hd2d_lighting_validation_lab.gd` 在 `VfxRoot/Torches` 和 `VfxRoot/Phase7Torches` 两组显式场景节点之间切换。
+  - 默认使用场景内已放置的 Phase 7 模板实例。
   - 新增 `torch_variant=phase6|phase7` 捕获参数，用于同场景同机位切换对照。
   - `lighting_profile=1/3/6` 继续可用，默认仍为 `3` 动态光。
 - 正式 Run 地图接入：
-  - `scripts/map3d/run_hex_map_3d.gd` 新增 `VfxRoot/TorchSamples` 运行时样本根节点。
+  - `scenes/map3d/run_hex_map_3d.tscn` 新增 `VfxRoot/TorchSamples` 场景内样本根节点。
   - `RunTorch_Key` 启用真实 `TorchLight`。
   - `RunTorch_Atmosphere` 只保留发光、glow 和火焰，不启用真实动态光。
 - 规范更新：
@@ -81,7 +100,7 @@
 | 分类 | 参考图目标 | Phase 6 P0 差距 | Phase 7 处理 |
 |---|---|---|---|
 | 火盆 | 金属火盆和支架轮廓清楚 | primitive 火盆偏简单，缺少杯口层次 | 增加 `CupRim` 和 `CoalBed`，支架、火盆、杯口拆层 |
-| 火焰 | 白黄内核、橙色中层、红橙外焰 | 三层成立，但模板不可复用 | 独立模板内置三层 mesh 火舌和不同 flicker phase |
+| 火焰 | 白黄内核、橙色中层、红橙外焰 | 三层成立，但轮廓偏规则 | 独立模板内置四层自然 sprite sheet 火焰和不同翻帧相位 |
 | 火星 | 少量、偶发、上升 | 可用，但跟随散节点重复 | 模板内置 `Sparks`，默认更克制 |
 | 光照 | 墙地暖光中心强、边缘弱 | 只在验证场成立 | 验证场和 Run 地图复用同一模板；默认 3 光源 |
 | 角色可读性 | 火光不抢角色主体 | 3 光源可读，6 光源为压力边界 | Phase 7 默认保持 3 光源，Run 地图只启用 1 个真实样本光 |

@@ -1,0 +1,284 @@
+[gd_scene format=3 uid="uid://40ls8xmvka72"]
+
+[ext_resource type="PackedScene" uid="uid://sreyb0nh6sb3" path="res://assets/generated/map3d/models/hd2d_market_plaza.glb" id="1_market"]
+[ext_resource type="PackedScene" path="res://scenes/map3d/characters/engineer_stand_animated_sprite_3d.tscn" id="2_engineer"]
+[ext_resource type="PackedScene" uid="uid://cj4wfay257ffn" path="res://scenes/map3d/vfx/hd2d_torch_effect.tscn" id="3_torch"]
+[ext_resource type="Texture2D" uid="uid://b5dwm4sdchok6" path="res://assets/generated/hd2d/fire/natural_torch/alpha_wall_light_patch_draft.png" id="4_light_patch"]
+
+[sub_resource type="Environment" id="Environment_market"]
+background_mode = 1
+background_color = Color(0.025, 0.018, 0.012, 1)
+ambient_light_source = 1
+ambient_light_color = Color(0.94, 0.67, 0.42, 1)
+ambient_light_energy = 0.1
+tonemap_mode = 2
+tonemap_exposure = 0.66
+tonemap_white = 1.85
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.16
+glow_strength = 0.42
+fog_enabled = true
+fog_light_color = Color(0.62, 0.42, 0.22, 1)
+fog_density = 0.0018
+fog_height = 1.65
+fog_height_density = 0.045
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributes_market"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 3.15
+dof_blur_far_transition = 4.2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 2.6
+dof_blur_near_transition = 1.5
+dof_blur_amount = 0.045
+
+[sub_resource type="StandardMaterial3D" id="Material_central_light_pool"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.56, 0.18, 0.145)
+albedo_texture = ExtResource("4_light_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_central_light_pool"]
+size = Vector2(5.6, 3.4)
+
+[sub_resource type="StandardMaterial3D" id="Material_back_light_pool"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.44, 0.16, 0.09)
+albedo_texture = ExtResource("4_light_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_back_light_pool"]
+size = Vector2(8.2, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="Material_warm_haze"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.62, 0.26, 0.035)
+albedo_texture = ExtResource("4_light_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_warm_haze"]
+size = Vector2(7.4, 3.1)
+
+[sub_resource type="StandardMaterial3D" id="Material_edge_vignette"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.22)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_side_vignette"]
+size = Vector2(4, 6.4)
+
+[sub_resource type="ParticleProcessMaterial" id="Material_dust_process"]
+emission_shape = 3
+emission_box_extents = Vector3(5.4, 1.2, 3)
+initial_velocity_min = 0.025
+initial_velocity_max = 0.085
+angular_velocity_min = -15.0
+angular_velocity_max = 15.0
+gravity = Vector3(0, 0.02, 0)
+scale_min = 0.7
+scale_max = 1.45
+color = Color(1, 0.8, 0.48, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="Material_dust_draw"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.76, 0.42, 0.18)
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="Mesh_dust_quad"]
+material = SubResource("Material_dust_draw")
+size = Vector2(0.055, 0.055)
+
+[sub_resource type="StandardMaterial3D" id="Material_fake_shadow"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.36)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="Mesh_fake_shadow"]
+top_radius = 0.42
+bottom_radius = 0.42
+height = 0.01
+radial_segments = 32
+
+[node name="Hd2dMarketPlazaLightingLab" type="Node3D" unique_id=1500478454]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1759021026]
+environment = SubResource("Environment_market")
+camera_attributes = SubResource("CameraAttributes_market")
+
+[node name="Lighting" type="Node3D" parent="." unique_id=1037360487]
+
+[node name="WarmSunKey" type="DirectionalLight3D" parent="Lighting" unique_id=76817629]
+transform = Transform3D(0.7880108, 0.45026633, -0.41988015, 0, 0.6819984, 0.7313537, 0.6156615, -0.57631457, 0.53742206, 0, 0, 0)
+light_color = Color(1, 0.71765035, 0.5639767, 1)
+light_energy = 1.05
+shadow_enabled = true
+directional_shadow_split_1 = 0.18
+directional_shadow_split_2 = 0.44
+directional_shadow_split_3 = 0.72
+directional_shadow_max_distance = 34.0
+
+[node name="CoolDeepFill" type="DirectionalLight3D" parent="Lighting" unique_id=235725573]
+transform = Transform3D(-0.6691307, -0.27838692, 0.6890319, 0, 0.92718387, 0.37460658, -0.7431448, 0.25066075, -0.62040716, 0, 0, 0)
+light_color = Color(0.22, 0.32, 0.42, 1)
+light_energy = 0.23
+
+[node name="CenterGoldBloom" type="OmniLight3D" parent="Lighting" unique_id=716018942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 2.25, -0.75)
+light_color = Color(1, 0.55, 0.18, 1)
+light_energy = 2.25
+shadow_enabled = true
+omni_range = 7.6
+
+[node name="BackLanternRow" type="OmniLight3D" parent="Lighting" unique_id=663747332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 2.7, -3.35)
+light_color = Color(1, 0.44, 0.16, 1)
+light_energy = 0.95
+omni_range = 6.2
+
+[node name="LeftShopTorchLight" type="OmniLight3D" parent="Lighting" unique_id=1076232946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, 1.65, 2.1)
+light_color = Color(1, 0.48, 0.16, 1)
+light_energy = 1.35
+shadow_enabled = true
+omni_range = 4.8
+
+[node name="RightShopTorchLight" type="OmniLight3D" parent="Lighting" unique_id=759135689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.65, 2)
+light_color = Color(1, 0.5, 0.18, 1)
+light_energy = 1.15
+shadow_enabled = true
+omni_range = 4.6
+
+[node name="ForegroundWarmKick" type="OmniLight3D" parent="Lighting" unique_id=1058624294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 4.2)
+light_color = Color(1, 0.52, 0.22, 1)
+light_energy = 0.9
+omni_range = 4.5
+
+[node name="Stage" type="Node3D" parent="." unique_id=545672826]
+
+[node name="MarketPlaza" parent="Stage" unique_id=1586992089 instance=ExtResource("1_market")]
+
+[node name="LightOverlays" type="Node3D" parent="Stage" unique_id=2001639121]
+
+[node name="CentralGoldPool" type="MeshInstance3D" parent="Stage/LightOverlays" unique_id=1264076169]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.15, 0.18, -0.65)
+material_override = SubResource("Material_central_light_pool")
+cast_shadow = 0
+mesh = SubResource("Mesh_central_light_pool")
+
+[node name="BackLanternGlowPool" type="MeshInstance3D" parent="Stage/LightOverlays" unique_id=1370061678]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.3, 0.2, -3.45)
+material_override = SubResource("Material_back_light_pool")
+cast_shadow = 0
+mesh = SubResource("Mesh_back_light_pool")
+
+[node name="WarmHazeColumn" type="MeshInstance3D" parent="Stage/LightOverlays" unique_id=1766830024]
+transform = Transform3D(1, 0, 0, 0, 0.82, 0.36, 0, -0.36, 0.82, 0.25, 2.1, -2.35)
+material_override = SubResource("Material_warm_haze")
+cast_shadow = 0
+mesh = SubResource("Mesh_warm_haze")
+
+[node name="LeftEdgeDarken" type="MeshInstance3D" parent="Stage/LightOverlays" unique_id=1894719043]
+transform = Transform3D(0.62, 0, 0.78, 0, 1, 0, -0.78, 0, 0.62, -7.35, 1.65, 0)
+material_override = SubResource("Material_edge_vignette")
+cast_shadow = 0
+mesh = SubResource("Mesh_side_vignette")
+
+[node name="RightEdgeDarken" type="MeshInstance3D" parent="Stage/LightOverlays" unique_id=1652142430]
+transform = Transform3D(0.62, 0, -0.78, 0, 1, 0, 0.78, 0, 0.62, 7.25, 1.65, 0)
+material_override = SubResource("Material_edge_vignette")
+cast_shadow = 0
+mesh = SubResource("Mesh_side_vignette")
+
+[node name="VfxRoot" type="Node3D" parent="." unique_id=1198371092]
+
+[node name="LeftWallTorch" parent="VfxRoot" unique_id=1938540037 instance=ExtResource("3_torch")]
+transform = Transform3D(0.86, 0, 0, 0, 0.86, 0, 0, 0, 0.86, -6.9, 0.15, 2.02)
+light_base_energy = 1.18
+light_range = 3.9
+flicker_phase = 0.4
+profile_rank = 1
+
+[node name="RightWallTorch" parent="VfxRoot" unique_id=1948940405 instance=ExtResource("3_torch")]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 5.72, 0.15, 1.92)
+light_base_energy = 1.04
+light_range = 3.6
+flicker_phase = 1.8
+profile_rank = 1
+
+[node name="MarketStallTorch" parent="VfxRoot" unique_id=692323532 instance=ExtResource("3_torch")]
+transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, -2.9, 0.1, 0.45)
+light_base_energy = 0.78
+light_range = 3.2
+flicker_phase = 3.2
+profile_rank = 2
+
+[node name="DustMotes" type="GPUParticles3D" parent="VfxRoot" unique_id=131397018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.7, -0.35)
+amount = 46
+lifetime = 4.2
+preprocess = 1.5
+randomness = 0.85
+process_material = SubResource("Material_dust_process")
+draw_pass_1 = SubResource("Mesh_dust_quad")
+
+[node name="Characters" type="Node3D" parent="." unique_id=1135666851]
+
+[node name="PlayerCharacter" parent="Characters" unique_id=120794771 instance=ExtResource("2_engineer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 1.38)
+billboard = 2
+
+[node name="LeftNpc" parent="Characters" unique_id=1292085321 instance=ExtResource("2_engineer")]
+transform = Transform3D(0.86, 0, 0, 0, 0.86, 0, 0, 0, 0.86, -4.15, 0.88, 1.8)
+billboard = 2
+
+[node name="RightNpc" parent="Characters" unique_id=1908282009 instance=ExtResource("2_engineer")]
+transform = Transform3D(0.86, 0, 0, 0, 0.86, 0, 0, 0, 0.86, 5.62, 0.88, -0.95)
+billboard = 2
+shaded = false
+
+[node name="PlayerShadow" type="MeshInstance3D" parent="Characters" unique_id=1049123303]
+transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 0.62, 0, 0.16, 1.5)
+material_override = SubResource("Material_fake_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_fake_shadow")
+
+[node name="LeftNpcShadow" type="MeshInstance3D" parent="Characters" unique_id=1964206699]
+transform = Transform3D(0.86, 0, 0, 0, 0.02, 0, 0, 0, 0.54, -4.15, 0.16, 1.92)
+material_override = SubResource("Material_fake_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_fake_shadow")
+
+[node name="RightNpcShadow" type="MeshInstance3D" parent="Characters" unique_id=457385551]
+transform = Transform3D(0.86, 0, 0, 0, 0.02, 0, 0, 0, 0.54, 5.62, 0.16, -0.83)
+material_override = SubResource("Material_fake_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_fake_shadow")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=798027331]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1361087959]
+transform = Transform3D(0.99999046, 0.002325104, -0.0036922023, 0, 0.84619313, 0.5328763, 0.004363309, -0.53287125, 0.8461851, 0.15, 9.6, 15.2)
+current = true
+fov = 38.0
+far = 80.0
