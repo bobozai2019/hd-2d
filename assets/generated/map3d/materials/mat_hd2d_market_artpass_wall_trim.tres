@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dx51miver2qun"]
+
+[ext_resource type="Texture2D" uid="uid://bk8ilojgitfvs" path="res://assets/generated/map3d/textures/hd2d_market_ref_limestone_wall_albedo.png" id="1_albedo"]
+[ext_resource type="Texture2D" uid="uid://c3pnpxc4rou8o" path="res://assets/generated/map3d/textures/hd2d_market_ref_limestone_wall_normal.png" id="2_normal"]
+[ext_resource type="Texture2D" uid="uid://dlotiwmi8d61j" path="res://assets/generated/map3d/textures/hd2d_market_ref_limestone_wall_occlusion.png" id="3_occlusion"]
+
+[resource]
+albedo_color = Color(0.44, 0.4, 0.31, 1)
+albedo_texture = ExtResource("1_albedo")
+metallic_specular = 0.035
+roughness = 0.92
+normal_enabled = true
+normal_scale = 0.24
+normal_texture = ExtResource("2_normal")
+ao_enabled = true
+ao_light_affect = 0.14
+ao_texture = ExtResource("3_occlusion")

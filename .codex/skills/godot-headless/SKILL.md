@@ -1,9 +1,12 @@
 ---
 name: godot-headless
-description: 在处理需要 headless 场景加载、截图捕获或可复用 headless 辅助工具的 Godot 项目时使用本 skill。用于通过 `godot --headless` 验证场景、将捆绑的 `capture_scene.gd` 辅助脚本同步到项目中，以及为 HTML 转 Godot UI 工作运行布局截图流程。
+description: "Godot 无头模式场景加载、截图捕获和布局验证。用于通过 godot --headless 验证场景和运行截图流程。"
+allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
 # Godot Headless
+
+$ARGUMENTS
 
 ## 概述
 
@@ -85,8 +88,96 @@ python .codex/skill/godot-headless/scripts/run_capture_scene.py --project-root .
 
 ### 项目本地交互探测
 
-如果项目在 `scripts/autotest/` 下添加了用于真实点击验证的运行时辅助工具，请在本 skill 中记录，而不是在 HTML 转换 skill 中。
+如果项目在 `scripts/tools/` 下添加了用于真实点击验证的运行时辅助工具，请在本 skill 中记录，而不是在 HTML 转换 skill 中。在本项目中，`scripts/tools/test_combat_hud_interactions.gd` 是示例：它运行窗口化场景，分发鼠标事件，捕获截图，并写入简短的验收报告。
 
 ### `references/headless-boundaries.md`
 
 当用户过度依赖 headless 结果，或需要关于 headless 能验证和不能验证什么的准确措辞时阅读。
+
+## 检测报错
+
+当 headless 运行出现错误或场景加载失败时，优先查看以下日志文件：
+
+- **`logs/editor.log`** — 编辑器运行日志，包含场景加载、资源解析、脚本编译等错误
+- **`logs/godot.log`** — Godot 引擎主日志，包含引擎级错误、渲染警告、物理引擎报错等
+
+使用 `Read` 工具或 `tail` 命令查看最新日志内容，定位错误原因。日志路径相对于项目根目录。
+
+## 报错/警告处理流程
+
+当用户说"有报错"、"有 warning"、"日志里有警告"或报告运行时错误/警告时，按以下流程处理：
+
+### 第一步：查看日志定位问题
+
+同时读取两个日志文件，找到最新的报错信息：
+
+```bash
+# 查看 editor.log 尾部（最近 100 行）
+tail -100 logs/editor.log
+
+# 查看 godot.log 尾部（最近 100 行）
+tail -100 logs/godot.log
+```
+
+重点关注：
+- `SCRIPT ERROR` / `Parse Error` — 脚本语法或运行时错误
+- `ERROR:` — 引擎级错误
+- `WARNING:` — 警告（通常不阻塞但值得关注）
+- 堆栈跟踪中的文件路径和行号
+
+### 第二步：分析并修复问题
+
+根据日志中的错误信息：
+1. 定位出错的脚本文件和行号
+2. 分析错误原因
+3. 实施修复
+
+### 第三步：验证修复
+
+修复后重新运行 headless 验证：
+
+```bash
+godot --headless --path . --scene res://scenes/<Scene>.tscn --quit-after 1
+```
+
+或使用 GodotIQ 工具检查：
+
+```
+godotiq_check_errors(scope="project")
+```
+
+### 第四步：清理日志中的报错/警告
+
+确认问题已修复后，清理日志文件中已解决的报错和警告：
+
+```bash
+# 清空 editor.log
+> logs/editor.log
+
+# 清空 godot.log
+> logs/godot.log
+```
+
+> **重要**：只有在确认问题已真正修复后才清理日志。清理日志的目的是让下次报错/警告时能快速定位新问题，不被旧信息干扰。
+
+### 完整流程示例
+
+```
+用户: "有报错"
+→ 读取 logs/editor.log 和 logs/godot.log
+→ 找到报错：scripts/systems/deck_system.gd:42 - 空引用
+→ 分析代码，发现手牌为空时未做边界检查
+→ 修复代码，添加空值保护
+→ 运行 godotiq_verify_project_runs 验证
+→ 确认无新报错后，清空两个日志文件
+→ 报告修复结果
+
+用户: "log 里有 warning"
+→ 读取 logs/editor.log 和 logs/godot.log
+→ 找到警告：res://data/cards/warrior/heavy_strike.tres - 资源加载过时
+→ 分析原因，发现 .tres 格式需要更新
+→ 修复资源文件
+→ 重新运行验证
+→ 确认警告消除后，清空两个日志文件
+→ 报告修复结果
+```

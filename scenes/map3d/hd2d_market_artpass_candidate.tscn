@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ho6tp78gj1gy"]
+
+[ext_resource type="PackedScene" path="res://scenes/map3d/hd2d_market_reference_artpass_lab.tscn" id="1_artpass_lab"]
+
+[node name="Hd2dMarketArtpassCandidate" type="Node3D" unique_id=252194648]
+
+[node name="ArtpassReference" parent="." unique_id=1597421099 instance=ExtResource("1_artpass_lab")]
+
+[node name="hd2d_market_warm_point_light_0" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="0" unique_id=1373335991]
+light_energy = 1.0
+
+[node name="hd2d_market_warm_point_light_1" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="1" unique_id=995727988]
+light_energy = 1.0
+
+[node name="hd2d_market_warm_point_light_2" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="2" unique_id=2112520248]
+light_energy = 1.0
+
+[node name="hd2d_market_warm_point_light_3" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="3" unique_id=578865830]
+light_energy = 1.0
+
+[node name="hd2d_market_low_angle_sun" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="5" unique_id=1064454535]
+light_energy = 1.0
+
+[editable path="ArtpassReference"]
+[editable path="ArtpassReference/Base8BMarketReferenceLab"]
+[editable path="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch"]
+[editable path="ArtpassReference/ArtpassDetails/ArtpassGlb"]

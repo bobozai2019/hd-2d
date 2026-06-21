@@ -241,9 +241,26 @@ func _capture_editor_frame() -> bool:
 func _run_editor_capture_smoke() -> void:
 	for _frame_index in range(30):
 		await get_tree().process_frame
-	var ok := await _capture_editor_frame()
+	var ok := await _wait_for_editor_button_capture()
 	if OS.get_environment(SMOKE_QUIT_ENV) == "1":
 		get_tree().quit(0 if ok else 1)
+
+
+func _wait_for_editor_button_capture() -> bool:
+	if _editor_button == null:
+		_last_error = "Editor RDC toolbar button is unavailable."
+		return false
+	_last_editor_capture_path = ""
+	_last_error = ""
+	_editor_button.pressed.emit()
+	for _frame_index in range(CAPTURE_TIMEOUT_FRAMES + 30):
+		if not _editor_capture_in_progress and not _last_editor_capture_path.is_empty():
+			return true
+		if not _editor_capture_in_progress and not _last_error.is_empty():
+			return false
+		await get_tree().process_frame
+	_last_error = "Timed out waiting for Editor RDC button smoke capture."
+	return false
 
 
 func _run_game_capture_smoke() -> void:
@@ -259,7 +276,7 @@ func _run_game_capture_smoke() -> void:
 		_last_error = _get_wrapper_error("Failed to enable child hook for Game RDC smoke.")
 	else:
 		get_editor_interface().play_main_scene()
-		ok = await _wait_for_game_runtime_and_capture()
+		ok = await _wait_for_game_runtime_and_button_capture()
 
 	if get_editor_interface().is_playing_scene():
 		get_editor_interface().stop_playing_scene()
@@ -302,13 +319,18 @@ func _selftest_game_session_resolution() -> bool:
 	)
 
 
-func _wait_for_game_runtime_and_capture() -> bool:
+func _wait_for_game_runtime_and_button_capture() -> bool:
+	if _game_button == null:
+		_last_error = "Game RDC toolbar button is unavailable."
+		return false
+
 	var requested := false
 	for _frame_index in range(GAME_SMOKE_TIMEOUT_FRAMES):
 		if not requested and not _get_ready_game_sessions().is_empty():
-			requested = _request_game_capture()
-			if not requested:
-				return false
+			_last_game_capture_path = ""
+			_last_error = ""
+			_game_button.pressed.emit()
+			requested = true
 		if requested and not _game_capture_in_progress:
 			return not _last_game_capture_path.is_empty()
 		await get_tree().process_frame

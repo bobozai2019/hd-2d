@@ -255,15 +255,47 @@ func _take_screenshot(params: Dictionary):
 		w = img.get_width()
 		h = img.get_height()
 
+	var max_encoded_bytes: int = 45000
 	var buffer: PackedByteArray
+
+	# Encode with format-appropriate method
 	match fmt:
 		"png":
 			buffer = img.save_png_to_buffer()
+			# PNG has no quality param — fall back to webp if too large
+			if buffer.size() > max_encoded_bytes:
+				fmt = "webp"
+				buffer = img.save_webp_to_buffer(true, quality)
 		"jpg":
 			buffer = img.save_jpg_to_buffer(quality)
 		_:
 			fmt = "webp"
 			buffer = img.save_webp_to_buffer(true, quality)
+
+	# Reduce quality if still too large
+	if buffer.size() > max_encoded_bytes and fmt != "png":
+		var q: float = quality
+		while buffer.size() > max_encoded_bytes and q > 0.1:
+			q = maxf(q * 0.5, 0.1)
+			match fmt:
+				"jpg":
+					buffer = img.save_jpg_to_buffer(q)
+				_:
+					buffer = img.save_webp_to_buffer(true, q)
+
+	# Resolution reduction loop if still over limit
+	while buffer.size() > max_encoded_bytes and img.get_width() > 100:
+		var ratio: float = sqrt(float(max_encoded_bytes) / float(buffer.size())) * 0.9
+		var new_w: int = maxi(int(img.get_width() * ratio), 100)
+		var new_h: int = maxi(int(img.get_height() * ratio), 100)
+		img.resize(new_w, new_h)
+		w = new_w
+		h = new_h
+		match fmt:
+			"jpg":
+				buffer = img.save_jpg_to_buffer(quality)
+			_:
+				buffer = img.save_webp_to_buffer(true, quality)
 
 	var b64 := Marshalls.raw_to_base64(buffer)
 	_send_json_result("godotiq:screenshot_result", {

@@ -1,59 +1,35 @@
-# CLAUDE.md
+﻿# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-Godot 4.6 项目 — HD-2D 技术验证项目。目标是在 Godot 中复刻八方旅人风格的 HD-2D 渲染效果（3D 地图 + 2D 像素角色 + 光影后处理）。
-
-**当前阶段**：早期技术验证。已完成基础相机控制和角色动画 Sprite3D。
-
+Godot 4.6 椤圭洰 鈥?HD-2D 鎶€鏈獙璇侀」鐩€傜洰鏍囨槸鍦?Godot 涓鍒诲叓鏂规梾浜洪鏍肩殑 HD-2D 娓叉煋鏁堟灉锛?D 鍦板浘 + 2D 鍍忕礌瑙掕壊 + 鍏夊奖鍚庡鐞嗭級銆?
+**褰撳墠闃舵**锛氭棭鏈熸妧鏈獙璇併€傚凡瀹屾垚鍩虹鐩告満鎺у埗鍜岃鑹插姩鐢?Sprite3D銆?
 ## Dev Commands
 
 ```bash
-# 启动 Godot 编辑器（需要 Godot 4.6 在 PATH 中）
+# 鍚姩 Godot 缂栬緫鍣紙闇€瑕?Godot 4.6 鍦?PATH 涓級
 godot -e
 
-# Headless 运行主场景（用于验证场景加载）
-godot --headless --quit
+# Headless 杩愯涓诲満鏅紙鐢ㄤ簬楠岃瘉鍦烘櫙鍔犺浇锛?godot --headless --quit
 
-# 使用 GodotIQ 工具验证场景
+# 浣跨敤 GodotIQ 宸ュ叿楠岃瘉鍦烘櫙
 # godotiq_check_errors / godotiq_verify_project_runs
 ```
 
-无构建步骤、无测试套件、无 lint。项目在 Godot 编辑器内通过 F5 运行。使用 GodotIQ MCP 工具进行编译检查和验证。
+鏃犳瀯寤烘楠ゃ€佹棤娴嬭瘯濂椾欢銆佹棤 lint銆傞」鐩湪 Godot 缂栬緫鍣ㄥ唴閫氳繃 F5 杩愯銆備娇鐢?GodotIQ MCP 宸ュ叿杩涜缂栬瘧妫€鏌ュ拰楠岃瘉銆?
+## 浠撳簱鐩綍
 
-## 仓库目录
+- `project.godot` 鈥?Godot 椤圭洰閰嶇疆銆備富鍦烘櫙涓?`res://scenes/map3d/hd2d_effect_lab.tscn`銆?- `scripts/map3d/` 鈥?HD-2D 鐩稿叧鑴氭湰锛堢浉鏈烘帶鍒躲€佽鑹插姩鐢荤瓑锛夈€?- `scenes/map3d/` 鈥?HD-2D 鍦烘櫙鏂囦欢銆?- `scenes/map3d/characters/` 鈥?瑙掕壊 Sprite3D 鍦烘櫙銆?- `assets/generated/` 鈥?鐢熸垚鐨勭編鏈祫婧愶紙瑙掕壊鍔ㄧ敾甯х瓑锛夈€?- `docs/` 鈥?鎶€鏈枃妗ｅ拰鍙傝€冦€?- `docs/production/` 鈥?閲忎骇瑙勮寖锛堜唬鐮併€乁I銆佽祫浜с€佷粨搴撳崼鐢燂級銆?- `tasks/` 鈥?浠诲姟璁″垝鍜?PRD銆?- `addons/` 鈥?Godot 鎻掍欢锛坓odotiq銆乬odot_editor_logger銆乻cene_bundle锛夈€?- `.codex/skills/` 鍜?`.agents/skills/` 鈥?椤圭洰鏈湴浠ｇ悊宸ヤ綔娴併€傚綋浠诲姟鍖归厤鍏惰Е鍙戞潯浠舵椂浣跨敤銆?
+### 鏂囨。瑙勮寖
 
-- `project.godot` — Godot 项目配置。主场景为 `res://scenes/map3d/hd2d_effect_lab.tscn`。
-- `scripts/map3d/` — HD-2D 相关脚本（相机控制、角色动画等）。
-- `scenes/map3d/` — HD-2D 场景文件。
-- `scenes/map3d/characters/` — 角色 Sprite3D 场景。
-- `assets/generated/` — 生成的美术资源（角色动画帧等）。
-- `docs/` — 技术文档和参考。
-- `docs/production/` — 量产规范（代码、UI、资产、仓库卫生）。
-- `tasks/` — 任务计划和 PRD。
-- `addons/` — Godot 插件（godotiq、godot_editor_logger、scene_bundle）。
-- `.codex/skills/` 和 `.agents/skills/` — 项目本地代理工作流。当任务匹配其触发条件时使用。
+docs/ 鐩綍缁撴瀯锛歚hd2d/`锛圚D-2D 鎶€鏈枃妗ｏ級銆乣production/`锛堥噺浜ц鑼冿級銆?
+鍛藉悕瑙勫垯锛?- 璁捐鏂囨。锛歚鏁板瓧-涓枃鏍囬.md`
+- 璁″垝鏂囨。锛歚YYYY-MM-DD-鑻辨枃鎻忚堪.md`
 
-### 文档规范
-
-docs/ 目录结构：`hd2d/`（HD-2D 技术文档）、`production/`（量产规范）。
-
-命名规则：
-- 设计文档：`数字-中文标题.md`
-- 计划文档：`YYYY-MM-DD-英文描述.md`
-
-## 代理工作流要求
-
-- 编辑前先阅读相关已有代码。匹配本地模式，不要引入新风格。
-- 保留用户的工作区变更。工作树可能有未提交的改动；除非明确要求，不要 reset、checkout 或还原文件。
-- 保持编辑聚焦于所请求的行为变更。除非正确性需要，否则避免大范围重构。
-- 宣称完成之前，运行最小范围的有效验证命令并报告执行结果。
-- 遇到 bug 或测试失败时，先定位根因再修改代码。
-- 创意性功能开发、UI 转换或较大规模的实现工作，应使用 `.agents/skills/` 或 `.codex/skills/` 中匹配的项目技能。
-- 当前仓库禁用所有 `superpowers` 相关 skills。凡是来源于 `obra/superpowers` 或名称包含 `using-superpowers`、`test-driven-development`、`systematic-debugging`、`writing-plans`、`executing-plans`、`subagent-driven-development`、`verification-before-completion`、`finishing-a-development-branch`、`using-git-worktrees`、`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`brainstorming`、`writing-skills` 的工作流，一律不要在本项目中触发或引用。
-
+## 浠ｇ悊宸ヤ綔娴佽姹?
+- 缂栬緫鍓嶅厛闃呰鐩稿叧宸叉湁浠ｇ爜銆傚尮閰嶆湰鍦版ā寮忥紝涓嶈寮曞叆鏂伴鏍笺€?- 淇濈暀鐢ㄦ埛鐨勫伐浣滃尯鍙樻洿銆傚伐浣滄爲鍙兘鏈夋湭鎻愪氦鐨勬敼鍔紱闄ら潪鏄庣‘瑕佹眰锛屼笉瑕?reset銆乧heckout 鎴栬繕鍘熸枃浠躲€?- 淇濇寔缂栬緫鑱氱劍浜庢墍璇锋眰鐨勮涓哄彉鏇淬€傞櫎闈炴纭€ч渶瑕侊紝鍚﹀垯閬垮厤澶ц寖鍥撮噸鏋勩€?- 瀹ｇО瀹屾垚涔嬪墠锛岃繍琛屾渶灏忚寖鍥寸殑鏈夋晥楠岃瘉鍛戒护骞舵姤鍛婃墽琛岀粨鏋溿€?- 閬囧埌 bug 鎴栨祴璇曞け璐ユ椂锛屽厛瀹氫綅鏍瑰洜鍐嶄慨鏀逛唬鐮併€?- 鍒涙剰鎬у姛鑳藉紑鍙戙€乁I 杞崲鎴栬緝澶ц妯＄殑瀹炵幇宸ヤ綔锛屽簲浣跨敤 `.agents/skills/` 鎴?`.codex/skills/` 涓尮閰嶇殑椤圭洰鎶€鑳姐€?- 褰撳墠浠撳簱绂佺敤鎵€鏈?`superpowers` 鐩稿叧 skills銆傚嚒鏄潵婧愪簬 `obra/superpowers` 鎴栧悕绉板寘鍚?`using-superpowers`銆乣test-driven-development`銆乣systematic-debugging`銆乣writing-plans`銆乣executing-plans`銆乣subagent-driven-development`銆乣verification-before-completion`銆乣finishing-a-development-branch`銆乣using-git-worktrees`銆乣requesting-code-review`銆乣receiving-code-review`銆乣dispatching-parallel-agents`銆乣brainstorming`銆乣writing-skills` 鐨勫伐浣滄祦锛屼竴寰嬩笉瑕佸湪鏈」鐩腑瑙﹀彂鎴栧紩鐢ㄣ€?
 ## Godot Project Config
 
 - Renderer: **Forward Plus** (`rendering/renderer/rendering_method`)
@@ -63,145 +39,129 @@ docs/ 目录结构：`hd2d/`（HD-2D 技术文档）、`production/`（量产规
 - Main scene: `scenes/map3d/hd2d_effect_lab.tscn`
 - Plugins: godotiq, godot_editor_logger, scene_bundle
 
-## 代码规范
+## 浠ｇ爜瑙勮寖
 
-进入量产后，详细规范以 `docs/production/` 为准。以下是精简速查。
-
-### 文件与目录命名
-
-| 类型 | 规范 | 示例 |
+杩涘叆閲忎骇鍚庯紝璇︾粏瑙勮寖浠?`docs/production/` 涓哄噯銆備互涓嬫槸绮剧畝閫熸煡銆?
+### 鏂囦欢涓庣洰褰曞懡鍚?
+| 绫诲瀷 | 瑙勮寖 | 绀轰緥 |
 |------|------|------|
 | GDScript (.gd) | snake_case | `hd2d_effect_lab.gd` |
-| 场景 (.tscn) | snake_case | `hd2d_effect_lab.tscn` |
-| 数据 (.tres) | snake_case | `some_resource.tres` |
-| 目录 | snake_case | `scripts/map3d/`, `scenes/map3d/` |
+| 鍦烘櫙 (.tscn) | snake_case | `hd2d_effect_lab.tscn` |
+| 鏁版嵁 (.tres) | snake_case | `some_resource.tres` |
+| 鐩綍 | snake_case | `scripts/map3d/`, `scenes/map3d/` |
 
-### 类声明
-
-- **逻辑层**：根据需要声明 `class_name`，PascalCase
-- **UI 脚本**（场景根节点）：不声明 `class_name`，匿名类 `extends Control`
-- **工具脚本**：不声明 `class_name`，匿名类 `extends SceneTree`
-- 跨文件类型引用**必须**用 `preload()` 常量，禁止直接用 `class_name` 作类型注解
-
+### 绫诲０鏄?
+- **閫昏緫灞?*锛氭牴鎹渶瑕佸０鏄?`class_name`锛孭ascalCase
+- **UI 鑴氭湰**锛堝満鏅牴鑺傜偣锛夛細涓嶅０鏄?`class_name`锛屽尶鍚嶇被 `extends Control`
+- **宸ュ叿鑴氭湰**锛氫笉澹版槑 `class_name`锛屽尶鍚嶇被 `extends SceneTree`
+- 璺ㄦ枃浠剁被鍨嬪紩鐢?*蹇呴』**鐢?`preload()` 甯搁噺锛岀姝㈢洿鎺ョ敤 `class_name` 浣滅被鍨嬫敞瑙?
 ```gdscript
-# 正确
+# 姝ｇ‘
 const SomeModuleScript = preload("res://scripts/some_module.gd")
 var _module: SomeModuleScript
 
-# 错误 — 循环引用
+# 閿欒 鈥?寰幆寮曠敤
 var _module: SomeModule
 ```
 
-后缀约定：`Def`（资源定义）、`State`（可变状态）、`System`（逻辑系统）、`Context`（DI 容器）、`Events`（信号总线）、`Manager`（生命周期管理器）
+鍚庣紑绾﹀畾锛歚Def`锛堣祫婧愬畾涔夛級銆乣State`锛堝彲鍙樼姸鎬侊級銆乣System`锛堥€昏緫绯荤粺锛夈€乣Context`锛圖I 瀹瑰櫒锛夈€乣Events`锛堜俊鍙锋€荤嚎锛夈€乣Manager`锛堢敓鍛藉懆鏈熺鐞嗗櫒锛?
+### 鍙橀噺鍛藉悕
 
-### 变量命名
-
-| 作用域 | 规范 | 示例 |
+| 浣滅敤鍩?| 瑙勮寖 | 绀轰緥 |
 |--------|------|------|
-| 公共字段 | snake_case，无前缀 | `var speed: float = 5.0` |
-| 私有/内部字段 | `_` 前缀 | `var _camera: Camera3D` |
-| 场景节点引用 | `@onready var _name: Type = $Path` | `@onready var _sprite: Sprite3D = $Sprite` |
-| 常量（类型别名） | PascalCase | `const SomeScript = preload(...)` |
-| 常量（数值） | SCREAMING_SNAKE_CASE | `const MAX_SPEED: float = 10.0` |
+| 鍏叡瀛楁 | snake_case锛屾棤鍓嶇紑 | `var speed: float = 5.0` |
+| 绉佹湁/鍐呴儴瀛楁 | `_` 鍓嶇紑 | `var _camera: Camera3D` |
+| 鍦烘櫙鑺傜偣寮曠敤 | `@onready var _name: Type = $Path` | `@onready var _sprite: Sprite3D = $Sprite` |
+| 甯搁噺锛堢被鍨嬪埆鍚嶏級 | PascalCase | `const SomeScript = preload(...)` |
+| 甯搁噺锛堟暟鍊硷級 | SCREAMING_SNAKE_CASE | `const MAX_SPEED: float = 10.0` |
 
-### 函数命名
+### 鍑芥暟鍛藉悕
 
-| 类型 | 规范 | 示例 |
+| 绫诲瀷 | 瑙勮寖 | 绀轰緥 |
 |------|------|------|
-| 公共函数 | snake_case，动词开头 | `func setup(config) -> void:` |
-| 私有函数 | `_` 前缀 | `func _update_camera() -> void:` |
-| 信号回调 | `_on_` 前缀 | `func _on_input_event() -> void:` |
-| Godot 生命周期 | 标准命名 | `func _ready() -> void:` |
+| 鍏叡鍑芥暟 | snake_case锛屽姩璇嶅紑澶?| `func setup(config) -> void:` |
+| 绉佹湁鍑芥暟 | `_` 鍓嶇紑 | `func _update_camera() -> void:` |
+| 淇″彿鍥炶皟 | `_on_` 鍓嶇紑 | `func _on_input_event() -> void:` |
+| Godot 鐢熷懡鍛ㄦ湡 | 鏍囧噯鍛藉悕 | `func _ready() -> void:` |
 
-- 所有函数**必须**声明返回类型（`-> void:`、`-> bool:`、`-> int:` 等）
-- 公共 API 参数应添加类型提示
+- 鎵€鏈夊嚱鏁?*蹇呴』**澹版槑杩斿洖绫诲瀷锛坄-> void:`銆乣-> bool:`銆乣-> int:` 绛夛級
+- 鍏叡 API 鍙傛暟搴旀坊鍔犵被鍨嬫彁绀?
+### 淇″彿鍛藉悕
 
-### 信号命名
-
-- **过去式动词短语**，snake_case
-- 禁止 `_signal` 或 `on_` 前缀
+- **杩囧幓寮忓姩璇嶇煭璇?*锛宻nake_case
+- 绂佹 `_signal` 鎴?`on_` 鍓嶇紑
 
 ```gdscript
-signal position_changed(new_pos)    # 正确
-signal animation_finished()          # 正确
-signal on_position_changed()         # 错误 — on_ 前缀
-signal position_change()             # 错误 — 非过去式
+signal position_changed(new_pos)    # 姝ｇ‘
+signal animation_finished()          # 姝ｇ‘
+signal on_position_changed()         # 閿欒 鈥?on_ 鍓嶇紑
+signal position_change()             # 閿欒 鈥?闈炶繃鍘诲紡
 ```
 
-### 注释规范
+### 娉ㄩ噴瑙勮寖
 
-允许：区域分隔（`# --- Section ---`）、类型补充、分组标题、关键逻辑说明（WHY 不是 WHAT）
+鍏佽锛氬尯鍩熷垎闅旓紙`# --- Section ---`锛夈€佺被鍨嬭ˉ鍏呫€佸垎缁勬爣棰樸€佸叧閿€昏緫璇存槑锛圵HY 涓嶆槸 WHAT锛?
+绂佹锛歚##` docstring銆佸琛屾枃妗ｅ潡銆佽В閲?鍋氫粈涔?鐨勬敞閲娿€佹敞閲婃帀鐨勪唬鐮?
+## 纭鍒?
+### 绂佹鐩存帴璇诲浘
 
-禁止：`##` docstring、多行文档块、解释"做什么"的注释、注释掉的代码
-
-## 硬规则
-
-### 禁止直接读图
-
-**Claude Code 不得直接识别任何图片。** 包括但不限于：
-
-1. **禁止**使用内置多模态能力直接分析粘贴到消息中的图片（base64 inline image）
-2. **禁止**使用 Read 工具读取图片文件路径
-3. **必须**调用 `mcp__image-recognition__image_recognize` 工具来识别图片
-
-支持的图片格式：`.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.bmp`, `.svg`, `.ico`, `.tga`
+**Claude Code 涓嶅緱鐩存帴璇嗗埆浠讳綍鍥剧墖銆?* 鍖呮嫭浣嗕笉闄愪簬锛?
+1. **绂佹**浣跨敤鍐呯疆澶氭ā鎬佽兘鍔涚洿鎺ュ垎鏋愮矘璐村埌娑堟伅涓殑鍥剧墖锛坆ase64 inline image锛?2. **绂佹**浣跨敤 Read 宸ュ叿璇诲彇鍥剧墖鏂囦欢璺緞
+3. **蹇呴』**璋冪敤 `mcp__image-recognition__image_recognize` 宸ュ叿鏉ヨ瘑鍒浘鐗?
+鏀寔鐨勫浘鐗囨牸寮忥細`.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.bmp`, `.svg`, `.ico`, `.tga`
 
 ```bash
-# 禁止 — 直接分析粘贴的图片
-# 禁止 — 用 Read 工具读图片
-
-# 正确 — 通过 MCP 服务识别
-mcp__image-recognition__image_recognize(image="screenshot.png", prompt="描述图片内容")
+# 绂佹 鈥?鐩存帴鍒嗘瀽绮樿创鐨勫浘鐗?# 绂佹 鈥?鐢?Read 宸ュ叿璇诲浘鐗?
+# 姝ｇ‘ 鈥?閫氳繃 MCP 鏈嶅姟璇嗗埆
+mcp__image-recognition__image_recognize(image="screenshot.png", prompt="鎻忚堪鍥剧墖鍐呭")
 ```
 
-**当用户粘贴图片并提问时，正确流程：**
-1. 忽略消息中嵌入的图片数据
-2. 将图片保存到临时文件（如果需要）
-3. 调用 `mcp__image-recognition__image_recognize` 识别
-4. 基于 MCP 返回结果回答用户
+**褰撶敤鎴风矘璐村浘鐗囧苟鎻愰棶鏃讹紝姝ｇ‘娴佺▼锛?*
+1. 蹇界暐娑堟伅涓祵鍏ョ殑鍥剧墖鏁版嵁
+2. 灏嗗浘鐗囦繚瀛樺埌涓存椂鏂囦欢锛堝鏋滈渶瑕侊級
+3. 璋冪敤 `mcp__image-recognition__image_recognize` 璇嗗埆
+4. 鍩轰簬 MCP 杩斿洖缁撴灉鍥炵瓟鐢ㄦ埛
 
-## 语言规范
+## 璇█瑙勮寖
 
-**所有文档、技能（Skill）、命令（Command）、Hook 文件必须使用中文编写。**
+**鎵€鏈夋枃妗ｃ€佹妧鑳斤紙Skill锛夈€佸懡浠わ紙Command锛夈€丠ook 鏂囦欢蹇呴』浣跨敤涓枃缂栧啓銆?*
 
-- 设计文档、计划文档、PRD 等：正文用中文
-- `.agents/skills/*/SKILL.md`：description 字段和正文用中文，保留 `name` 字段为英文
-- `.claude/commands/*.md`：description 字段和正文用中文
-- `.claude/hooks/*.md`：正文用中文
-- `.claude/knowledge/*.md`：正文用中文
-- 代码块（GDScript、bash、JSON 等）内容保持原样，不翻译
-- 技术术语（如 HD-2D、MCP、TDD 等）保持英文
-- 文件路径保持英文
+- 璁捐鏂囨。銆佽鍒掓枃妗ｃ€丳RD 绛夛細姝ｆ枃鐢ㄤ腑鏂?- `.agents/skills/*/SKILL.md`锛歞escription 瀛楁鍜屾鏂囩敤涓枃锛屼繚鐣?`name` 瀛楁涓鸿嫳鏂?- `.claude/commands/*.md`锛歞escription 瀛楁鍜屾鏂囩敤涓枃
+- `.claude/hooks/*.md`锛氭鏂囩敤涓枃
+- `.claude/knowledge/*.md`锛氭鏂囩敤涓枃
+- 浠ｇ爜鍧楋紙GDScript銆乥ash銆丣SON 绛夛級鍐呭淇濇寔鍘熸牱锛屼笉缈昏瘧
+- 鎶€鏈湳璇紙濡?HD-2D銆丮CP銆乀DD 绛夛級淇濇寔鑻辨枃
+- 鏂囦欢璺緞淇濇寔鑻辨枃
 
 ## Knowledge Base
 
-项目知识沉淀系统，从开发会话中捕获有价值的洞察，按领域分类存储在 `.claude/knowledge/`。
+椤圭洰鐭ヨ瘑娌夋穩绯荤粺锛屼粠寮€鍙戜細璇濅腑鎹曡幏鏈変环鍊肩殑娲炲療锛屾寜棰嗗煙鍒嗙被瀛樺偍鍦?`.claude/knowledge/`銆?
+寮€濮嬫煇棰嗗煙宸ヤ綔鍓嶏紝妫€鏌ュ搴斿垎绫绘枃浠惰幏鍙栧厛楠岀煡璇嗭細
 
-开始某领域工作前，检查对应分类文件获取先验知识：
+- `.claude/knowledge/ui.md` 鈥?UI 妯″紡銆丆ontrol 鑺傜偣鍐崇瓥
+- `.claude/knowledge/conventions.md` 鈥?浠ｇ爜椋庢牸鍜屾灦鏋勫喅绛?- `.claude/knowledge/debugging.md` 鈥?闄烽槺鍜岃皟璇曟妧宸?- `.claude/knowledge/godot.md` 鈥?寮曟搸鎬櫀鍜?workaround
+- `.claude/knowledge/INDEX.md` 鈥?鐭ヨ瘑搴撶储寮?
+浣跨敤 `/remember` 鎹曡幏鏂版礊瀵燂紝`/recall` 鎸夊叧閿瘝鎼滅储鐭ヨ瘑搴撱€?
+## 楠岃瘉鎸囧紩
 
-- `.claude/knowledge/ui.md` — UI 模式、Control 节点决策
-- `.claude/knowledge/conventions.md` — 代码风格和架构决策
-- `.claude/knowledge/debugging.md` — 陷阱和调试技巧
-- `.claude/knowledge/godot.md` — 引擎怪癖和 workaround
-- `.claude/knowledge/INDEX.md` — 知识库索引
+鏍规嵁淇敼鑼冨洿閫夋嫨楠岃瘉鏂瑰紡锛?
+- 椤圭洰鏁翠綋瀹屾暣鎬э細`godot --headless --quit`
+- 鑴氭湰缂栬瘧/杩愯鏃堕敊璇細浣跨敤 GodotIQ `godotiq_check_errors` / `godotiq_verify_project_runs`
+- 璋冭瘯闃舵鎶ラ敊锛氫紭鍏堣鍙?`logs/godot.log`銆侴odotIQ 璋冭瘯鎺у埗鍙板彲鑳芥紡鎺?Debug/F5 杩愯鏃剁殑鍚庡彴閿欒锛屽挨鍏舵槸鐢ㄦ埛璇?鐐硅皟璇曟湁鎶ラ敊"鏃讹紝鍏堢湅姝ゆ棩蹇楀啀涓嬬粨璁恒€?- UI 甯冨眬/瑙嗚楠岃瘉锛歨eadless 鍦烘櫙鍔犺浇鎴栨埅鍥炬崟鑾?
+濡傛灉鍥犵幆澧冧腑 PATH 鏈厤缃?Godot 鎴栫己灏戜緷璧栬€屾棤娉曡繍琛屽懡浠わ紝璇峰湪鏈€缁堝洖澶嶄腑濡傚疄璇存槑銆?
+## 鏂囦欢鍜?Git 鍗敓
 
-使用 `/remember` 捕获新洞察，`/recall` 按关键词搜索知识库。
+- 闄ら潪鐢ㄦ埛瑕佹眰锛屽惁鍒欎笉瑕佹彁浜ゃ€?- 闄ら潪浠诲姟鏄庣‘娑夊強锛屽惁鍒欎笉瑕佸皢 `.godot/`銆佹棩蹇椼€佹埅鍥炬垨鐢熸垚鐨?import 鏂囦欢浣滀负浠ｇ爜鍙樻洿鐨勪竴閮ㄥ垎淇敼銆?- 涓嶈浠呭洜涓虹湅璧锋潵鏈娇鐢ㄥ氨鍒犻櫎鏂囨。鎴栬祫婧愭枃浠躲€?- 鏂扮殑椤圭洰鏂囨。淇濇寔绠€娲佸拰鍙搷浣溿€?- 浠呭湪 Godot 纭疄闇€瑕佹垨灞炰簬宸茬紪杈戣祫婧愭祦绋嬫椂锛屾墠淇濈暀鐢熸垚鐨?`.uid` / `.import` 鏂囦欢銆?
 
-## 验证指引
+<!-- myaitool-hub-start -->
+## Shared myaitool hub
 
-根据修改范围选择验证方式：
+Shared skills, knowledge, and MCP management docs:
+`D:/AIprogram/myaitool/docs/hub-management.md`
 
-- 项目整体完整性：`godot --headless --quit`
-- 脚本编译/运行时错误：使用 GodotIQ `godotiq_check_errors` / `godotiq_verify_project_runs`
-- 调试阶段报错：优先读取 `logs/godot.log`。GodotIQ 调试控制台可能漏掉 Debug/F5 运行时的后台错误，尤其是用户说"点调试有报错"时，先看此日志再下结论。
-- UI 布局/视觉验证：headless 场景加载或截图捕获
+MCP server layout, distribution, security, and verification docs:
+`D:/AIprogram/myaitool/docs/mcp-management.md`
+<!-- myaitool-hub-end -->
 
-如果因环境中 PATH 未配置 Godot 或缺少依赖而无法运行命令，请在最终回复中如实说明。
 
-## 文件和 Git 卫生
 
-- 除非用户要求，否则不要提交。
-- 除非任务明确涉及，否则不要将 `.godot/`、日志、截图或生成的 import 文件作为代码变更的一部分修改。
-- 不要仅因为看起来未使用就删除文档或资源文件。
-- 新的项目文档保持简洁和可操作。
-- 仅在 Godot 确实需要或属于已编辑资源流程时，才保留生成的 `.uid` / `.import` 文件。

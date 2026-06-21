@@ -1,0 +1,478 @@
+[gd_scene format=3 uid="uid://dealcvf17d8ao"]
+
+[ext_resource type="Script" uid="uid://g2cuw8anppjn" path="res://scripts/map3d/hd2d_market_reference_match_lab.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://sreyb0nh6sb3" path="res://assets/generated/map3d/models/hd2d_market_plaza.glb" id="2_market"]
+[ext_resource type="PackedScene" path="res://scenes/map3d/characters/engineer_stand_animated_sprite_3d.tscn" id="3_engineer"]
+[ext_resource type="PackedScene" uid="uid://cj4wfay257ffn" path="res://scenes/map3d/vfx/hd2d_torch_effect.tscn" id="4_torch"]
+[ext_resource type="Texture2D" uid="uid://dxuymw8uprdwu" path="res://assets/generated/hd2d/light_patches/alpha_market_central_warm_pool.png" id="5_central_patch"]
+[ext_resource type="Texture2D" uid="uid://bxngxl3d1rbgk" path="res://assets/generated/hd2d/light_patches/alpha_market_wall_warm_falloff.png" id="6_wall_patch"]
+[ext_resource type="Texture2D" uid="uid://c0vlthvxln5bp" path="res://assets/generated/hd2d/light_patches/alpha_market_window_glow_strip.png" id="7_window_patch"]
+[ext_resource type="Texture2D" uid="uid://1110gu01e6mr" path="res://assets/generated/hd2d/light_patches/alpha_market_edge_shadow_soft.png" id="8_edge_patch"]
+[ext_resource type="Material" uid="uid://dwuro14y3xgy6" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres" id="9_stone"]
+[ext_resource type="Material" uid="uid://7tr58mv26dfk" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres" id="10_wall"]
+[ext_resource type="Material" uid="uid://dkscws3msm64n" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres" id="11_wood"]
+[ext_resource type="Material" uid="uid://bek3kbbywfcs3" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres" id="12_fabric"]
+[ext_resource type="Material" uid="uid://bkp7mrqo28rv8" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres" id="13_roof"]
+[ext_resource type="Material" uid="uid://pju5j2lbubra" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres" id="14_dark"]
+[ext_resource type="Material" uid="uid://c3rqbo61mrr7e" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres" id="15_window_emission"]
+[ext_resource type="Material" uid="uid://8r5xf4mlpid3" path="res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres" id="16_lantern_emission"]
+[ext_resource type="PackedScene" uid="uid://cm3gpihmcdumb" path="res://assets/generated/map3d/models/hd2d_market_reference_match.glb" id="17_market_ref_glb"]
+
+[sub_resource type="Environment" id="Environment_market_reference"]
+background_mode = 1
+background_color = Color(0.012, 0.018, 0.028, 1)
+ambient_light_source = 1
+ambient_light_color = Color(0.13, 0.19, 0.26, 1)
+ambient_light_energy = 0.15
+tonemap_mode = 2
+tonemap_exposure = 0.8
+tonemap_white = 1.55
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.2
+glow_strength = 0.44
+fog_enabled = true
+fog_light_color = Color(0.18, 0.18, 0.2, 1)
+fog_density = 0.0038
+fog_height = 1.65
+fog_height_density = 0.035
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributes_market_reference"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 10.5
+dof_blur_far_transition = 3.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 2.2
+dof_blur_near_transition = 1.4
+dof_blur_amount = 0.018
+
+[sub_resource type="BoxMesh" id="Mesh_unit_box"]
+
+[sub_resource type="CylinderMesh" id="Mesh_unit_cylinder"]
+height = 1.0
+radial_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="Material_central_patch"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.56, 0.18, 0.22)
+albedo_texture = ExtResource("5_central_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_central_light_pool"]
+size = Vector2(5.8, 3.4)
+
+[sub_resource type="StandardMaterial3D" id="Material_wall_patch"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.48, 0.16, 0.2)
+albedo_texture = ExtResource("6_wall_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_wall_light_pool"]
+size = Vector2(3.8, 1.7)
+
+[sub_resource type="StandardMaterial3D" id="Material_window_patch"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.54, 0.18, 0.22)
+albedo_texture = ExtResource("7_window_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_window_glow_strip"]
+size = Vector2(1.6, 0.42)
+
+[sub_resource type="StandardMaterial3D" id="Material_edge_shadow"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.28)
+albedo_texture = ExtResource("8_edge_patch")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="Mesh_edge_shadow"]
+size = Vector2(4.2, 5.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_character_shadow"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.52)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="Mesh_character_shadow"]
+top_radius = 0.42
+bottom_radius = 0.42
+height = 0.01
+radial_segments = 32
+
+[node name="Hd2dMarketReferenceMatchLab" type="Node3D" unique_id=1946799421]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1167256324]
+environment = SubResource("Environment_market_reference")
+camera_attributes = SubResource("CameraAttributes_market_reference")
+
+[node name="Lighting" type="Node3D" parent="." unique_id=623230867]
+
+[node name="CoolAmbientMoon" type="DirectionalLight3D" parent="Lighting" unique_id=750714854]
+transform = Transform3D(-0.6691307, -0.27838692, 0.6890319, 0, 0.92718387, 0.37460658, -0.7431448, 0.25066075, -0.62040716, 0, 0, 0)
+light_color = Color(0.42, 0.53, 0.68, 1)
+light_energy = 0.14
+
+[node name="CenterWarmKey" type="OmniLight3D" parent="Lighting" unique_id=2040846055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 2.25, -0.62)
+light_color = Color(1, 0.54, 0.18, 1)
+light_energy = 2.55
+shadow_enabled = true
+omni_range = 7.2
+
+[node name="LeftShopWarm" type="OmniLight3D" parent="Lighting" unique_id=252917873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.95, 1.7, 1.1)
+light_color = Color(1, 0.45, 0.16, 1)
+light_energy = 1.08
+shadow_enabled = true
+omni_range = 4.7
+
+[node name="RightShopWarm" type="OmniLight3D" parent="Lighting" unique_id=886013343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, 1.65, 0.75)
+light_color = Color(1, 0.48, 0.18, 1)
+omni_range = 4.1
+
+[node name="Stage" type="Node3D" parent="." unique_id=963643446]
+
+[node name="MarketReferenceMatch" parent="Stage" unique_id=920922533 instance=ExtResource("2_market")]
+
+[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketReferenceMatch" index="0" unique_id=1373335991]
+light_energy = 0.1
+
+[node name="hd2d_market_warm_point_light_1" parent="Stage/MarketReferenceMatch" index="1" unique_id=995727988]
+light_energy = 0.1
+
+[node name="hd2d_market_warm_point_light_2" parent="Stage/MarketReferenceMatch" index="2" unique_id=2112520248]
+light_energy = 0.1
+
+[node name="hd2d_market_warm_point_light_3" parent="Stage/MarketReferenceMatch" index="3" unique_id=578865830]
+light_energy = 0.1
+
+[node name="hd2d_market_low_angle_sun" parent="Stage/MarketReferenceMatch" index="5" unique_id=1064454535]
+light_energy = 0.1
+
+[node name="ReferenceFloorOverlay" type="Node3D" parent="Stage" unique_id=535479900]
+
+[node name="CentralStoneReadabilityPatch" type="MeshInstance3D" parent="Stage/ReferenceFloorOverlay" unique_id=290129176]
+transform = Transform3D(7.6, 0, 0, 0, 0.035, 0, 0, 0, 5.4, 0, 0.045, 0.6)
+material_override = ExtResource("9_stone")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RearStoneReadabilityPatch" type="MeshInstance3D" parent="Stage/ReferenceFloorOverlay" unique_id=1709189112]
+transform = Transform3D(6.4, 0, 0, 0, 0.03, 0, 0, 0, 2.6, 0, 0.05, -3)
+material_override = ExtResource("9_stone")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="ReferenceAdditiveProps" type="Node3D" parent="Stage" unique_id=562387882]
+
+[node name="GeneratedMarketReferenceGlb" parent="Stage/ReferenceAdditiveProps" unique_id=1500716100 instance=ExtResource("17_market_ref_glb")]
+
+[node name="ForegroundOccluders" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=110823645]
+visible = false
+
+[node name="ForegroundLowWall" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/ForegroundOccluders" unique_id=485633021]
+transform = Transform3D(8.4, 0, 0, 0, 0.52, 0, 0, 0, 0.42, 0.1, 0.32, 4.55)
+material_override = ExtResource("14_dark")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="ForegroundLeftStep" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/ForegroundOccluders" unique_id=2046005999]
+transform = Transform3D(3.2, 0, 0, 0, 0.24, 0, 0, 0, 1.1, -4.2, 0.18, 3.8)
+material_override = ExtResource("14_dark")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="ForegroundRightStep" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/ForegroundOccluders" unique_id=801748303]
+transform = Transform3D(3, 0, 0, 0, 0.22, 0, 0, 0, 1, 4.45, 0.17, 3.7)
+material_override = ExtResource("14_dark")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LeftFacade" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=141017651]
+visible = false
+
+[node name="LeftFacadeWallLip" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/LeftFacade" unique_id=537545934]
+transform = Transform3D(1.1, 0, 0, 0, 2.7, 0, 0, 0, 3.4, -6.05, 1.35, -0.6)
+material_override = ExtResource("10_wall")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LeftEaveDarkRoof" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/LeftFacade" unique_id=498001541]
+transform = Transform3D(2.9, 0, 0, 0, 0.22, 0, 0, 0, 1.9, -5.55, 2.82, -0.2)
+material_override = ExtResource("13_roof")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LeftShopSign" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/LeftFacade" unique_id=950016566]
+transform = Transform3D(0.9, 0, 0, 0, 0.35, 0, 0, 0, 0.08, -4.78, 1.72, 1.52)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RightFacade" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=486529059]
+visible = false
+
+[node name="RightFacadeWallLip" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade" unique_id=1645742784]
+transform = Transform3D(1.2, 0, 0, 0, 2.8, 0, 0, 0, 3.2, 5.75, 1.38, -0.75)
+material_override = ExtResource("10_wall")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RightEaveDarkRoof" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade" unique_id=1970184571]
+transform = Transform3D(2.75, 0, 0, 0, 0.22, 0, 0, 0, 1.65, 5.22, 2.9, -0.38)
+material_override = ExtResource("13_roof")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="Ladder" type="Node3D" parent="Stage/ReferenceAdditiveProps/RightFacade" unique_id=76262422]
+transform = Transform3D(0.82, 0, 0.24, 0, 1, 0, -0.24, 0, 0.82, 5, 1.35, -2.2)
+
+[node name="LadderLeftRail" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=259784908]
+transform = Transform3D(0.08, 0, 0, 0, 2.5, 0, 0, 0, 0.08, -0.28, 0, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LadderRightRail" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=1768745540]
+transform = Transform3D(0.08, 0, 0, 0, 2.5, 0, 0, 0, 0.08, 0.28, 0, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LadderRungA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=2090185060]
+transform = Transform3D(0.68, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, -0.75, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LadderRungB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=614084710]
+transform = Transform3D(0.68, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, -0.25, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LadderRungC" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=1674482788]
+transform = Transform3D(0.68, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.25, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LadderRungD" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RightFacade/Ladder" unique_id=772364804]
+transform = Transform3D(0.68, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.75, 0)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="MarketStalls" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=1295567564]
+visible = false
+
+[node name="LeftCanopyStall" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/MarketStalls" unique_id=36590243]
+transform = Transform3D(2.05, 0, 0, 0, 0.12, 0, 0, 0, 1.3, -2.8, 1.48, 0.25)
+material_override = ExtResource("12_fabric")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RightCanopyStall" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/MarketStalls" unique_id=1027726614]
+transform = Transform3D(2.05, 0, 0, 0, 0.12, 0, 0, 0, 1.25, 2.7, 1.48, -0.15)
+material_override = ExtResource("12_fabric")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="LeftTable" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/MarketStalls" unique_id=367482687]
+transform = Transform3D(1.55, 0, 0, 0, 0.18, 0, 0, 0, 0.72, -2.8, 0.62, 0.55)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RightTable" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/MarketStalls" unique_id=1399431721]
+transform = Transform3D(1.55, 0, 0, 0, 0.18, 0, 0, 0, 0.72, 2.7, 0.62, 0.25)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="SmallProps" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=768756997]
+visible = false
+
+[node name="CrateA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=357063842]
+transform = Transform3D(0.42, 0, 0, 0, 0.36, 0, 0, 0, 0.42, -3.55, 0.28, 1.35)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="CrateB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=749993667]
+transform = Transform3D(0.46, 0, 0, 0, 0.32, 0, 0, 0, 0.36, 3.55, 0.26, 0.85)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="BarrelA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=1747309912]
+transform = Transform3D(0.32, 0, 0, 0, 0.62, 0, 0, 0, 0.32, -4.12, 0.45, 0.35)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="BarrelB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=1624181539]
+transform = Transform3D(0.28, 0, 0, 0, 0.54, 0, 0, 0, 0.28, 4.18, 0.4, 0.18)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="JarA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=520710093]
+transform = Transform3D(0.18, 0, 0, 0, 0.34, 0, 0, 0, 0.18, -2.35, 0.82, 0.56)
+material_override = ExtResource("14_dark")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="JarB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=500880514]
+transform = Transform3D(0.16, 0, 0, 0, 0.3, 0, 0, 0, 0.16, 2.32, 0.82, 0.3)
+material_override = ExtResource("14_dark")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="PlateStackA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=45862104]
+transform = Transform3D(0.26, 0, 0, 0, 0.055, 0, 0, 0, 0.26, -3, 0.78, 0.56)
+material_override = ExtResource("10_wall")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="PlateStackB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=1558794246]
+transform = Transform3D(0.26, 0, 0, 0, 0.055, 0, 0, 0, 0.26, 3.02, 0.78, 0.28)
+material_override = ExtResource("10_wall")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="FoldedClothA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=1050181261]
+transform = Transform3D(0.66, 0, 0, 0, 0.055, 0, 0, 0, 0.3, -2.42, 0.82, 0.92)
+material_override = ExtResource("12_fabric")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="ShelfA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/SmallProps" unique_id=908322442]
+transform = Transform3D(0.9, 0, 0, 0, 0.08, 0, 0, 0, 0.28, 4.28, 1.18, -0.88)
+material_override = ExtResource("11_wood")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RearGlowShells" type="Node3D" parent="Stage/ReferenceAdditiveProps" unique_id=931438691]
+visible = false
+
+[node name="RearWindowGlowA" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RearGlowShells" unique_id=2102532645]
+transform = Transform3D(0.42, 0, 0, 0, 0.7, 0, 0, 0, 0.04, -3.1, 1.92, -3.25)
+material_override = ExtResource("15_window_emission")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RearWindowGlowB" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RearGlowShells" unique_id=1980672100]
+transform = Transform3D(0.42, 0, 0, 0, 0.7, 0, 0, 0, 0.04, -1.15, 1.92, -3.45)
+material_override = ExtResource("15_window_emission")
+mesh = SubResource("Mesh_unit_box")
+
+[node name="RearLanternGlowC" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RearGlowShells" unique_id=1803900855]
+transform = Transform3D(0.22, 0, 0, 0, 0.28, 0, 0, 0, 0.22, 1.22, 1.72, -3.28)
+material_override = ExtResource("16_lantern_emission")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="RearLanternGlowD" type="MeshInstance3D" parent="Stage/ReferenceAdditiveProps/RearGlowShells" unique_id=1191189516]
+transform = Transform3D(0.22, 0, 0, 0, 0.28, 0, 0, 0, 0.22, 3.22, 1.72, -3.1)
+material_override = ExtResource("16_lantern_emission")
+mesh = SubResource("Mesh_unit_cylinder")
+
+[node name="LightPatches" type="Node3D" parent="Stage" unique_id=1386365996]
+
+[node name="CentralWarmPoolPatch" type="MeshInstance3D" parent="Stage/LightPatches" unique_id=1477342244]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.15, 0.085, -0.5)
+material_override = SubResource("Material_central_patch")
+cast_shadow = 0
+mesh = SubResource("Mesh_central_light_pool")
+
+[node name="LeftWallWarmFalloff" type="MeshInstance3D" parent="Stage/LightPatches" unique_id=254900206]
+transform = Transform3D(0.9, 0, 0.05, 0, 1, 0, -0.05, 0, 0.9, -4.75, 1.42, 1.25)
+material_override = SubResource("Material_wall_patch")
+cast_shadow = 0
+mesh = SubResource("Mesh_wall_light_pool")
+
+[node name="RightWallWarmFalloff" type="MeshInstance3D" parent="Stage/LightPatches" unique_id=962675343]
+transform = Transform3D(0.9, 0, -0.05, 0, 1, 0, 0.05, 0, 0.9, 4.65, 1.42, 0.95)
+material_override = SubResource("Material_wall_patch")
+cast_shadow = 0
+mesh = SubResource("Mesh_wall_light_pool")
+
+[node name="RearWindowGlowStrip" type="MeshInstance3D" parent="Stage/LightPatches" unique_id=1688157154]
+transform = Transform3D(1.4, 0, 0, 0, 0.65, 0, 0, 0, 1, 0.25, 2.16, -3.25)
+material_override = SubResource("Material_window_patch")
+cast_shadow = 0
+mesh = SubResource("Mesh_window_glow_strip")
+
+[node name="EdgeShadowHelpers" type="Node3D" parent="Stage" unique_id=1353173413]
+
+[node name="LeftEdgeSoftShadow" type="MeshInstance3D" parent="Stage/EdgeShadowHelpers" unique_id=310334341]
+transform = Transform3D(0.62, 0, 0.78, 0, 1, 0, -0.78, 0, 0.62, -7, 1.62, 0.2)
+material_override = SubResource("Material_edge_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_edge_shadow")
+
+[node name="RightEdgeSoftShadow" type="MeshInstance3D" parent="Stage/EdgeShadowHelpers" unique_id=454923586]
+transform = Transform3D(0.62, 0, -0.78, 0, 1, 0, 0.78, 0, 0.62, 7, 1.62, 0.1)
+material_override = SubResource("Material_edge_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_edge_shadow")
+
+[node name="VfxRoot" type="Node3D" parent="." unique_id=1961174911]
+
+[node name="LeftVisualTorch" parent="VfxRoot" unique_id=1585992213 instance=ExtResource("4_torch")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, -4.95, 0.2, 1.1)
+sparks_enabled = false
+light_enabled = false
+flicker_phase = 0.4
+
+[node name="RightVisualTorch" parent="VfxRoot" unique_id=1441315017 instance=ExtResource("4_torch")]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 4.7, 0.2, 0.75)
+sparks_enabled = false
+light_enabled = false
+flicker_phase = 1.6
+
+[node name="Characters" type="Node3D" parent="." unique_id=1741115767]
+
+[node name="PlayerCharacter" parent="Characters" unique_id=986825830 instance=ExtResource("3_engineer")]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0.95201707, 1.32)
+modulate = Color(1, 0.92, 0.78, 1)
+billboard = 2
+
+[node name="LeftNpc" parent="Characters" unique_id=1764799156 instance=ExtResource("3_engineer")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -3.75, 0.66, 1.62)
+modulate = Color(0.9, 0.86, 0.76, 1)
+billboard = 2
+
+[node name="RightNpc" parent="Characters" unique_id=14717045 instance=ExtResource("3_engineer")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, 5.15, 0.66, -0.72)
+modulate = Color(0.9, 0.86, 0.76, 1)
+billboard = 2
+
+[node name="PlayerLightWrapSprite" parent="Characters" instance=ExtResource("3_engineer")]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0.95201707, 1.345)
+modulate = Color(1, 0.62, 0.28, 0.32)
+billboard = 2
+shaded = false
+
+[node name="LeftNpcLightWrapSprite" parent="Characters" instance=ExtResource("3_engineer")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -3.75, 0.66, 1.645)
+modulate = Color(1, 0.58, 0.25, 0.26)
+billboard = 2
+shaded = false
+
+[node name="RightNpcLightWrapSprite" parent="Characters" instance=ExtResource("3_engineer")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, 5.15, 0.66, -0.695)
+modulate = Color(1, 0.58, 0.25, 0.26)
+billboard = 2
+shaded = false
+
+[node name="PlayerShadow" type="MeshInstance3D" parent="Characters" unique_id=1793268737]
+transform = Transform3D(0.82, 0, 0.14, 0, 0.02, 0, -0.1, 0, 0.54, 0.08, 0.105, 1.48)
+material_override = SubResource("Material_character_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_character_shadow")
+
+[node name="LeftNpcShadow" type="MeshInstance3D" parent="Characters" unique_id=2117709065]
+transform = Transform3D(0.62, 0, 0.1, 0, 0.02, 0, -0.08, 0, 0.42, -3.66, 0.105, 1.77)
+material_override = SubResource("Material_character_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_character_shadow")
+
+[node name="RightNpcShadow" type="MeshInstance3D" parent="Characters" unique_id=450672227]
+transform = Transform3D(0.62, 0, 0.1, 0, 0.02, 0, -0.08, 0, 0.42, 5.24, 0.105, -0.56)
+material_override = SubResource("Material_character_shadow")
+cast_shadow = 0
+mesh = SubResource("Mesh_character_shadow")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=270972892]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=903899841]
+transform = Transform3D(0.99999046, 0.002325104, -0.0036922023, 0, 0.84619313, 0.5328763, 0.004363309, -0.53287125, 0.8461851, 0.05, 9.35, 15.65)
+current = true
+fov = 38.0
+far = 80.0
+
+[editable path="Stage/MarketReferenceMatch"]

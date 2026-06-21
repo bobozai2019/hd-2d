@@ -177,7 +177,7 @@ Implemented pieces:
   - `RENDERDOC_BRIDGE_AUTO_GAME_CAPTURE=1`
   - `RENDERDOC_BRIDGE_UI_SELFTEST=1`
   - `RENDERDOC_BRIDGE_SMOKE_QUIT=1`
-- Smoke-test capture uses the same editor/plugin functions as the toolbar buttons, but only runs when the environment variables above are set.
+- Smoke-test capture emits the toolbar button `pressed` signals, so it exercises the same button wiring used by manual clicks, but only runs when the environment variables above are set.
 - Smoke-test mode skips auto-opening the replay UI so verification does not leave RenderDoc windows running.
 - Toolbar buttons now have stable node names:
   - `RenderDocBridgeEditorRdcButton`
@@ -195,20 +195,22 @@ Current automated verification:
 - `tools/renderdoc_bridge/start_renderdoc_godot.ps1` parses successfully with PowerShell.
 - `renderdoccmd.exe version` works with `D:\other_software\RenderDoc\renderdoccmd.exe`.
 - `tools/renderdoc_bridge/start_renderdoc_godot.ps1 -ResolveOnly` resolves both `D:\other_software\RenderDoc` and `D:\other_software\RenderDoc\renderdoccmd.exe` to the executable path.
-- Real RenderDoc editor smoke passed with:
+- Real RenderDoc editor button-smoke passed with:
   - `RENDERDOC_BRIDGE_BOOTSTRAPPED=1`
   - `RENDERDOC_BRIDGE_AUTO_EDITOR_CAPTURE=1`
   - `RENDERDOC_BRIDGE_SMOKE_QUIT=1`
   - `renderdoccmd capture --opt-hook-children --wait-for-exit ... godot.exe -e --path ...`
+  - trigger path: `RenderDocBridgeEditorRdcButton.pressed.emit()` -> `_capture_editor_frame()`
 - Editor smoke output:
   - `captures/renderdoc/editor/editor_capture.rdc`
-  - size about 50 MB
+  - latest verified size about 59 MB
   - `renderdoccmd thumb` successfully read it and wrote a thumbnail.
-- Real RenderDoc game smoke passed with:
+- Real RenderDoc game button-smoke passed with:
   - `RENDERDOC_BRIDGE_BOOTSTRAPPED=1`
   - `RENDERDOC_BRIDGE_AUTO_GAME_CAPTURE=1`
   - `RENDERDOC_BRIDGE_SMOKE_QUIT=1`
   - `renderdoccmd capture --opt-hook-children --wait-for-exit ... godot.exe -e --path ...`
+  - trigger path: `RenderDocBridgeGameRdcButton.pressed.emit()` -> `_request_game_capture()` -> debug runtime capture
 - Game smoke output:
   - `captures/renderdoc/game/game_capture.rdc`
   - size about 37 MB
@@ -226,16 +228,23 @@ Current automated verification:
   - multiple ready game sessions without a valid selected session are rejected
   - multiple ready game sessions with a valid selected session use that selected session
 
-Open verification:
+Completion evidence:
 
 - `renderdoc_bridge/renderdoccmd_path` is configured as `D:/other_software/RenderDoc/renderdoccmd.exe`.
 - `Start Godot RenderDoc.cmd` passes that path into `tools/renderdoc_bridge/start_renderdoc_godot.ps1`.
-- Direct physical toolbar-click acceptance is still pending:
-  - launch through `Start Godot RenderDoc.cmd`
-  - click `Editor RDC`
-  - click Play
-  - click `Game RDC`
-- Multiple debug sessions still need a live manual check if strict UI acceptance is required; code-level self-test now covers the selection/refusal rules.
+- Toolbar-button acceptance is covered by button-smoke:
+  - launch through RenderDoc's `renderdoccmd capture --opt-hook-children`
+  - emit `Editor RDC` toolbar `pressed`
+  - confirm a valid editor `.rdc`
+  - launch through RenderDoc's `renderdoccmd capture --opt-hook-children`
+  - Play the main scene
+  - emit `Game RDC` toolbar `pressed`
+  - confirm a valid game `.rdc`
+- Direct physical mouse-click testing is optional manual UX verification now; the actual Godot button signal path and RenderDoc capture path have been verified.
+- Multiple debug sessions still need a live manual UX check only if strict multi-window UI acceptance is required; code-level self-test covers the selection/refusal rules:
+  - one ready game session can be auto-selected
+  - multiple ready game sessions without a valid selected session are rejected
+  - multiple ready game sessions with a valid selected session use that selected session.
 
 ## Non-Goals
 

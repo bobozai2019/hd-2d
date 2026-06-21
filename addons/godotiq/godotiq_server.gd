@@ -1804,7 +1804,7 @@ func _do_editor_screenshot(peer_id: int, id: String, viewport_3d: SubViewport, c
 			actual_format = "webp"
 
 	# If encoded image is too large for WS buffer, progressively downscale
-	var max_encoded_bytes: int = 45000
+	var max_encoded_bytes: int = 30000
 	while encoded.size() > max_encoded_bytes and img.get_width() > 100:
 		var w: int = int(img.get_width() * 0.7)
 		var h: int = int(img.get_height() * 0.7)
@@ -2507,20 +2507,30 @@ func _send_error(peer_id: int, id: String, code: String, message: String) -> voi
 	_send_text(peer_id, msg)
 
 
+const WS_MAX_MESSAGE_BYTES: int = 65536
+
+
 func send_event(event_name: String, data: Dictionary) -> void:
 	var msg := JSON.stringify({"event": event_name, "data": data})
 	for peer_id in _peers:
-		var ws: WebSocketPeer = _peers[peer_id]
-		if ws.get_ready_state() == WebSocketPeer.STATE_OPEN:
-			ws.send_text(msg)
+		_send_text_safe(peer_id, msg)
 
 
 func _send_text(peer_id: int, text: String) -> void:
+	_send_text_safe(peer_id, text)
+
+
+func _send_text_safe(peer_id: int, text: String) -> void:
 	if not _peers.has(peer_id):
 		return
 	var ws: WebSocketPeer = _peers[peer_id]
-	if ws.get_ready_state() == WebSocketPeer.STATE_OPEN:
-		ws.send_text(text)
+	if ws.get_ready_state() != WebSocketPeer.STATE_OPEN:
+		return
+	var size: int = text.to_utf8_buffer().size()
+	if size > WS_MAX_MESSAGE_BYTES:
+		push_error("[GodotIQ] WS message too large (%d bytes), dropping" % size)
+		return
+	ws.send_text(text)
 
 
 # --- check_errors ---

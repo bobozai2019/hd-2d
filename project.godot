@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="hd2d"
-run/main_scene="res://scenes/map3d/hd2d_market_plaza_lighting_lab.tscn"
+run/main_scene="uid://ck70k0i5jceu0"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

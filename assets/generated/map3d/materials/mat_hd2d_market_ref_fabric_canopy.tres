@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://crheteosw757m"]
+
+[ext_resource type="Texture2D" uid="uid://cltxguoedu72w" path="res://assets/generated/map3d/textures/hd2d_market_ref_fabric_canopy_albedo.png" id="1_albedo"]
+[ext_resource type="Texture2D" uid="uid://cpp0iy6k42y6n" path="res://assets/generated/map3d/textures/hd2d_market_ref_fabric_canopy_normal.png" id="2_normal"]
+[ext_resource type="Texture2D" uid="uid://do15gqqxcu6ku" path="res://assets/generated/map3d/textures/hd2d_market_ref_fabric_canopy_occlusion.png" id="3_occlusion"]
+
+[resource]
+albedo_color = Color(0.28, 0.12, 0.1, 1)
+albedo_texture = ExtResource("1_albedo")
+metallic_specular = 0.05
+roughness = 0.94
+normal_enabled = true
+normal_scale = 0.32
+normal_texture = ExtResource("2_normal")
+ao_enabled = true
+ao_light_affect = 0.18
+ao_texture = ExtResource("3_occlusion")

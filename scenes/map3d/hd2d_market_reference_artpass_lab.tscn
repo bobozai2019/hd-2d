@@ -1,0 +1,97 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/map3d/hd2d_market_reference_artpass_lab.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/map3d/hd2d_market_reference_match_lab.tscn" id="2_base_lab"]
+[ext_resource type="PackedScene" path="res://assets/generated/map3d/models/hd2d_market_reference_match_artpass.glb" id="3_artpass_glb"]
+[ext_resource type="Texture2D" path="res://assets/generated/hd2d/light_patches/alpha_market_artpass_center_pool.png" id="4_center_patch"]
+[ext_resource type="Texture2D" path="res://assets/generated/hd2d/light_patches/alpha_market_artpass_stall_bounce.png" id="5_stall_patch"]
+[ext_resource type="Texture2D" path="res://assets/generated/hd2d/light_patches/alpha_market_artpass_back_lantern_haze.png" id="6_back_patch"]
+[ext_resource type="Texture2D" path="res://assets/generated/hd2d/light_patches/alpha_market_artpass_foreground_vignette.png" id="7_foreground_patch"]
+
+[sub_resource type="QuadMesh" id="Mesh_center_pool"]
+size = Vector2(6.8, 3.4)
+
+[sub_resource type="QuadMesh" id="Mesh_stall_bounce"]
+size = Vector2(2.8, 1.6)
+
+[sub_resource type="QuadMesh" id="Mesh_back_haze"]
+size = Vector2(6.2, 1.8)
+
+[sub_resource type="QuadMesh" id="Mesh_foreground_vignette"]
+size = Vector2(9.4, 4.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_center_pool"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.54, 0.18, 0.16)
+albedo_texture = ExtResource("4_center_patch")
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="Material_stall_bounce"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.46, 0.16, 0.14)
+albedo_texture = ExtResource("5_stall_patch")
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="Material_back_haze"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.58, 0.24, 0.1)
+albedo_texture = ExtResource("6_back_patch")
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="Material_foreground_vignette"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.18)
+albedo_texture = ExtResource("7_foreground_patch")
+disable_receive_shadows = true
+
+[node name="Hd2dMarketReferenceArtpassLab" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Base8BMarketReferenceLab" parent="." instance=ExtResource("2_base_lab")]
+
+[node name="ArtpassDetails" type="Node3D" parent="."]
+
+[node name="ArtpassGlb" parent="ArtpassDetails" instance=ExtResource("3_artpass_glb")]
+
+[node name="ArtpassLightPatches" type="Node3D" parent="."]
+
+[node name="ArtpassCenterPool" type="MeshInstance3D" parent="ArtpassLightPatches"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.12, 0.12, -0.62)
+material_override = SubResource("Material_center_pool")
+cast_shadow = 0
+mesh = SubResource("Mesh_center_pool")
+
+[node name="ArtpassLeftStallBounce" type="MeshInstance3D" parent="ArtpassLightPatches"]
+transform = Transform3D(0.9, 0, 0.08, 0, 1, 0, -0.08, 0, 0.9, -3.2, 1.1, 0.55)
+material_override = SubResource("Material_stall_bounce")
+cast_shadow = 0
+mesh = SubResource("Mesh_stall_bounce")
+
+[node name="ArtpassRightStallBounce" type="MeshInstance3D" parent="ArtpassLightPatches"]
+transform = Transform3D(0.9, 0, -0.08, 0, 1, 0, 0.08, 0, 0.9, 2.7, 1.06, 0.34)
+material_override = SubResource("Material_stall_bounce")
+cast_shadow = 0
+mesh = SubResource("Mesh_stall_bounce")
+
+[node name="ArtpassBackLanternHaze" type="MeshInstance3D" parent="ArtpassLightPatches"]
+transform = Transform3D(1, 0, 0, 0, 0.58, 0.18, 0, -0.18, 0.58, 0.0, 2.0, -2.92)
+material_override = SubResource("Material_back_haze")
+cast_shadow = 0
+mesh = SubResource("Mesh_back_haze")
+
+[node name="ArtpassForegroundVignette" type="MeshInstance3D" parent="ArtpassLightPatches"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.0, 0.1, 3.62)
+material_override = SubResource("Material_foreground_vignette")
+cast_shadow = 0
+mesh = SubResource("Mesh_foreground_vignette")
