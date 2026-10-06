@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ck70k0i5jceu0"]
+[gd_scene format=3 uid="uid://ck70k0i5jceu0"]
 
 [ext_resource type="PackedScene" uid="uid://sreyb0nh6sb3" path="res://assets/generated/map3d/models/hd2d_market_plaza.glb" id="1_3ry5l"]
 [ext_resource type="Texture2D" uid="uid://b5dwm4sdchok6" path="res://assets/generated/hd2d/fire/natural_torch/alpha_wall_light_patch_draft.png" id="2_hesm5"]
@@ -181,20 +181,20 @@ omni_range = 4.5
 
 [node name="MarketPlaza" parent="Stage" unique_id=1586992089 instance=ExtResource("1_3ry5l")]
 
-[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketPlaza" index="0" unique_id=1373335991]
+[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketPlaza" index="0" unique_id=1311621934]
 light_energy = 1.0
 
-[node name="hd2d_market_warm_point_light_1" parent="Stage/MarketPlaza" index="1" unique_id=995727988]
+[node name="hd2d_market_warm_point_light_1" parent="Stage/MarketPlaza" index="1" unique_id=882793609]
 light_energy = 1.0
 
-[node name="hd2d_market_warm_point_light_2" parent="Stage/MarketPlaza" index="2" unique_id=2112520248]
+[node name="hd2d_market_warm_point_light_2" parent="Stage/MarketPlaza" index="2" unique_id=1443510351]
 light_energy = 3.262
 light_indirect_energy = 3.636
 
-[node name="hd2d_market_warm_point_light_3" parent="Stage/MarketPlaza" index="3" unique_id=578865830]
+[node name="hd2d_market_warm_point_light_3" parent="Stage/MarketPlaza" index="3" unique_id=575693556]
 light_energy = 1.0
 
-[node name="hd2d_market_low_angle_sun" parent="Stage/MarketPlaza" index="5" unique_id=1064454535]
+[node name="hd2d_market_low_angle_sun" parent="Stage/MarketPlaza" index="5" unique_id=727618858]
 light_color = Color(0.587547, 0.20274213, 0.15159822, 1)
 light_energy = 6.737
 light_indirect_energy = 1.373
@@ -269,15 +269,14 @@ draw_pass_1 = SubResource("Mesh_dust_quad")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1361087959]
 transform = Transform3D(0.99999046, 0.002325104, -0.0036922023, 0, 0.84619313, 0.5328763, 0.004363309, -0.53287125, 0.8461851, 0.15, 9.6, 15.2)
-current = true
 cull_mask = 1
+current = true
 fov = 38.0
 near = 0.045
 far = 80.0
 
 [node name="CharacterViewport" type="SubViewport" parent="." unique_id=664988988]
 transparent_bg = true
-own_world_3d = false
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 3
@@ -334,13 +333,13 @@ mesh = SubResource("Mesh_fake_shadow")
 layer = 10
 
 [node name="CompositeRect" type="TextureRect" parent="CharacterLayer" unique_id=364077982]
-texture = SubResource("ViewportTexture_char")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = SubResource("ViewportTexture_char")
 expand_mode = 1
 stretch_mode = 6
 

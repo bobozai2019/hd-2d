@@ -125,7 +125,7 @@ material_override = SubResource("Material_coal")
 mesh = SubResource("Mesh_coal")
 
 [node name="FlameEffect" type="Node3D" parent="." unique_id=1642068117]
-transform = Transform3D(1.0962023, -0.020240098, 0, 0.023552304, 0.9420412, 0, 0, 0, 1.0964552, 0, 1.03, 0.29)
+transform = Transform3D(1.0930871, -0.0031078863, 0, 0.0035345373, 0.9611414, 0, 0, 0, 1.0930928, 0, 1.03, 0.29)
 
 [node name="OuterFlame" type="Sprite3D" parent="FlameEffect" unique_id=1161281011]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, -0.012)
@@ -137,7 +137,7 @@ alpha_scissor_threshold = 0.02
 texture_filter = 1
 texture = ExtResource("2_outer")
 hframes = 8
-frame = 2
+frame = 3
 
 [node name="MiddleFlame" type="Sprite3D" parent="FlameEffect" unique_id=31406274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 0.16, 0)
@@ -149,7 +149,7 @@ alpha_scissor_threshold = 0.02
 texture_filter = 1
 texture = ExtResource("3_middle")
 hframes = 8
-frame = 5
+frame = 2
 
 [node name="CoreFlame" type="Sprite3D" parent="FlameEffect" unique_id=86460193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0.13, 0.012)
@@ -173,10 +173,15 @@ alpha_scissor_threshold = 0.02
 texture_filter = 1
 texture = ExtResource("5_wisp")
 hframes = 6
-frame = 2
+frame = 5
 
 [node name="FlameHalo" type="Node3D" parent="." unique_id=788650966]
-transform = Transform3D(0.88193595, 0, 0, 0, 1.0671574, 0, 0, 0, 0.88193595, 0, 1.07, 0.25)
+transform = Transform3D(0.8981256, 0, 0, 0, 1.0653234, 0, 0, 0, 0.8981256, 0, 1.07, 0.25)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FlameHalo" unique_id=339987898]
+transform = Transform3D(0.8988621, -0.052690394, 0, 0.05449169, 0.9295912, 0, 0, 0, 0.90040517, -0.004978965, 0.04478842, -0.10635389)
+light_color = Color(0.95901793, 0.24519908, 0.40311873, 1)
+light_energy = 1.279
 
 [node name="OuterGlowVolume" type="Sprite3D" parent="FlameHalo" unique_id=1960158907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.06)
@@ -218,6 +223,6 @@ draw_pass_1 = SubResource("Mesh_spark_quad")
 [node name="TorchLight" type="OmniLight3D" parent="." unique_id=2079092994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16, 0.28)
 light_color = Color(1, 0.62, 0.28, 1)
-light_energy = 0.6754518
+light_energy = 0.67251736
 shadow_enabled = true
 omni_range = 3.8

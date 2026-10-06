@@ -4,3 +4,17 @@
 /.godotiq/bridge_token
 /captures
 /registry_backups
+/release/
+
+# Local validation output and editor logs
+logs/
+output/
+
+# Temporary files created by tools and editors
+*.tmp
+*.temp
+*.bak
+*~
+
+# RenderDoc bridge temporary replacement files
+addons/renderdoc_bridge/bin/~*

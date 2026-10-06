@@ -50,7 +50,7 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(1, 0.48, 0.20, 0.045)
+albedo_color = Color(1, 0.48, 0.2, 0.045)
 albedo_texture = ExtResource("4_light_patch")
 disable_receive_shadows = true
 
@@ -62,7 +62,7 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(1, 0.62, 0.30, 0.018)
+albedo_color = Color(1, 0.62, 0.3, 0.018)
 albedo_texture = ExtResource("4_light_patch")
 disable_receive_shadows = true
 
@@ -138,7 +138,7 @@ directional_shadow_max_distance = 34.0
 
 [node name="CoolDeepFill" type="DirectionalLight3D" parent="Lighting" unique_id=235725573]
 transform = Transform3D(-0.6691307, -0.27838692, 0.6890319, 0, 0.92718387, 0.37460658, -0.7431448, 0.25066075, -0.62040716, 0, 0, 0)
-light_color = Color(0.42, 0.50, 0.52, 1)
+light_color = Color(0.42, 0.5, 0.52, 1)
 light_energy = 0.24
 
 [node name="CenterGoldBloom" type="OmniLight3D" parent="Lighting" unique_id=716018942]
@@ -163,7 +163,7 @@ omni_range = 3.5
 
 [node name="RightShopTorchLight" type="OmniLight3D" parent="Lighting" unique_id=759135689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.65, 2)
-light_color = Color(1, 0.60, 0.36, 1)
+light_color = Color(1, 0.6, 0.36, 1)
 light_energy = 0.6
 shadow_enabled = true
 omni_range = 3.4
@@ -178,20 +178,20 @@ omni_range = 3.1
 
 [node name="MarketPlaza" parent="Stage" unique_id=1586992089 instance=ExtResource("1_market")]
 
-[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketPlaza" index="0" unique_id=1373335991]
+[node name="hd2d_market_warm_point_light_0" parent="Stage/MarketPlaza" index="0" unique_id=1311621934]
 light_energy = 0.0
 
-[node name="hd2d_market_warm_point_light_1" parent="Stage/MarketPlaza" index="1" unique_id=995727988]
+[node name="hd2d_market_warm_point_light_1" parent="Stage/MarketPlaza" index="1" unique_id=882793609]
 light_energy = 0.0
 
-[node name="hd2d_market_warm_point_light_2" parent="Stage/MarketPlaza" index="2" unique_id=2112520248]
+[node name="hd2d_market_warm_point_light_2" parent="Stage/MarketPlaza" index="2" unique_id=1443510351]
 light_energy = 0.0
 light_indirect_energy = 0.0
 
-[node name="hd2d_market_warm_point_light_3" parent="Stage/MarketPlaza" index="3" unique_id=578865830]
+[node name="hd2d_market_warm_point_light_3" parent="Stage/MarketPlaza" index="3" unique_id=575693556]
 light_energy = 0.0
 
-[node name="hd2d_market_low_angle_sun" parent="Stage/MarketPlaza" index="5" unique_id=1064454535]
+[node name="hd2d_market_low_angle_sun" parent="Stage/MarketPlaza" index="5" unique_id=727618858]
 light_color = Color(0.42, 0.48, 0.46, 1)
 light_energy = 0.0
 light_indirect_energy = 0.0

@@ -1,64 +1,116 @@
-=== EditorLogger session start: 2026-06-22T00:15:23 ===
-[2026-06-22T00:15:23] [STDOUT] Editor Logger enabled
+=== EditorLogger session start: 2026-06-22T22:12:44 ===
+[2026-06-22T22:12:44] [STDOUT] Editor Logger enabled
 
-[2026-06-22T00:15:23] [STDOUT] GodotIQ: WebSocket server skipped; port 6007 is unavailable (error 22). Another editor instance may already be running.
+[2026-06-22T22:12:45] [STDOUT] GodotIQ: WebSocket server listening on 127.0.0.1:6007
 
-[2026-06-22T00:15:23] [STDOUT] GodotIQ: Logger registered (Godot 4.5+)
+[2026-06-22T22:12:45] [STDOUT] GodotIQ: Logger registered (Godot 4.5+)
 
-[2026-06-22T00:15:24] [STDOUT] [  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[2026-06-22T22:12:47] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:11 - ext_resource, invalid UID: uid://dwuro14y3xgy6 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres | backtraces=[]
+[2026-06-22T22:12:47] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:12 - ext_resource, invalid UID: uid://7tr58mv26dfk - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres | backtraces=[]
+[2026-06-22T22:12:47] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:13 - ext_resource, invalid UID: uid://dkscws3msm64n - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres | backtraces=[]
+[2026-06-22T22:12:47] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:14 - ext_resource, invalid UID: uid://bek3kbbywfcs3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres | backtraces=[]
+[2026-06-22T22:12:47] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:15 - ext_resource, invalid UID: uid://bkp7mrqo28rv8 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:16 - ext_resource, invalid UID: uid://pju5j2lbubra - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:17 - ext_resource, invalid UID: uid://c3rqbo61mrr7e - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:18 - ext_resource, invalid UID: uid://8r5xf4mlpid3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:11 - ext_resource, invalid UID: uid://dwuro14y3xgy6 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:12 - ext_resource, invalid UID: uid://7tr58mv26dfk - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:13 - ext_resource, invalid UID: uid://dkscws3msm64n - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:14 - ext_resource, invalid UID: uid://bek3kbbywfcs3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:15 - ext_resource, invalid UID: uid://bkp7mrqo28rv8 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:16 - ext_resource, invalid UID: uid://pju5j2lbubra - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:17 - ext_resource, invalid UID: uid://c3rqbo61mrr7e - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:18 - ext_resource, invalid UID: uid://8r5xf4mlpid3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:11 - ext_resource, invalid UID: uid://dwuro14y3xgy6 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:12 - ext_resource, invalid UID: uid://7tr58mv26dfk - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:13 - ext_resource, invalid UID: uid://dkscws3msm64n - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:14 - ext_resource, invalid UID: uid://bek3kbbywfcs3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:15 - ext_resource, invalid UID: uid://bkp7mrqo28rv8 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:16 - ext_resource, invalid UID: uid://pju5j2lbubra - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:17 - ext_resource, invalid UID: uid://c3rqbo61mrr7e - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres | backtraces=[]
+[2026-06-22T22:12:48] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:18 - ext_resource, invalid UID: uid://8r5xf4mlpid3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres | backtraces=[]
+[2026-06-22T22:13:26] [ERROR] type=0 editor_notify=false | origin=ViewportTexture::_setup_local_to_scene (scene\main\viewport.cpp:216) | code=Parameter "vpn" is null. | rationale=Path to node is invalid: 'CharacterViewport'. | backtraces=[]
+[2026-06-22T22:13:56] [ERROR] type=1 editor_notify=false | origin=RendererSceneRenderRD::_render_buffers_post_process_and_tonemap (servers\rendering\renderer_rd\renderer_scene_render_rd.cpp:499) | code=Depth of field is not supported in viewports with a transparent background. Disabling DoF in transparent viewport. | backtraces=[]
+[2026-06-22T22:42:56] [STDOUT] res://assets/generated/enginner/walk/frame_000001.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [STDOUT] [92m[ DONE ][39m [1mfirst_scan_filesystem[22m
-[0m
+[2026-06-22T22:48:06] [STDOUT] res://assets/generated/enginner/skill/frame_000001.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [STDOUT] [   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[2026-06-22T22:48:43] [STDOUT] res://assets/generated/enginner/skill/frame_000002.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [STDOUT] [   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[2026-06-22T22:50:56] [STDOUT] res://assets/generated/enginner/skill/frame_000004.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [STDOUT] [  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[2026-06-22T22:51:17] [STDOUT] res://assets/generated/enginner/skill/frame_000003.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [STDOUT] [  33% ] [90m[1mloading_editor_layout[22m | 正在重新打开场景……[39m[0m
+[2026-06-22T22:51:17] [STDOUT] res://assets/generated/enginner/skill/frame_000005.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:11 - ext_resource, invalid UID: uid://dwuro14y3xgy6 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:12 - ext_resource, invalid UID: uid://7tr58mv26dfk - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:13 - ext_resource, invalid UID: uid://dkscws3msm64n - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:14 - ext_resource, invalid UID: uid://bek3kbbywfcs3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:15 - ext_resource, invalid UID: uid://bkp7mrqo28rv8 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:16 - ext_resource, invalid UID: uid://pju5j2lbubra - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:17 - ext_resource, invalid UID: uid://c3rqbo61mrr7e - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres | backtraces=[]
-[2026-06-22T00:15:24] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:18 - ext_resource, invalid UID: uid://8r5xf4mlpid3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:11 - ext_resource, invalid UID: uid://dwuro14y3xgy6 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_stone_floor.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:12 - ext_resource, invalid UID: uid://7tr58mv26dfk - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_limestone_wall.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:13 - ext_resource, invalid UID: uid://dkscws3msm64n - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_aged_wood.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:14 - ext_resource, invalid UID: uid://bek3kbbywfcs3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_fabric_canopy.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:15 - ext_resource, invalid UID: uid://bkp7mrqo28rv8 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_roof_tile.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:16 - ext_resource, invalid UID: uid://pju5j2lbubra - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_prop_dark.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:17 - ext_resource, invalid UID: uid://c3rqbo61mrr7e - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_window_emission_warm.tres | backtraces=[]
-[2026-06-22T00:15:25] [ERROR] type=1 editor_notify=false | origin=ResourceLoaderText::load (scene\resources\resource_format_text.cpp:501) | code=res://scenes/map3d/hd2d_market_reference_match_lab.tscn:18 - ext_resource, invalid UID: uid://8r5xf4mlpid3 - using text path instead: res://assets/generated/map3d/materials/mat_hd2d_market_ref_lantern_emission_warm.tres | backtraces=[]
-[2026-06-22T00:15:25] [STDOUT] [  50% ] [90m[1mloading_editor_layout[22m | 正在加载中央编辑器布局……[39m[0m
+[2026-06-22T22:51:18] [STDOUT] res://assets/generated/enginner/skill/frame_000006.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:25] [STDOUT] [  66% ] [90m[1mloading_editor_layout[22m | 正在加载插件窗口布局……[39m[0m
+[2026-06-22T22:51:18] [STDOUT] res://assets/generated/enginner/skill/frame_000007.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:25] [STDOUT] [  83% ] [90m[1mloading_editor_layout[22m | 编辑器布局就绪。[39m[0m
+[2026-06-22T22:51:18] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T22:51:18] [STDOUT] res://assets/generated/enginner/skill/frame_000008.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:15:25] [STDOUT] [92m[ DONE ][39m [1mloading_editor_layout[22m
-[0m
+[2026-06-22T22:51:18] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T22:51:19] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T22:51:19] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T22:51:19] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T22:51:19] [STDOUT] res://assets/generated/enginner/skill/frame_000009.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
 
-[2026-06-22T00:23:32] [ERROR] type=0 editor_notify=false | origin=GDScript::reload (modules\gdscript\gdscript.cpp:754) | code=Method/function failed. Returning: ERR_ALREADY_IN_USE | rationale=Cannot reload script while instances exist. | backtraces=[GDScript backtrace (most recent call first):
-    [0] _check_loaded_script (res://addons/godotiq/godotiq_server.gd:2601)
-    [1] _handle_check_errors (res://addons/godotiq/godotiq_server.gd:2552)]
-[2026-06-22T00:32:52] [ERROR] type=0 editor_notify=false | origin=GDScript::reload (modules\gdscript\gdscript.cpp:754) | code=Method/function failed. Returning: ERR_ALREADY_IN_USE | rationale=Cannot reload script while instances exist. | backtraces=[GDScript backtrace (most recent call first):
-    [0] _check_loaded_script (res://addons/godotiq/godotiq_server.gd:2611)
-    [1] _handle_check_errors (res://addons/godotiq/godotiq_server.gd:2562)]
-[2026-06-22T00:37:21] [ERROR] type=0 editor_notify=false | origin=GDScript::reload (modules\gdscript\gdscript.cpp:754) | code=Method/function failed. Returning: ERR_ALREADY_IN_USE | rationale=Cannot reload script while instances exist. | backtraces=[GDScript backtrace (most recent call first):
-    [0] _check_loaded_script (res://addons/godotiq/godotiq_server.gd:2611)
-    [1] _handle_check_errors (res://addons/godotiq/godotiq_server.gd:2562)
-    [2] _dispatch (res://addons/godotiq/godotiq_server.gd:397)
-    [3] _handle_message (res://addons/godotiq/godotiq_server.gd:350)
-    [4] _process (res://addons/godotiq/godotiq_server.gd:267)]
-[2026-06-22T00:39:13] [ERROR] type=0 editor_notify=false | origin=ViewportTexture::_setup_local_to_scene (scene\main\viewport.cpp:216) | code=Parameter "vpn" is null. | rationale=Path to node is invalid: 'CharacterViewport'. | backtraces=[]
-[2026-06-22T00:43:08] [ERROR] type=0 editor_notify=false | origin=GDScript::reload (modules\gdscript\gdscript.cpp:754) | code=Method/function failed. Returning: ERR_ALREADY_IN_USE | rationale=Cannot reload script while instances exist. | backtraces=[GDScript backtrace (most recent call first):
-    [0] _check_loaded_script (res://addons/godotiq/godotiq_server.gd:2611)
-    [1] _handle_check_errors (res://addons/godotiq/godotiq_server.gd:2562)
-    [2] _dispatch (res://addons/godotiq/godotiq_server.gd:397)
-    [3] _handle_message (res://addons/godotiq/godotiq_server.gd:350)
-    [4] _process (res://addons/godotiq/godotiq_server.gd:267)]
+[2026-06-22T23:00:40] [STDOUT] res://assets/generated/enginner/stand/frame_000001.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:40] [STDOUT] res://assets/generated/enginner/stand/frame_000003.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:40] [STDOUT] res://assets/generated/enginner/stand/frame_000005.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [STDOUT] res://assets/generated/enginner/stand/frame_000002.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [STDOUT] res://assets/generated/enginner/stand/frame_000007.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [STDOUT] res://assets/generated/enginner/stand/frame_000008.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [STDOUT] res://assets/generated/enginner/stand/frame_000004.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [STDOUT] res://assets/generated/enginner/stand/frame_000009.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:41] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:42] [STDOUT] res://assets/generated/enginner/stand/frame_000006.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:42] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:42] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:42] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:42] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:42] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:52] [STDOUT] res://assets/generated/enginner/walk/frame_000002.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:52] [STDOUT] res://assets/generated/enginner/walk/frame_000003.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:52] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:53] [STDOUT] res://assets/generated/enginner/walk/frame_000004.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:53] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:53] [STDOUT] res://assets/generated/enginner/walk/frame_000005.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:53] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:53] [STDOUT] res://assets/generated/enginner/walk/frame_000006.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:53] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:54] [STDOUT] res://assets/generated/enginner/walk/frame_000007.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:54] [STDOUT] res://assets/generated/enginner/walk/frame_000008.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:54] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:54] [STDOUT] res://assets/generated/enginner/walk/frame_000009.png：检测到纹理被用于 3D。启用 mipmap 生成并将纹理压缩模式设置为 VRAM Compressed (S3TC/ETC/BPTC)。
+
+[2026-06-22T23:00:54] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::add_task (editor\gui\progress_dialog.cpp:200) | code=Condition "tasks.has(p_task)" is true. | rationale=Task 'reimport' already exists. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::task_step (editor\gui\progress_dialog.cpp:231) | code=Condition "!tasks.has(p_task)" is true. Returning: canceled | backtraces=[]
+[2026-06-22T23:00:55] [ERROR] type=0 editor_notify=false | origin=ProgressDialog::end_task (editor\gui\progress_dialog.cpp:254) | code=Condition "!tasks.has(p_task)" is true. | backtraces=[]

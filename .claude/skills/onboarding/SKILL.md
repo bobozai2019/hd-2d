@@ -1,11 +1,11 @@
 ---
 name: onboarding
-description: "Use when a project needs to connect to the configured myaitool hub. Reads onboarding config, installs thin references to hub management docs, optionally links shared MCP servers and knowledge categories, and keeps project CLAUDE.md/AGENTS.md conventions as the source of truth."
+description: "Use when a project needs to connect to the configured myaitool hub. Reads onboarding config, installs thin references to hub management docs, optionally links shared skills, MCP servers, knowledge categories, and centrally managed Godot addons, and keeps project CLAUDE.md/AGENTS.md conventions as the source of truth."
 ---
 
 # 项目接入（Onboarding）
 
-将当前项目接入配置文件指定的技能/知识/MCP 中枢。
+将当前项目接入配置文件指定的技能/知识/MCP/Godot 插件中枢。
 
 ## Trigger
 
@@ -39,6 +39,10 @@ description: "Use when a project needs to connect to the configured myaitool hub
 - `managedBlock`：项目入口 MD 中可重复更新的引用块标记
 - `defaults.tools`：默认写入哪些工具入口
 - `defaults.mcpLinkRoot`：项目侧 MCP junction 根目录
+- `godot.addonsRoot`：hub 内 Godot 插件根目录
+- `godot.projectAddonsRoot`：Godot 项目侧插件目录，默认 `addons`
+- `godot.defaultAddonPort`：GodotIQ 默认 WebSocket 端口起点，默认 `6007`
+- `godot.mcpAddonDependencies`：MCP 与必须同时安装的 Godot 插件映射
 
 重要：不要在技能正文里写死全局 hub 路径。需要路径时，读取配置文件。
 
@@ -59,6 +63,7 @@ powershell -ExecutionPolicy Bypass -File D:\AIprogram\myaitool\scripts\onboard-p
   [-Skills @('skill1','skill2')] `
   [-McpServers @('mcp1','mcp2')] `
   [-KnowledgeCategories @('general','web','nodejs')] `
+  [-GodotAddons @('godotiq','scene_bundle')] `
   [-ProjectPath <path>] `
   [-ConflictAction Error|Skip|Backup|Force] `
   [-Force]
@@ -70,6 +75,7 @@ powershell -ExecutionPolicy Bypass -File D:\AIprogram\myaitool\scripts\onboard-p
 - `-Skills`：指定安装哪些技能（空 = 不装任何技能）
 - `-McpServers`：指定安装哪些 MCP（空 = 不装）
 - `-KnowledgeCategories`：指定链接哪些 hub 知识分类到 `.shared/knowledge/hub/`（空 = 不链接）
+- `-GodotAddons`：指定安装并启用哪些 Godot 插件 junction（空 = 不主动安装；MCP 依赖仍会自动加入）
 - `-ConflictAction`：冲突处理方式（默认 `Error`）
   - `Error`：遇到冲突抛异常，停止执行（当前默认行为）
   - `Skip`：跳过冲突项，保留本地内容，继续安装其他项
@@ -103,6 +109,30 @@ args = ["-m", "image_recognition"]
 
 密钥必须来自用户环境变量或本机 secret manager。不要把 `MIMO_API_KEY` 写进项目文件、agent 配置或命令行参数。
 
+### GodotIQ 联动
+
+`-McpServers godotiq` 必须根据 `godot.mcpAddonDependencies` 自动安装
+`addons/godotiq` junction，并将 `res://addons/godotiq/plugin.cfg` 幂等加入
+`project.godot` 的 `[editor_plugins] enabled`，不能只注册 MCP 或只创建目录。
+
+Claude Code 的 `.mcp.json` 和 Codex 的 `.codex/config.toml` 都必须生成：
+
+- `command = python`
+- `args = ["-m", "godotiq"]`
+- `PYTHONPATH = <Godot项目根目录>/addons/godotiq`
+- `GODOTIQ_ADDON_PORT = <项目配置的可用端口>`
+
+Codex 还必须设置 `cwd = <Godot项目根目录>`。Claude Code 的 `.mcp.json`
+不写 `cwd`，而是设置 `GODOTIQ_PROJECT_ROOT = <Godot项目根目录>`。
+
+`PYTHONPATH` 指向包含 `godotiq/` Python package 的父目录，从项目插件中优先加载
+MCP 实现。MCP junction 仍保留，用于 hub 文档和管理。
+
+如果项目 `.godotiq.json` 已有 `server.addon_port`，必须保留并复用。否则从
+`godot.defaultAddonPort` 起检测本机端口，选择首个可用端口并创建项目配置。
+Claude Code 和 Codex 必须写入同一个 `GODOTIQ_ADDON_PORT`，保证多 Godot
+编辑器同时运行时不会连接到其他项目。
+
 ## Workflow
 
 执行 `/onboarding` 时，按 4 个阶段进行：
@@ -118,13 +148,17 @@ args = ["-m", "image_recognition"]
 4. 扫描 `<hubRoot>/skills/` 目录，读每个 `SKILL.md` 的 YAML frontmatter `description` 字段。
 5. 扫描 `<hubRoot>/mcp-servers/` 目录，读每个 `MCP.md`。
 6. 扫描 `<hubRoot>/knowledge/` 目录，获取子目录列表和每个子目录下的文件名（用于推荐知识分类）。
+7. 如果是 Godot 项目，只扫描配置的 `godot.addonsRoot` 直接子目录；仅将根部含
+   `plugin.cfg` 的目录视为插件。不要递归扫描，避免嵌套 package 被重复列出。
 
 ### Phase B — Recommend（推荐）
 
 根据项目类型，判断哪些技能和 MCP 适用。
 
 **通用技能（静默安装，不问用户）：**
-- onboarding、experience、remember、recall、bug-history
+- onboarding、summarize、recall、myplan
+
+`experience`、`remember`、`bug-history` 仅作为已有项目的迁移期兼容入口，不再为新项目默认安装。
 
 **按项目类型推荐的技能：**
 
@@ -163,7 +197,13 @@ AskUserQuestion:
       options:
         - label: "image-recognition"
           description: "图片识别 MCP"
+        - label: "godotiq"
+          description: "Godot 编辑器桥接；自动安装必需的 godotiq 插件"
 ```
+
+如果是 Godot 项目，展示可用插件多选。插件名、description 和 version 从各插件
+根部 `plugin.cfg` 读取。选择 `godotiq` MCP 时，界面必须明确说明
+`godotiq` 插件会作为必需依赖一起安装，不再要求用户重复选择。
 
 **知识分类推荐：**
 
@@ -203,6 +243,7 @@ AskUserQuestion:
 - `.codex/skills/<name>`
 - `.shared/knowledge/hub/<category>`
 - `.claude/mcp-servers/<name>`
+- `addons/<godot-addon-name>`
 
 如果发现冲突，用 `AskUserQuestion` 列出冲突项并让用户选择处理方式：
 ```
@@ -230,11 +271,29 @@ AskUserQuestion:
 powershell -ExecutionPolicy Bypass -File D:\AIprogram\myaitool\scripts\onboard-project.ps1 `
   -ConfigPath D:\AIprogram\myaitool\config\onboarding.json `
   -Tools <tools> `
-  -Skills @('onboarding','experience','remember','recall','bug-history','<user-selected>') `
+  -Skills @('onboarding','summarize','recall','myplan','<user-selected>') `
   -McpServers @('<user-selected>') `
   -KnowledgeCategories @('<user-selected>') `
+  -GodotAddons @('<user-selected>') `
   -ConflictAction <user-choice>
 ```
+
+`godot.mcpAddonDependencies` 中声明的依赖由脚本自动合并。例如选择
+`-McpServers godotiq` 即使没有显式传 `-GodotAddons godotiq`，也必须创建：
+
+```text
+<project>/addons/godotiq → <hubRoot>/godot/addons/godotiq
+```
+
+随后必须保留已有 editor plugin 条目，并将插件路径加入 `project.godot`：
+
+```ini
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godotiq/plugin.cfg")
+```
+
+重复执行不得产生重复插件路径。
 
 `-ConflictAction` 根据用户在冲突预检中的选择传入：
 - 选择"保留本地" → `-ConflictAction Skip`
@@ -251,7 +310,14 @@ powershell -ExecutionPolicy Bypass -File D:\AIprogram\myaitool\scripts\onboard-p
    - Claude Code：确认 `.claude/mcp-servers/<name>/MCP.md` 可读取
    - Codex：确认 `.codex/config.toml` 包含 `[mcp_servers.<name>]` 条目
 4. 如果安装了知识分类：确认 `.shared/knowledge/hub/<category>` junction 可读取。
-5. 汇总结果，包括：
+5. 如果安装了 Godot 插件：
+   - 确认 `addons/<name>/plugin.cfg` 可读取且 junction 指向 hub。
+   - 确认 `project.godot` 的 `[editor_plugins] enabled` 包含且只包含一次对应插件路径。
+   - godotiq 还要确认 `addons/godotiq/godotiq/__main__.py` 可读取。
+   - 确认 `.godotiq.json` 的 `server.addon_port` 与两个 MCP 配置一致。
+   - Claude Code：确认 `.mcp.json` 的 `GODOTIQ_PROJECT_ROOT`、`PYTHONPATH` 和 `python -m godotiq`。
+   - Codex：确认 `.codex/config.toml` 的 `cwd`、`PYTHONPATH` 和 `python -m godotiq`。
+6. 汇总结果，包括：
    - 已安装的 skills、knowledge、MCP
    - 跳过的冲突项（skipped-local / skipped-different）
    - 备份的路径（如有），附恢复说明：
@@ -281,6 +347,8 @@ powershell -ExecutionPolicy Bypass -File D:\AIprogram\myaitool\scripts\onboard-p
 - 不覆盖项目入口文件，只 upsert managed block。
 - 不把 hub 规则全文复制进项目入口文件。
 - 不把密钥写入任何仓库文件、agent 配置、manifest 或命令行示例。
+- Godot 插件固定使用 junction（Windows 等价于 `mklink /J`），不复制插件快照；安装后自动启用。
+- godotiq MCP 与 godotiq 插件是不可拆分依赖；安装 MCP 时必须先确保插件 junction 可用。
 - **本地优先**：遇到本地已有同名内容时，默认停止（`-ConflictAction Error`）；只有用户明确选择后才跳过/备份/替换。
 - 执行任何归档、删除、替换本地资产前，必须先展示冲突列表并获得用户确认。
 - `Force` 模式使用 `Remove-Item -Recurse`，文件永久删除不可恢复，必须在 AskUserQuestion 中明确告知用户。

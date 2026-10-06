@@ -79,11 +79,11 @@ description: 在为 GDScript 文件生成测试脚本、请求测试覆盖率或
 | ID | 检查项 | 检测方法 | 严重度 |
 |----|--------|----------|--------|
 | B1 | 有可测试 API | `godotiq_file_context`：≥1 个公共函数（非 `_` 前缀），或 Resource 子类有 `@export` 属性 | BLOCKER |
-| B2 | Node 基类依赖 | 检查 `extends` 行：继承 Node/Control/CanvasItem/Node2D/Node3D/BaseButton/Container 等 Node 派生类型 | BLOCKER(unit) / WARNING(integration+runtime) |
-| B3 | Autoload 依赖 | 解析 `project.godot` 的 `[autoload]` 获取名称 → grep 目标文件。检查依赖文件是否有 `create_default()` 工厂方法 | BLOCKER(unit) / WARNING(integration) |
+| B2 | Node 基类依赖 | 检查 `extends` 行：**排除法**——如果 `extends` 的类型不是 RefCounted/Resource/Object/SceneTree，则为 Node 派生类型（unit/integration 模板均调用 `.new()` 且无场景树，对 Node 派生类型均会失败） | BLOCKER(unit+integration) / WARNING(runtime+visual) |
+| B3 | Autoload 依赖 | 解析 `project.godot` 的 `[autoload]` 获取名称 → **word-boundary 匹配**目标文件（避免子串误匹配）+ 检查 `get_node("/root/{name}")` 模式。如 autoload 是 `.tscn`，需解析场景根脚本检查 `create_default()`；无法解析时降级为 WARNING | BLOCKER(unit) / WARNING(integration) |
 | B4 | DisplayServer 依赖 | 检查文件是否引用 `DisplayServer`/`RenderingServer`。如有 headless fallback 逻辑则仅为 WARNING | WARNING |
 | B5 | 循环 import | 从 `godotiq_dependency_graph` 输出构建有向图，DFS 检测环路 | BLOCKER |
-| B6 | 依赖可解析 | 枚举目标文件中所有 `preload("res://...")` 和 `load("res://...")` 字面路径，验证每个文件存在 | BLOCKER |
+| B6 | 依赖可解析 | 枚举目标文件中所有 `preload("res://...")`、`load("res://...")`、`ResourceLoader.load("res://...")` 字面路径，验证每个文件存在。非字面路径（变量/拼接）无法验证，发出 WARNING | BLOCKER |
 | B7 | 游戏可启动（仅 Mode B） | `godotiq_run(action="play")` → 等待 3-5 秒 → 检查 `godotiq_state_inspect` 有无致命错误 → 立即 `godotiq_run(action="stop")` | BLOCKER |
 
 **B1 细化：**
@@ -118,17 +118,26 @@ WARNINGS ({count}):
 1. Stage A 先执行。A1/A2 为 BLOCKER → 立即停止。
 2. Stage B 逐文件执行，在分析数据可用后运行。
 3. 单文件有 BLOCKER → 呈现报告，通过 AskUserQuestion 提供固定选项菜单。
-4. 批量模式 → 跳过阻塞文件，生成其余。**若前 3 个文件全部被 BLOCKER，暂停询问用户是否继续。**
+4. 批量模式 → 跳过阻塞文件，生成其余。**若任意连续 3 个文件对所有请求的测试类型均为 BLOCKER（无可生成的测试类型），暂停询问用户是否继续。**
 5. 业务模式 B7 失败 → 全部停止。
-6. **绝不为 B1/B2/B5/B6 BLOCKER 的文件生成单元测试。**
-7. **绝不静默 mock 核心逻辑来绕过 BLOCKER。** 如需 mock，必须在测试代码中添加注释：`# MOCK: {原因}`
+6. **绝不为 B1/B2/B5/B6 BLOCKER 的文件生成对应测试类型。**
+7. **绝不静默 mock 核心逻辑来绕过 BLOCKER。** mock 分类见下表。
 8. Pre-flight 通过时静默继续，不输出额外信息。
+
+### Mock 分类规则
+
+| 类别 | 示例 | 是否允许 | 注释要求 |
+|------|------|----------|----------|
+| 测试基础设施 | 工厂方法（`create_default()`）、默认值设置、helper 初始化 | 允许 | 无需注释 |
+| 依赖替换 | 用本地实例替换 autoload、注入 mock 依赖 | 允许 | 必须标注：`# MOCK: autoload {name} 不可用，使用本地实例` |
+| 行为绕过 | 跳过 `_ready()`、stub 信号连接 | 允许 | 必须标注：`# MOCK: {函数/行为} 被绕过，原因: {BLOCKER ID}` |
+| 逻辑替换 | 用简化算法替换核心业务逻辑 | **禁止** | 必须报告 BLOCKER，不得生成测试 |
 
 ### AskUserQuestion 固定选项菜单
 
 当单文件出现 BLOCKER 时，**只能**提供以下选项（不可自行扩展）：
 
-- **选项 1**: 仅生成集成/运行时测试（跳过被阻塞的测试类型）
+- **选项 1**: 仅生成集成/运行时测试（跳过被阻塞的测试类型）——**仅当集成/运行时模板确实可用时才提供此选项**（B2 BLOCKER 时 integration 模板同样不可用，此时选项 1 应改为"仅生成运行时测试"；若所有模板均不可用则不提供此选项）
 - **选项 2**: 跳过此文件
 - **选项 3**: 展示详细阻塞分析
 

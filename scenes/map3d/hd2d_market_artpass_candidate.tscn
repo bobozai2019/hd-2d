@@ -1,27 +1,67 @@
 [gd_scene format=3 uid="uid://ho6tp78gj1gy"]
 
-[ext_resource type="PackedScene" path="res://scenes/map3d/hd2d_market_reference_artpass_lab.tscn" id="1_artpass_lab"]
+[ext_resource type="PackedScene" uid="uid://bnero63nhf1p8" path="res://scenes/map3d/hd2d_market_reference_artpass_lab.tscn" id="1_artpass_lab"]
 
 [node name="Hd2dMarketArtpassCandidate" type="Node3D" unique_id=252194648]
 
 [node name="ArtpassReference" parent="." unique_id=1597421099 instance=ExtResource("1_artpass_lab")]
 
-[node name="hd2d_market_warm_point_light_0" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="0" unique_id=1373335991]
+[node name="hd2d_market_warm_point_light_0" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533) index="0" unique_id=1311621934]
 light_energy = 1.0
 
-[node name="hd2d_market_warm_point_light_1" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="1" unique_id=995727988]
+[node name="hd2d_market_warm_point_light_1" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533) index="1" unique_id=882793609]
 light_energy = 1.0
 
-[node name="hd2d_market_warm_point_light_2" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="2" unique_id=2112520248]
+[node name="hd2d_market_warm_point_light_2" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533) index="2" unique_id=1443510351]
 light_energy = 1.0
 
-[node name="hd2d_market_warm_point_light_3" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="3" unique_id=578865830]
+[node name="hd2d_market_warm_point_light_3" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533) index="3" unique_id=575693556]
 light_energy = 1.0
 
-[node name="hd2d_market_low_angle_sun" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" index="5" unique_id=1064454535]
+[node name="hd2d_market_plaza_center_inlaid_tile" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch/hd2d_market_plaza_root" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533, 1883632130) index="62" unique_id=1088269193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.73169154)
+
+[node name="hd2d_market_low_angle_sun" parent="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch" parent_id_path=PackedInt32Array(1597421099, 908858918, 920922533) index="5" unique_id=727618858]
 light_energy = 1.0
+
+[node name="FlameEffect" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch" parent_id_path=PackedInt32Array(1597421099, 908858918, 1585992213) index="1" unique_id=1642068117]
+transform = Transform3D(0.90269154, 0.05363631, 0, -0.04620086, 1.0479684, 0, 0, 0, 0.9038731, 0, 1.03, 0.29)
+
+[node name="OuterFlame" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameEffect" index="0" unique_id=1161281011]
+frame = 7
+
+[node name="MiddleFlame" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameEffect" index="1" unique_id=31406274]
+frame = 4
+
+[node name="CoreFlame" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameEffect" index="2" unique_id=86460193]
+frame = 3
+
+[node name="TopWisp" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameEffect" index="3" unique_id=1753644060]
+frame = 1
+
+[node name="FlameHalo" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch" parent_id_path=PackedInt32Array(1597421099, 908858918, 1585992213) index="2" unique_id=788650966]
+transform = Transform3D(0.9737201, 0, 0, 0, 0.9621126, 0, 0, 0, 0.9737201, 0, 1.07, 0.25)
+
+[node name="OmniLight3D" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameHalo" index="0" unique_id=339987898]
+light_energy = 4.742
+
+[node name="WallLightPatch" parent="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch/FlameHalo" index="3" unique_id=829219944]
+transform = Transform3D(1.3521509, 0, 0, 0, 0.9004987, 0, 0, 0, 1.3521509, -0.00968194, 0.027272582, -0.12936592)
+
+[node name="PlayerCharacter" parent="ArtpassReference/Base8BMarketReferenceLab/Characters" parent_id_path=PackedInt32Array(1597421099, 908858918, 1741115767) index="0" unique_id=986825830]
+frame_progress = 0.42991185
+
+[node name="LeftNpc" parent="ArtpassReference/Base8BMarketReferenceLab/Characters" parent_id_path=PackedInt32Array(1597421099, 908858918, 1741115767) index="1" unique_id=1764799156]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -2.1539698, 0.66, 2.1653972)
+autoplay = "skill"
+frame_progress = 0.607386
+
+[node name="PlayerLightWrapSprite" parent="ArtpassReference/Base8BMarketReferenceLab/Characters" parent_id_path=PackedInt32Array(1597421099, 908858918, 1741115767) index="3"]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 1.8975672, 0.95201707, 2.767309)
+frame_progress = 0.20613176
 
 [editable path="ArtpassReference"]
 [editable path="ArtpassReference/Base8BMarketReferenceLab"]
 [editable path="ArtpassReference/Base8BMarketReferenceLab/Stage/MarketReferenceMatch"]
+[editable path="ArtpassReference/Base8BMarketReferenceLab/VfxRoot/LeftVisualTorch"]
 [editable path="ArtpassReference/ArtpassDetails/ArtpassGlb"]

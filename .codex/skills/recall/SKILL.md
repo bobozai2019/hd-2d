@@ -1,109 +1,58 @@
 ---
 name: recall
-description: "搜索知识库中的相关洞察。搜索范围：hub 知识库 + 项目本地 .shared/knowledge/ + 全局 ~/.claude/memory/。"
+description: "搜索统一知识库中的相关洞察。搜索范围包括 hub 的跨项目 knowledge 和当前项目的 .shared/knowledge；支持概览、关键词、分类、问题、反模式及近期知识查询。"
 ---
 
 # Recall — Knowledge Search
 
-搜索知识库中的知识。搜索范围包括三个位置。
+搜索由 `summarize` 维护的双层知识库。
 
-## Trigger
+## Resolve paths
 
-用户调用 `/recall`，或说"查一下知识库"、"有没有相关经验"等。
+1. 从本技能的 hub 规范路径定位 hub 根目录，并读取 `config/onboarding.json` 的 `hubRoot`。
+2. 用 `git rev-parse --show-toplevel` 确定当前项目根目录，不可用时才使用当前工作目录。
+3. 搜索以下两个位置：
 
-## 搜索范围
-
-```
-D:/AIprogram/myaitool/knowledge/     — Hub 知识库（通用/跨项目）
-.shared/knowledge/                    — 项目本地知识（Claude Code + Codex 共享）
-~/.claude/memory/                     — 全局 memory（用户级）
-```
-
-## Process
-
-### 无参数 — 列出概览
-
-读取三个知识目录下所有知识文件，统计条目数（`## ` 标题）：
-
-```
-知识库概览：
-
-| 位置 | 目录 | 文件 | 条目数 |
-|------|------|------|--------|
-| hub | nodejs | technical.md | 5 |
-| hub | godot | engine-quirks.md | 4 |
-| hub | web | issues.md | 7 |
-| 项目 | .shared/knowledge | technical.md | 3 |
-| 全局 | ~/.claude/memory | technical.md | 2 |
-| ... | ... | ... | ... |
+```text
+<hubRoot>/knowledge/                    — 跨项目知识
+<projectRoot>/.shared/knowledge/        — 项目知识
 ```
 
-### 关键词搜索
+不要搜索或创建 `~/.claude/memory/`。项目库中的旧 `MEMORY.md`、扁平文件和 `bug_history/` 仍作为兼容内容递归搜索。
 
-用 `Grep` 搜索三个目录下所有 `.md` 文件：
+## Search
 
-1. 搜索 `$ARGUMENTS` 关键词（不区分大小写）
-2. 返回匹配条目，包含来源（hub/项目/全局）、分类、日期和内容
-3. 无匹配时建议相关分类
+### 无参数
 
-### 分类浏览
+递归读取两个知识目录的 Markdown 文件，按位置、相对路径和条目数（`## ` 标题）给出概览。
 
-如果 `$ARGUMENTS` 匹配分类关键词，读取对应目录并列出所有条目：
+### 关键词
 
-| 关键词 | 目标 |
-|--------|------|
-| `godot` | hub knowledge/godot/*.md |
-| `web` | hub knowledge/web/*.md |
-| `nodejs` | hub knowledge/nodejs/*.md |
-| `windows` | hub knowledge/windows/*.md |
-| `python` | hub knowledge/python/*.md |
-| `git` | hub knowledge/git-workflow.md |
-| `claude-code` | hub knowledge/claude-code-patterns.md |
-| `项目` / `local` | .shared/knowledge/*.md |
-| `全局` / `global` | ~/.claude/memory/*.md |
+不区分大小写递归搜索所有 Markdown 文件，返回完整匹配条目，而不只是命中行。每条标明 hub/项目、相对路径、日期和标题。无匹配时建议相邻关键词或分类。
+
+### 分类
+
+先读取两层知识库各自的 `INDEX.md`。参数匹配索引中的分类、文件名、标签或说明时，读取对应文件或目录。特殊范围关键词：
+
+- `项目` / `local`：只搜索项目库。
+- `hub` / `通用` / `shared`：只搜索 hub。
 
 ### 特殊查询
 
-- `problems` / `issues` / `fixes` — 搜索所有包含 `**症状:**` 或 `**根因:**` 或 `**修复:**` 的条目，作为问题-解决索引
-- `recent` / `latest` — 最近 7 天的条目，按日期分组
-- `anti-pattern` / `陷阱` — 搜索反模式条目
+- `problems` / `issues` / `fixes`：匹配症状、根因、修复、陷阱等字段。
+- `recent` / `latest`：返回最近 7 天条目并按日期分组。
+- `anti-pattern` / `陷阱`：匹配反模式和失败教训。
 
-### 输出格式
+## Output
 
-```
+```text
 找到 N 条相关知识：
 
-1. [hub | nodejs | 日期] 标题
-   经验: ...
+1. [hub | web/vite-proxy.md | 日期] 标题
+   经验：...
 
-2. [项目 | .shared/knowledge | 日期] 标题
-   经验: ...
-
-3. [全局 | ~/.claude/memory | 日期] 标题
-   经验: ...
+2. [项目 | unity/yaml-assets.md | 日期] 标题
+   经验：...
 ```
 
-## 知识路径
-
-```
-D:/AIprogram/myaitool/knowledge/
-├── nodejs/      — Node.js 技术经验
-├── godot/       — Godot 领域
-├── web/         — Web 前端
-├── windows/     — Windows 平台
-├── git-workflow.md
-├── claude-code-patterns.md
-└── python/      — Python（待积累）
-
-.shared/knowledge/
-├── MEMORY.md    — Index
-├── technical.md — 项目特定技术经验
-├── design.md    — 项目特定设计经验
-└── workflow.md  — 项目特定工作流经验
-
-~/.claude/memory/
-├── MEMORY.md
-├── technical.md
-├── design.md
-└── workflow.md
-```
+路径以各自 `INDEX.md` 为导航，但索引不完整时仍递归搜索实际文件。不要在技能内维护固定的知识目录树。
