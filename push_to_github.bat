@@ -21,7 +21,7 @@ if not errorlevel 1 (
     if errorlevel 1 exit /b 1
 )
 
-git push
+git push -u origin master
 if errorlevel 1 exit /b 1
 
 echo Push completed successfully.
